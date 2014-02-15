@@ -1,0 +1,7 @@
+parameters:
+#    idpc_solicitud.example.class: IDPC\SolicitudBundle\Example
+
+services:
+#    idpc_solicitud.example:
+#        class: %idpc_solicitud.example.class%
+#        arguments: [@service_id, "plain_value", %parameter%]

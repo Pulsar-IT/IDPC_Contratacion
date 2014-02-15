@@ -1,0 +1,8 @@
+idpc_solicitud:
+    resource: "@IDPCSolicitudBundle/Resources/config/routing.yml"
+    prefix:   /
+
+security_security:
+    resource: "@SecuritySecurityBundle/Resources/config/routing.yml"
+    prefix:   /
+

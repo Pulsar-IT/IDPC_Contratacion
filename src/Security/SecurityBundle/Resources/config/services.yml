@@ -1,0 +1,7 @@
+parameters:
+#    meissen_security.example.class: Meissen\SecurityBundle\Example
+
+services:
+#    meissen_security.example:
+#        class: %meissen_security.example.class%
+#        arguments: [@service_id, "plain_value", %parameter%]

@@ -1,0 +1,122 @@
+{% extends '::base.html.twig' %}
+
+{% block body -%}
+    <h1>UserDet</h1>
+
+    <table class="record_properties">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ entity.id }}</td>
+            </tr>
+            <tr>
+                <th>Tipodocumento</th>
+                <td>{{ entity.tipoDocumento }}</td>
+            </tr>
+            <tr>
+                <th>Documento</th>
+                <td>{{ entity.documento }}</td>
+            </tr>
+            <tr>
+                <th>Expedicionlugar</th>
+                <td>{{ entity.expedicionLugar}}</td>
+            </tr>
+            <tr>
+                <th>Expediciondate</th>
+                <td>{{ entity.expedicionDate|date('Y-m-d') }}</td>
+            </tr>
+            <tr>
+                <th>Primernombre</th>
+                <td>{{ entity.primerNombre }}</td>
+            </tr>
+            <tr>
+                <th>Segundonombre</th>
+                <td>{{ entity.segundoNombre }}</td>
+            </tr>
+            <tr>
+                <th>Primerapellido</th>
+                <td>{{ entity.primerApellido }}</td>
+            </tr>
+            <tr>
+                <th>Segundoapellido</th>
+                <td>{{ entity.segundoApellido }}</td>
+            </tr>
+            <tr>
+                <th>Genero</th>
+                <td>{{ entity.genero }}</td>
+            </tr>
+            <tr>
+                <th>Estatura</th>
+                <td>{{ entity.estatura }}</td>
+            </tr>
+            <tr>
+                <th>Fechanacimiento</th>
+                <td>{{ entity.fechaNacimiento|date('Y-m-d') }}</td>
+            </tr>
+            <tr>
+                <th>Paisnacimiento</th>
+                <td>{{ entity.paisNacimiento }}</td>
+            </tr>
+            <tr>
+                <th>Departamentonacimiento</th>
+                <td>{{ entity.departamentoNacimiento }}</td>
+            </tr>
+            <tr>
+                <th>Ciudadnacimiento</th>
+                <td>{{ entity.ciudadNacimiento }}</td>
+            </tr>
+            <tr>
+                <th>Direccionresidencia</th>
+                <td>{{ entity.direccionResidencia }}</td>
+            </tr>
+            <tr>
+                <th>Paisresidencia</th>
+                <td>{{ entity.paisResidencia }}</td>
+            </tr>
+            <tr>
+                <th>Departamentoresidencia</th>
+                <td>{{ entity.departamentoResidencia }}</td>
+            </tr>
+            <tr>
+                <th>Ciudadresidencia</th>
+                <td>{{ entity.ciudadResidencia }}</td>
+            </tr>
+            <tr>
+                <th>Telefonofijo</th>
+                <td>{{ entity.telefonoFijo }}</td>
+            </tr>
+            <tr>
+                <th>Telefonomovil</th>
+                <td>{{ entity.telefonoMovil }}</td>
+            </tr>
+            <tr>
+                <th>Created_at</th>
+                <td>{{ entity.createdat|date('Y-m-d H:i:s') }}</td>
+            </tr>
+            <tr>
+                <th>Update_at</th>
+                <td>{{ entity.updateat|date('Y-m-d H:i:s') }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+        <ul class="record_actions">
+    <li>
+        <a href="{{ path('admin_security_userdet') }}">
+            Back to the list
+        </a>
+    </li>
+    <li>
+        <a href="{{ path('admin_security_userdet_edit', { 'id': entity.id }) }}">
+            Edit
+        </a>
+    </li>
+    <li>
+        <form action="{{ path('admin_security_userdet_delete', { 'id': entity.id }) }}" method="post">
+            <input type="hidden" name="_method" value="DELETE" />
+            {{ form_widget(delete_form) }}
+            <button type="submit">Delete</button>
+        </form>
+    </li>
+</ul>
+{% endblock %}
