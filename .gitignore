@@ -21,3 +21,5 @@ Capfile
 
 app/config/deploy.rb
 
+
+composer.json
