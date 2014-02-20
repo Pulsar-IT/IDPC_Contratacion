@@ -1,0 +1,4 @@
+IDPCAnnotations:
+    resource: "@IDPCContractualBundle/Controller/"
+    prefix:   /
+    type:     annotation

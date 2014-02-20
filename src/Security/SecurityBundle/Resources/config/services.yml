@@ -1,5 +1,5 @@
 parameters:
-#    meissen_security.example.class: Meissen\SecurityBundle\Example
+#    meissen_security.example.class: Security\SecurityBundle\Example
 
 services:
 #    meissen_security.example:

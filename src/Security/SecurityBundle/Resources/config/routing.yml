@@ -1,9 +1,9 @@
 meissen_security_homepage:
     pattern:  /admin/
-    defaults: { _controller: MeissenSecurityBundle:Default:index }
+    defaults: { _controller: SecuritySecurityBundle:Default:index }
     
-MeissenAnnotations:
-    resource: "@MeissenSecurityBundle/Controller/"
+SecurityAnnotations:
+    resource: "@SecuritySecurityBundle/Controller/"
     prefix:   /
     type:     annotation
 

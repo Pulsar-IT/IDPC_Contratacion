@@ -1,6 +1,6 @@
 <?php
 
-namespace Meissen\SecurityBundle\Entity;
+namespace Security\SecurityBundle\Entity;
 
 use Symfony\Component\Security\Core\Role\RoleInterface;
 use Doctrine\ORM\Mapping as ORM;
@@ -8,7 +8,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
- * Meissen\SecurityBundle\Entity\Role
+ * Security\SecurityBundle\Entity\Role
  * 
  * @ORM\Entity()
  * @ORM\Table(name="admin_roles")

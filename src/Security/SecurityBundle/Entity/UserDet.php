@@ -1,16 +1,16 @@
 <?php
 
-namespace Meissen\SecurityBundle\Entity;
+namespace Security\SecurityBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
- * Meissen\SecurityBundle\Entity\UserDet
+ * Security\SecurityBundle\Entity\UserDet
  *
  * @ORM\Table(name="admin_user_details")
- * @ORM\Entity(repositoryClass="Meissen\SecurityBundle\Entity\UserDetRepository")
+ * @ORM\Entity(repositoryClass="Security\SecurityBundle\Entity\UserDetRepository")
  */
 
  class UserDet {
@@ -743,10 +743,10 @@ use Gedmo\Mapping\Annotation as Gedmo;
     /**
      * Set user
      *
-     * @param \Meissen\SecurityBundle\Entity\User $user
+     * @param \Security\SecurityBundle\Entity\User $user
      * @return UserDet
      */
-    public function setUser(\Meissen\SecurityBundle\Entity\User $user = null)
+    public function setUser(\Security\SecurityBundle\Entity\User $user = null)
     {
         $this->user = $user;
     
@@ -756,7 +756,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
     /**
      * Get user
      *
-     * @return \Meissen\SecurityBundle\Entity\User 
+     * @return \Security\SecurityBundle\Entity\User 
      */
     public function getUser()
     {

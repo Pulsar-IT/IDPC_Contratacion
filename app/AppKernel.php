@@ -18,6 +18,7 @@ class AppKernel extends Kernel
             new Sensio\Bundle\FrameworkExtraBundle\SensioFrameworkExtraBundle(),
             new Security\SecurityBundle\SecuritySecurityBundle(),
             new IDPC\SolicitudBundle\IDPCSolicitudBundle(),
+            new IDPC\ContractualBundle\IDPCContractualBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {
