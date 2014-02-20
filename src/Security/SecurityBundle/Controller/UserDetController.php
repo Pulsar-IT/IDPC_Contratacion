@@ -1,14 +1,14 @@
 <?php
 
-namespace Meissen\SecurityBundle\Controller;
+namespace Security\SecurityBundle\Controller;
 
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
-use Meissen\SecurityBundle\Entity\UserDet;
-use Meissen\SecurityBundle\Form\UserDetType;
+use Security\SecurityBundle\Entity\UserDet;
+use Security\SecurityBundle\Form\UserDetType;
 
 /**
  * UserDet controller.
@@ -29,7 +29,7 @@ class UserDetController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entities = $em->getRepository('MeissenSecurityBundle:UserDet')->findAll();
+        $entities = $em->getRepository('SecuritySecurityBundle:UserDet')->findAll();
 
         return array(
             'entities' => $entities,
@@ -40,7 +40,7 @@ class UserDetController extends Controller
      *
      * @Route("/", name="admin_security_userdet_create")
      * @Method("POST")
-     * @Template("MeissenSecurityBundle:UserDet:new.html.twig")
+     * @Template("SecuritySecurityBundle:UserDet:new.html.twig")
      */
     public function createAction(Request $request)
     {
@@ -91,7 +91,7 @@ class UserDetController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entity = $em->getRepository('MeissenSecurityBundle:UserDet')->find($id);
+        $entity = $em->getRepository('SecuritySecurityBundle:UserDet')->find($id);
 
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find UserDet entity.');
@@ -116,7 +116,7 @@ class UserDetController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entity = $em->getRepository('MeissenSecurityBundle:UserDet')->find($id);
+        $entity = $em->getRepository('SecuritySecurityBundle:UserDet')->find($id);
 
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find UserDet entity.');
@@ -137,13 +137,13 @@ class UserDetController extends Controller
      *
      * @Route("/{id}", name="admin_security_userdet_update")
      * @Method("PUT")
-     * @Template("MeissenSecurityBundle:UserDet:edit.html.twig")
+     * @Template("SecuritySecurityBundle:UserDet:edit.html.twig")
      */
     public function updateAction(Request $request, $id)
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entity = $em->getRepository('MeissenSecurityBundle:UserDet')->find($id);
+        $entity = $em->getRepository('SecuritySecurityBundle:UserDet')->find($id);
 
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find UserDet entity.');
@@ -179,7 +179,7 @@ class UserDetController extends Controller
 
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();
-            $entity = $em->getRepository('MeissenSecurityBundle:UserDet')->find($id);
+            $entity = $em->getRepository('SecuritySecurityBundle:UserDet')->find($id);
 
             if (!$entity) {
                 throw $this->createNotFoundException('Unable to find UserDet entity.');

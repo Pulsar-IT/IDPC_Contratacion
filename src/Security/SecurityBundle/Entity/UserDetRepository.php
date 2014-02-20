@@ -1,6 +1,6 @@
 <?php
 
-namespace Meissen\SecurityBundle\Entity;
+namespace Security\SecurityBundle\Entity;
 
 use Doctrine\ORM\EntityRepository;
 

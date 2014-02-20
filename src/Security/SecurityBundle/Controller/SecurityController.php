@@ -1,6 +1,6 @@
 <?php
 
-namespace Meissen\SecurityBundle\Controller;
+namespace Security\SecurityBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
@@ -30,7 +30,7 @@ class SecurityController extends Controller
         } else {
             $error = $session->get(SecurityContext::AUTHENTICATION_ERROR);
         }
-        return $this->render('MeissenSecurityBundle:Security:login.html.twig', array(
+        return $this->render('SecuritySecurityBundle:Security:login.html.twig', array(
             // el último nombre de usuario ingresado por el usuario
             'last_username' => $session->get(SecurityContext::LAST_USERNAME),
             'error'         => $error,

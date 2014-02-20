@@ -1,14 +1,14 @@
 <?php
 
-namespace Meissen\SecurityBundle\Controller;
+namespace Security\SecurityBundle\Controller;
 
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
-use Meissen\SecurityBundle\Entity\User;
-use Meissen\SecurityBundle\Form\UserType;
+use Security\SecurityBundle\Entity\User;
+use Security\SecurityBundle\Form\UserType;
 
 /**
  * User controller.
@@ -29,7 +29,7 @@ class UserController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entities = $em->getRepository('MeissenSecurityBundle:User')->findAll();
+        $entities = $em->getRepository('SecuritySecurityBundle:User')->findAll();
 
         return array(
             'entities' => $entities,
@@ -40,7 +40,7 @@ class UserController extends Controller
      *
      * @Route("/", name="admin_security_user_create")
      * @Method("POST")
-     * @Template("MeissenSecurityBundle:User:new.html.twig")
+     * @Template("SecuritySecurityBundle:User:new.html.twig")
      */
     public function createAction(Request $request)
     {
@@ -94,7 +94,7 @@ class UserController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entity = $em->getRepository('MeissenSecurityBundle:User')->find($id);
+        $entity = $em->getRepository('SecuritySecurityBundle:User')->find($id);
 
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find User entity.');
@@ -119,7 +119,7 @@ class UserController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entity = $em->getRepository('MeissenSecurityBundle:User')->find($id);
+        $entity = $em->getRepository('SecuritySecurityBundle:User')->find($id);
 
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find User entity.');
@@ -140,13 +140,13 @@ class UserController extends Controller
      *
      * @Route("/{id}", name="admin_security_user_update")
      * @Method("PUT")
-     * @Template("MeissenSecurityBundle:User:edit.html.twig")
+     * @Template("SecuritySecurityBundle:User:edit.html.twig")
      */
     public function updateAction(Request $request, $id)
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entity = $em->getRepository('MeissenSecurityBundle:User')->find($id);
+        $entity = $em->getRepository('SecuritySecurityBundle:User')->find($id);
 
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find User entity.');
@@ -187,7 +187,7 @@ class UserController extends Controller
 
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();
-            $entity = $em->getRepository('MeissenSecurityBundle:User')->find($id);
+            $entity = $em->getRepository('SecuritySecurityBundle:User')->find($id);
 
             if (!$entity) {
                 throw $this->createNotFoundException('Unable to find User entity.');

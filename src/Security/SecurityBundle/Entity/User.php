@@ -1,6 +1,6 @@
 <?php
 
-namespace Meissen\SecurityBundle\Entity;
+namespace Security\SecurityBundle\Entity;
 
 use Symfony\Component\Security\Core\User\UserInterface;
 use Doctrine\ORM\Mapping as ORM;
@@ -9,7 +9,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
- * Meissen\SecurityBundle\Entity\User
+ * Security\SecurityBundle\Entity\User
  * 
   * @ORM\Entity()
   * @ORM\Table(name="admin_user")
@@ -168,9 +168,9 @@ class User implements UserInterface, \Serializable
     /**
      * Add user_roles
      *
-     * @param Meissen\SecurityBundle\Entity\Role $userRoles
+     * @param Security\SecurityBundle\Entity\Role $userRoles
      */
-    public function addRole(\Meissen\SecurityBundle\Entity\Role $userRoles)
+    public function addRole(\Security\SecurityBundle\Entity\Role $userRoles)
     {
         $this->user_roles[] = $userRoles;
     }
@@ -255,10 +255,10 @@ class User implements UserInterface, \Serializable
     /**
      * Add user_roles
      *
-     * @param \Meissen\SecurityBundle\Entity\Role $userRoles
+     * @param \Security\SecurityBundle\Entity\Role $userRoles
      * @return User
      */
-    public function addUserRole(\Meissen\SecurityBundle\Entity\Role $userRoles)
+    public function addUserRole(\Security\SecurityBundle\Entity\Role $userRoles)
     {
         $this->user_roles[] = $userRoles;
     
@@ -268,9 +268,9 @@ class User implements UserInterface, \Serializable
     /**
      * Remove user_roles
      *
-     * @param \Meissen\SecurityBundle\Entity\Role $userRoles
+     * @param \Security\SecurityBundle\Entity\Role $userRoles
      */
-    public function removeUserRole(\Meissen\SecurityBundle\Entity\Role $userRoles)
+    public function removeUserRole(\Security\SecurityBundle\Entity\Role $userRoles)
     {
         $this->user_roles->removeElement($userRoles);
     }
@@ -279,10 +279,10 @@ class User implements UserInterface, \Serializable
     /**
      * Set userdet
      *
-     * @param \Meissen\SecurityBundle\Entity\UserDet $userdet
+     * @param \Security\SecurityBundle\Entity\UserDet $userdet
      * @return User
      */
-    public function setUserdet(\Meissen\SecurityBundle\Entity\UserDet $userdet = null)
+    public function setUserdet(\Security\SecurityBundle\Entity\UserDet $userdet = null)
     {
         $this->userdet = $userdet;
     
@@ -292,7 +292,7 @@ class User implements UserInterface, \Serializable
     /**
      * Get userdet
      *
-     * @return \Meissen\SecurityBundle\Entity\UserDet 
+     * @return \Security\SecurityBundle\Entity\UserDet 
      */
     public function getUserdet()
     {

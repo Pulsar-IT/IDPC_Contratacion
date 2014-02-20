@@ -1,0 +1,7 @@
+parameters:
+#    idpc_contractual.example.class: IDPC\ContractualBundle\Example
+
+services:
+#    idpc_contractual.example:
+#        class: %idpc_contractual.example.class%
+#        arguments: [@service_id, "plain_value", %parameter%]

@@ -1,14 +1,14 @@
 <?php
 
-namespace Meissen\SecurityBundle\Controller;
+namespace Security\SecurityBundle\Controller;
 
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
-use Meissen\SecurityBundle\Entity\Role;
-use Meissen\SecurityBundle\Form\RoleType;
+use Security\SecurityBundle\Entity\Role;
+use Security\SecurityBundle\Form\RoleType;
 
 /**
  * Role controller.
@@ -29,7 +29,7 @@ class RoleController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entities = $em->getRepository('MeissenSecurityBundle:Role')->findAll();
+        $entities = $em->getRepository('SecuritySecurityBundle:Role')->findAll();
 
         return array(
             'entities' => $entities,
@@ -40,7 +40,7 @@ class RoleController extends Controller
      *
      * @Route("/", name="admin_security_role_create")
      * @Method("POST")
-     * @Template("MeissenSecurityBundle:Role:new.html.twig")
+     * @Template("SecuritySecurityBundle:Role:new.html.twig")
      */
     public function createAction(Request $request)
     {
@@ -91,7 +91,7 @@ class RoleController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entity = $em->getRepository('MeissenSecurityBundle:Role')->find($id);
+        $entity = $em->getRepository('SecuritySecurityBundle:Role')->find($id);
 
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find Role entity.');
@@ -116,7 +116,7 @@ class RoleController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entity = $em->getRepository('MeissenSecurityBundle:Role')->find($id);
+        $entity = $em->getRepository('SecuritySecurityBundle:Role')->find($id);
 
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find Role entity.');
@@ -137,13 +137,13 @@ class RoleController extends Controller
      *
      * @Route("/{id}", name="admin_security_role_update")
      * @Method("PUT")
-     * @Template("MeissenSecurityBundle:Role:edit.html.twig")
+     * @Template("SecuritySecurityBundle:Role:edit.html.twig")
      */
     public function updateAction(Request $request, $id)
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entity = $em->getRepository('MeissenSecurityBundle:Role')->find($id);
+        $entity = $em->getRepository('SecuritySecurityBundle:Role')->find($id);
 
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find Role entity.');
@@ -179,7 +179,7 @@ class RoleController extends Controller
 
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();
-            $entity = $em->getRepository('MeissenSecurityBundle:Role')->find($id);
+            $entity = $em->getRepository('SecuritySecurityBundle:Role')->find($id);
 
             if (!$entity) {
                 throw $this->createNotFoundException('Unable to find Role entity.');

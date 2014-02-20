@@ -1,6 +1,6 @@
 <?php
 
-namespace Meissen\SecurityBundle\Tests\Controller;
+namespace Security\SecurityBundle\Tests\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 

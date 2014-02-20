@@ -1,6 +1,6 @@
 <?php
 
-namespace Meissen\SecurityBundle\Form;
+namespace Security\SecurityBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -22,7 +22,7 @@ class UserType extends AbstractType
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'Meissen\SecurityBundle\Entity\User'
+            'data_class' => 'Security\SecurityBundle\Entity\User'
         ));
     }
 

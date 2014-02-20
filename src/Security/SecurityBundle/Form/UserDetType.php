@@ -1,6 +1,6 @@
 <?php
 
-namespace Meissen\SecurityBundle\Form;
+namespace Security\SecurityBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -51,7 +51,7 @@ class UserDetType extends AbstractType
             ->add('telefonoFijo')
             ->add('telefonoMovil')
             ->add('user', 'entity', array(
-                'class' =>  'MeissenSecurityBundle:User',
+                'class' =>  'SecuritySecurityBundle:User',
                 'property'  =>  'username'
             ))
         ;
@@ -60,7 +60,7 @@ class UserDetType extends AbstractType
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'Meissen\SecurityBundle\Entity\UserDet'
+            'data_class' => 'Security\SecurityBundle\Entity\UserDet'
         ));
     }
 
