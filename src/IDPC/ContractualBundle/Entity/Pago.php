@@ -51,7 +51,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
     protected $numeroPago;
     
     /**
-     * @ORM\Column(type="boolean", nullable=false)
+     * @ORM\Column(type="boolean", nullable=true)
      */
     
     protected $estado;
@@ -76,27 +76,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
     
     protected $contrato;
 
-
-    
-
-
-
-
-
-
-    
-    
-    
-
-
-    
-
-
-    
-
-
-    
-            
+  
 
     /**
      * Constructor
@@ -273,5 +253,28 @@ use Gedmo\Mapping\Annotation as Gedmo;
     public function getEstado()
     {
         return $this->estado;
+    }
+
+    /**
+     * Set contrato
+     *
+     * @param \IDPC\ContractualBundle\Entity\Contrato $contrato
+     * @return Pago
+     */
+    public function setContrato(\IDPC\ContractualBundle\Entity\Contrato $contrato = null)
+    {
+        $this->contrato = $contrato;
+
+        return $this;
+    }
+
+    /**
+     * Get contrato
+     *
+     * @return \IDPC\ContractualBundle\Entity\Contrato 
+     */
+    public function getContrato()
+    {
+        return $this->contrato;
     }
 }

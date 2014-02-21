@@ -25,6 +25,6 @@ class RoleType extends AbstractType
 
     public function getName()
     {
-        return 'meissen_securitybundle_roletype';
+        return 'security_securitybundle_roletype';
     }
 }

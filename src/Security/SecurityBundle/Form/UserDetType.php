@@ -66,6 +66,6 @@ class UserDetType extends AbstractType
 
     public function getName()
     {
-        return 'meissen_securitybundle_userdettype';
+        return 'security_securitybundle_userdettype';
     }
 }

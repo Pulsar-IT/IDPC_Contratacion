@@ -46,6 +46,15 @@ use Gedmo\Mapping\Annotation as Gedmo;
     Private $pagos;
     
     /**
+     * @ORM\OneToOne(targetEntity="IDPC\SolicitudBundle\Entity\EstudiosPrevios", mappedBy="contrato")
+     */
+    
+    protected $estudio;
+
+
+    
+    
+    /**
      * @var datetime $created
      * 
      * @ORM\Column( type="datetime")
@@ -216,5 +225,28 @@ use Gedmo\Mapping\Annotation as Gedmo;
     public function getPagos()
     {
         return $this->pagos;
+    }
+
+    /**
+     * Set estudio
+     *
+     * @param \IDPC\SolicitudBundle\Entity\EstudiosPrevios $estudio
+     * @return Contrato
+     */
+    public function setEstudio(\IDPC\SolicitudBundle\Entity\EstudiosPrevios $estudio = null)
+    {
+        $this->estudio = $estudio;
+
+        return $this;
+    }
+
+    /**
+     * Get estudio
+     *
+     * @return \IDPC\SolicitudBundle\Entity\EstudiosPrevios 
+     */
+    public function getEstudio()
+    {
+        return $this->estudio;
     }
 }

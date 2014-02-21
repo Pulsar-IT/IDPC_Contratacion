@@ -1,10 +1,10 @@
 <?php
 
-namespace Security\SecurityBundle\Tests\Controller;
+namespace IDPC\SolicitudBundle\Tests\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
-class UserControllerTest extends WebTestCase
+class EstudiosPreviosControllerTest extends WebTestCase
 {
     /*
     public function testCompleteScenario()
@@ -13,13 +13,13 @@ class UserControllerTest extends WebTestCase
         $client = static::createClient();
 
         // Create a new entry in the database
-        $crawler = $client->request('GET', '/admin/security/user/');
-        $this->assertEquals(200, $client->getResponse()->getStatusCode(), "Unexpected HTTP status code for GET /admin/security/user/");
+        $crawler = $client->request('GET', '/estudiosprevios/');
+        $this->assertEquals(200, $client->getResponse()->getStatusCode(), "Unexpected HTTP status code for GET /estudiosprevios/");
         $crawler = $client->click($crawler->selectLink('Create a new entry')->link());
 
         // Fill in the form and submit it
         $form = $crawler->selectButton('Create')->form(array(
-            'security_securitybundle_usertype[field_name]'  => 'Test',
+            'idpc_solicitudbundle_estudiospreviostype[field_name]'  => 'Test',
             // ... other fields to fill
         ));
 
@@ -33,7 +33,7 @@ class UserControllerTest extends WebTestCase
         $crawler = $client->click($crawler->selectLink('Edit')->link());
 
         $form = $crawler->selectButton('Edit')->form(array(
-            'security_securitybundle_usertype[field_name]'  => 'Foo',
+            'idpc_solicitudbundle_estudiospreviostype[field_name]'  => 'Foo',
             // ... other fields to fill
         ));
 

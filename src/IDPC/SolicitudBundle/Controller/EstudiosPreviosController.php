@@ -1,27 +1,27 @@
 <?php
 
-namespace IDPC\ContractualBundle\Controller;
+namespace IDPC\SolicitudBundle\Controller;
 
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
-use IDPC\ContractualBundle\Entity\Cumplimiento;
-use IDPC\ContractualBundle\Form\CumplimientoType;
+use IDPC\SolicitudBundle\Entity\EstudiosPrevios;
+use IDPC\SolicitudBundle\Form\EstudiosPreviosType;
 
 /**
- * Cumplimiento controller.
+ * EstudiosPrevios controller.
  *
- * @Route("/cumplimiento")
+ * @Route("/estudiosprevios")
  */
-class CumplimientoController extends Controller
+class EstudiosPreviosController extends Controller
 {
 
     /**
-     * Lists all Cumplimiento entities.
+     * Lists all EstudiosPrevios entities.
      *
-     * @Route("/", name="cumplimiento")
+     * @Route("/", name="estudiosprevios")
      * @Method("GET")
      * @Template()
      */
@@ -29,32 +29,31 @@ class CumplimientoController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entities = $em->getRepository('IDPCContractualBundle:Cumplimiento')->findAll();
+        $entities = $em->getRepository('IDPCSolicitudBundle:EstudiosPrevios')->findAll();
 
         return array(
             'entities' => $entities,
         );
     }
     /**
-     * Creates a new Cumplimiento entity.
+     * Creates a new EstudiosPrevios entity.
      *
-     * @Route("/", name="cumplimiento_create")
+     * @Route("/", name="estudiosprevios_create")
      * @Method("POST")
-     * @Template("IDPCContractualBundle:Cumplimiento:new.html.twig")
+     * @Template("IDPCSolicitudBundle:EstudiosPrevios:new.html.twig")
      */
     public function createAction(Request $request)
     {
-        $entity = new Cumplimiento();
+        $entity = new EstudiosPrevios();
         $form = $this->createCreateForm($entity);
         $form->handleRequest($request);
 
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();
-            
             $em->persist($entity);
             $em->flush();
 
-            return $this->redirect($this->generateUrl('cumplimiento_show', array('id' => $entity->getId())));
+            return $this->redirect($this->generateUrl('estudiosprevios_show', array('id' => $entity->getId())));
         }
 
         return array(
@@ -64,16 +63,16 @@ class CumplimientoController extends Controller
     }
 
     /**
-    * Creates a form to create a Cumplimiento entity.
+    * Creates a form to create a EstudiosPrevios entity.
     *
-    * @param Cumplimiento $entity The entity
+    * @param EstudiosPrevios $entity The entity
     *
     * @return \Symfony\Component\Form\Form The form
     */
-    private function createCreateForm(Cumplimiento $entity)
+    private function createCreateForm(EstudiosPrevios $entity)
     {
-        $form = $this->createForm(new CumplimientoType(), $entity, array(
-            'action' => $this->generateUrl('cumplimiento_create'),
+        $form = $this->createForm(new EstudiosPreviosType(), $entity, array(
+            'action' => $this->generateUrl('estudiosprevios_create'),
             'method' => 'POST',
         ));
 
@@ -83,15 +82,15 @@ class CumplimientoController extends Controller
     }
 
     /**
-     * Displays a form to create a new Cumplimiento entity.
+     * Displays a form to create a new EstudiosPrevios entity.
      *
-     * @Route("/new", name="cumplimiento_new")
+     * @Route("/new", name="estudiosprevios_new")
      * @Method("GET")
      * @Template()
      */
     public function newAction()
     {
-        $entity = new Cumplimiento();
+        $entity = new EstudiosPrevios();
         $form   = $this->createCreateForm($entity);
 
         return array(
@@ -101,9 +100,9 @@ class CumplimientoController extends Controller
     }
 
     /**
-     * Finds and displays a Cumplimiento entity.
+     * Finds and displays a EstudiosPrevios entity.
      *
-     * @Route("/{id}", name="cumplimiento_show")
+     * @Route("/{id}", name="estudiosprevios_show")
      * @Method("GET")
      * @Template()
      */
@@ -111,10 +110,10 @@ class CumplimientoController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entity = $em->getRepository('IDPCContractualBundle:Cumplimiento')->find($id);
+        $entity = $em->getRepository('IDPCSolicitudBundle:EstudiosPrevios')->find($id);
 
         if (!$entity) {
-            throw $this->createNotFoundException('Unable to find Cumplimiento entity.');
+            throw $this->createNotFoundException('Unable to find EstudiosPrevios entity.');
         }
 
         $deleteForm = $this->createDeleteForm($id);
@@ -126,9 +125,9 @@ class CumplimientoController extends Controller
     }
 
     /**
-     * Displays a form to edit an existing Cumplimiento entity.
+     * Displays a form to edit an existing EstudiosPrevios entity.
      *
-     * @Route("/{id}/edit", name="cumplimiento_edit")
+     * @Route("/{id}/edit", name="estudiosprevios_edit")
      * @Method("GET")
      * @Template()
      */
@@ -136,10 +135,10 @@ class CumplimientoController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entity = $em->getRepository('IDPCContractualBundle:Cumplimiento')->find($id);
+        $entity = $em->getRepository('IDPCSolicitudBundle:EstudiosPrevios')->find($id);
 
         if (!$entity) {
-            throw $this->createNotFoundException('Unable to find Cumplimiento entity.');
+            throw $this->createNotFoundException('Unable to find EstudiosPrevios entity.');
         }
 
         $editForm = $this->createEditForm($entity);
@@ -153,16 +152,16 @@ class CumplimientoController extends Controller
     }
 
     /**
-    * Creates a form to edit a Cumplimiento entity.
+    * Creates a form to edit a EstudiosPrevios entity.
     *
-    * @param Cumplimiento $entity The entity
+    * @param EstudiosPrevios $entity The entity
     *
     * @return \Symfony\Component\Form\Form The form
     */
-    private function createEditForm(Cumplimiento $entity)
+    private function createEditForm(EstudiosPrevios $entity)
     {
-        $form = $this->createForm(new CumplimientoType(), $entity, array(
-            'action' => $this->generateUrl('cumplimiento_update', array('id' => $entity->getId())),
+        $form = $this->createForm(new EstudiosPreviosType(), $entity, array(
+            'action' => $this->generateUrl('estudiosprevios_update', array('id' => $entity->getId())),
             'method' => 'PUT',
         ));
 
@@ -171,20 +170,20 @@ class CumplimientoController extends Controller
         return $form;
     }
     /**
-     * Edits an existing Cumplimiento entity.
+     * Edits an existing EstudiosPrevios entity.
      *
-     * @Route("/{id}", name="cumplimiento_update")
+     * @Route("/{id}", name="estudiosprevios_update")
      * @Method("PUT")
-     * @Template("IDPCContractualBundle:Cumplimiento:edit.html.twig")
+     * @Template("IDPCSolicitudBundle:EstudiosPrevios:edit.html.twig")
      */
     public function updateAction(Request $request, $id)
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entity = $em->getRepository('IDPCContractualBundle:Cumplimiento')->find($id);
+        $entity = $em->getRepository('IDPCSolicitudBundle:EstudiosPrevios')->find($id);
 
         if (!$entity) {
-            throw $this->createNotFoundException('Unable to find Cumplimiento entity.');
+            throw $this->createNotFoundException('Unable to find EstudiosPrevios entity.');
         }
 
         $deleteForm = $this->createDeleteForm($id);
@@ -194,7 +193,7 @@ class CumplimientoController extends Controller
         if ($editForm->isValid()) {
             $em->flush();
 
-            return $this->redirect($this->generateUrl('cumplimiento_edit', array('id' => $id)));
+            return $this->redirect($this->generateUrl('estudiosprevios_edit', array('id' => $id)));
         }
 
         return array(
@@ -204,9 +203,9 @@ class CumplimientoController extends Controller
         );
     }
     /**
-     * Deletes a Cumplimiento entity.
+     * Deletes a EstudiosPrevios entity.
      *
-     * @Route("/{id}", name="cumplimiento_delete")
+     * @Route("/{id}", name="estudiosprevios_delete")
      * @Method("DELETE")
      */
     public function deleteAction(Request $request, $id)
@@ -216,21 +215,21 @@ class CumplimientoController extends Controller
 
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();
-            $entity = $em->getRepository('IDPCContractualBundle:Cumplimiento')->find($id);
+            $entity = $em->getRepository('IDPCSolicitudBundle:EstudiosPrevios')->find($id);
 
             if (!$entity) {
-                throw $this->createNotFoundException('Unable to find Cumplimiento entity.');
+                throw $this->createNotFoundException('Unable to find EstudiosPrevios entity.');
             }
 
             $em->remove($entity);
             $em->flush();
         }
 
-        return $this->redirect($this->generateUrl('cumplimiento'));
+        return $this->redirect($this->generateUrl('estudiosprevios'));
     }
 
     /**
-     * Creates a form to delete a Cumplimiento entity by id.
+     * Creates a form to delete a EstudiosPrevios entity by id.
      *
      * @param mixed $id The entity id
      *
@@ -239,34 +238,10 @@ class CumplimientoController extends Controller
     private function createDeleteForm($id)
     {
         return $this->createFormBuilder()
-            ->setAction($this->generateUrl('cumplimiento_delete', array('id' => $id)))
+            ->setAction($this->generateUrl('estudiosprevios_delete', array('id' => $id)))
             ->setMethod('DELETE')
             ->add('submit', 'submit', array('label' => 'Delete'))
             ->getForm()
         ;
     }
-    
-    public function upload()
-{
-    // the file property can be empty if the field is not required
-    if (null === $this->getFile()) {
-        return;
-    }
-
-    // aquí usa el nombre de archivo original pero lo debes
-    // sanear al menos para evitar cualquier problema de seguridad
-
-    // move takes the target directory and then the
-    // target filename to move to
-    $this->getFile()->move(
-        $this->getUploadRootDir(),
-        $this->getFile()->getClientOriginalName()
-    );
-
-    // set the path property to the filename where you've saved the file
-    $this->path = $this->getFile()->getClientOriginalName();
-
-    // limpia la propiedad «file» ya que no la necesitas más
-    $this->file = null;
-}
 }

@@ -1,3 +1,4 @@
-idpc_solicitud_homepage:
-    pattern:  /hello/{name}
-    defaults: { _controller: IDPCSolicitudBundle:Default:index }
+IDPCAnnotations:
+    resource: "@IDPCSolicitudBundle/Controller/"
+    prefix:   /
+    type:     annotation

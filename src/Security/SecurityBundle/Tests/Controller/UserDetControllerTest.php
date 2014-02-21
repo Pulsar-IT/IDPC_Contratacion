@@ -19,7 +19,7 @@ class UserDetControllerTest extends WebTestCase
 
         // Fill in the form and submit it
         $form = $crawler->selectButton('Create')->form(array(
-            'meissen_securitybundle_userdettype[field_name]'  => 'Test',
+            'security_securitybundle_userdettype[field_name]'  => 'Test',
             // ... other fields to fill
         ));
 
@@ -33,7 +33,7 @@ class UserDetControllerTest extends WebTestCase
         $crawler = $client->click($crawler->selectLink('Edit')->link());
 
         $form = $crawler->selectButton('Edit')->form(array(
-            'meissen_securitybundle_userdettype[field_name]'  => 'Foo',
+            'security_securitybundle_userdettype[field_name]'  => 'Foo',
             // ... other fields to fill
         ));
 

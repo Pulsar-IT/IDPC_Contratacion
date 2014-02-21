@@ -1,12 +1,12 @@
 <?php
 
-namespace IDPC\ContractualBundle\Form;
+namespace IDPC\SolicitudBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
-class CumplimientoType extends AbstractType
+class EstudiosPreviosType extends AbstractType
 {
         /**
      * @param FormBuilderInterface $builder
@@ -15,14 +15,13 @@ class CumplimientoType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('planilla')
+            ->add('objeto')
+            ->add('valorContrato')
+            ->add('plazoMeses')
+            ->add('plazoDias')
             ->add('created_at')
             ->add('update_at')
-            ->add('pago', 'entity', array(
-                'class' => 'IDPCContractualBundle:Pago',
-                'property' => 'mes'
-            ))
-            ->add('file')
+            ->add('contrato')
         ;
     }
     
@@ -32,7 +31,7 @@ class CumplimientoType extends AbstractType
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'IDPC\ContractualBundle\Entity\Cumplimiento'
+            'data_class' => 'IDPC\SolicitudBundle\Entity\EstudiosPrevios'
         ));
     }
 
@@ -41,6 +40,6 @@ class CumplimientoType extends AbstractType
      */
     public function getName()
     {
-        return 'idpc_contractualbundle_cumplimiento';
+        return 'idpc_solicitudbundle_estudiosprevios';
     }
 }

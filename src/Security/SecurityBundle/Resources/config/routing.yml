@@ -1,4 +1,4 @@
-meissen_security_homepage:
+security_security_homepage:
     pattern:  /admin/
     defaults: { _controller: SecuritySecurityBundle:Default:index }
     

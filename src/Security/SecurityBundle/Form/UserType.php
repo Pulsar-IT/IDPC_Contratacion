@@ -28,6 +28,6 @@ class UserType extends AbstractType
 
     public function getName()
     {
-        return 'meissen_securitybundle_usertype';
+        return 'security_securitybundle_usertype';
     }
 }
