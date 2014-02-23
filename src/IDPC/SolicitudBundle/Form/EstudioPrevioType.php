@@ -6,7 +6,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
-class SolicitudType extends AbstractType
+class EstudioPrevioType extends AbstractType
 {
         /**
      * @param FormBuilderInterface $builder
@@ -15,17 +15,15 @@ class SolicitudType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-                ->add('fechaCierre', 'date', array(
-                    'label' => 'Fecha Cierre',
-                    'widget' => 'single_text'
+                ->add('tipoContrato', 'entity', array(
+                    'class' => 'IDPCBaseBundle:TipoContrato',
+                    'property' => 'tipoContrato'
                 ))
-            ->add('estadoSolicitud')
-            ->add('estadoProceso')
-            ->add('observaciones')
-            ->add('area', 'entity', array(
-                'class' => 'IDPCBaseBundle:Area',
-                'property' => 'sigla'
-            ))
+            ->add('objeto')
+            ->add('valorContrato')
+            ->add('plazoMeses')
+            ->add('plazoDias')
+            ->add('contrato')
         ;
     }
     
@@ -35,7 +33,7 @@ class SolicitudType extends AbstractType
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'IDPC\SolicitudBundle\Entity\Solicitud'
+            'data_class' => 'IDPC\SolicitudBundle\Entity\EstudioPrevio'
         ));
     }
 
@@ -44,6 +42,6 @@ class SolicitudType extends AbstractType
      */
     public function getName()
     {
-        return 'idpc_solicitudbundle_solicitud';
+        return 'idpc_solicitudbundle_estudiosprevios';
     }
 }

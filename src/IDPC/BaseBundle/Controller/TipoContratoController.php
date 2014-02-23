@@ -1,27 +1,27 @@
 <?php
 
-namespace IDPC\SolicitudBundle\Controller;
+namespace IDPC\BaseBundle\Controller;
 
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
-use IDPC\SolicitudBundle\Entity\EstudiosPrevios;
-use IDPC\SolicitudBundle\Form\EstudiosPreviosType;
+use IDPC\BaseBundle\Entity\TipoContrato;
+use IDPC\BaseBundle\Form\TipoContratoType;
 
 /**
- * EstudiosPrevios controller.
+ * TipoContrato controller.
  *
- * @Route("/estudiosprevios")
+ * @Route("/tipocontrato")
  */
-class EstudiosPreviosController extends Controller
+class TipoContratoController extends Controller
 {
 
     /**
-     * Lists all EstudiosPrevios entities.
+     * Lists all TipoContrato entities.
      *
-     * @Route("/", name="estudiosprevios")
+     * @Route("/", name="tipocontrato")
      * @Method("GET")
      * @Template()
      */
@@ -29,22 +29,22 @@ class EstudiosPreviosController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entities = $em->getRepository('IDPCSolicitudBundle:EstudiosPrevios')->findAll();
+        $entities = $em->getRepository('IDPCBaseBundle:TipoContrato')->findAll();
 
         return array(
             'entities' => $entities,
         );
     }
     /**
-     * Creates a new EstudiosPrevios entity.
+     * Creates a new TipoContrato entity.
      *
-     * @Route("/", name="estudiosprevios_create")
+     * @Route("/", name="tipocontrato_create")
      * @Method("POST")
-     * @Template("IDPCSolicitudBundle:EstudiosPrevios:new.html.twig")
+     * @Template("IDPCBaseBundle:TipoContrato:new.html.twig")
      */
     public function createAction(Request $request)
     {
-        $entity = new EstudiosPrevios();
+        $entity = new TipoContrato();
         $form = $this->createCreateForm($entity);
         $form->handleRequest($request);
 
@@ -53,7 +53,7 @@ class EstudiosPreviosController extends Controller
             $em->persist($entity);
             $em->flush();
 
-            return $this->redirect($this->generateUrl('estudiosprevios_show', array('id' => $entity->getId())));
+            return $this->redirect($this->generateUrl('tipocontrato_show', array('id' => $entity->getId())));
         }
 
         return array(
@@ -63,16 +63,16 @@ class EstudiosPreviosController extends Controller
     }
 
     /**
-    * Creates a form to create a EstudiosPrevios entity.
+    * Creates a form to create a TipoContrato entity.
     *
-    * @param EstudiosPrevios $entity The entity
+    * @param TipoContrato $entity The entity
     *
     * @return \Symfony\Component\Form\Form The form
     */
-    private function createCreateForm(EstudiosPrevios $entity)
+    private function createCreateForm(TipoContrato $entity)
     {
-        $form = $this->createForm(new EstudiosPreviosType(), $entity, array(
-            'action' => $this->generateUrl('estudiosprevios_create'),
+        $form = $this->createForm(new TipoContratoType(), $entity, array(
+            'action' => $this->generateUrl('tipocontrato_create'),
             'method' => 'POST',
         ));
 
@@ -82,15 +82,15 @@ class EstudiosPreviosController extends Controller
     }
 
     /**
-     * Displays a form to create a new EstudiosPrevios entity.
+     * Displays a form to create a new TipoContrato entity.
      *
-     * @Route("/new", name="estudiosprevios_new")
+     * @Route("/new", name="tipocontrato_new")
      * @Method("GET")
      * @Template()
      */
     public function newAction()
     {
-        $entity = new EstudiosPrevios();
+        $entity = new TipoContrato();
         $form   = $this->createCreateForm($entity);
 
         return array(
@@ -100,9 +100,9 @@ class EstudiosPreviosController extends Controller
     }
 
     /**
-     * Finds and displays a EstudiosPrevios entity.
+     * Finds and displays a TipoContrato entity.
      *
-     * @Route("/{id}", name="estudiosprevios_show")
+     * @Route("/{id}", name="tipocontrato_show")
      * @Method("GET")
      * @Template()
      */
@@ -110,10 +110,10 @@ class EstudiosPreviosController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entity = $em->getRepository('IDPCSolicitudBundle:EstudiosPrevios')->find($id);
+        $entity = $em->getRepository('IDPCBaseBundle:TipoContrato')->find($id);
 
         if (!$entity) {
-            throw $this->createNotFoundException('Unable to find EstudiosPrevios entity.');
+            throw $this->createNotFoundException('Unable to find TipoContrato entity.');
         }
 
         $deleteForm = $this->createDeleteForm($id);
@@ -125,9 +125,9 @@ class EstudiosPreviosController extends Controller
     }
 
     /**
-     * Displays a form to edit an existing EstudiosPrevios entity.
+     * Displays a form to edit an existing TipoContrato entity.
      *
-     * @Route("/{id}/edit", name="estudiosprevios_edit")
+     * @Route("/{id}/edit", name="tipocontrato_edit")
      * @Method("GET")
      * @Template()
      */
@@ -135,10 +135,10 @@ class EstudiosPreviosController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entity = $em->getRepository('IDPCSolicitudBundle:EstudiosPrevios')->find($id);
+        $entity = $em->getRepository('IDPCBaseBundle:TipoContrato')->find($id);
 
         if (!$entity) {
-            throw $this->createNotFoundException('Unable to find EstudiosPrevios entity.');
+            throw $this->createNotFoundException('Unable to find TipoContrato entity.');
         }
 
         $editForm = $this->createEditForm($entity);
@@ -152,16 +152,16 @@ class EstudiosPreviosController extends Controller
     }
 
     /**
-    * Creates a form to edit a EstudiosPrevios entity.
+    * Creates a form to edit a TipoContrato entity.
     *
-    * @param EstudiosPrevios $entity The entity
+    * @param TipoContrato $entity The entity
     *
     * @return \Symfony\Component\Form\Form The form
     */
-    private function createEditForm(EstudiosPrevios $entity)
+    private function createEditForm(TipoContrato $entity)
     {
-        $form = $this->createForm(new EstudiosPreviosType(), $entity, array(
-            'action' => $this->generateUrl('estudiosprevios_update', array('id' => $entity->getId())),
+        $form = $this->createForm(new TipoContratoType(), $entity, array(
+            'action' => $this->generateUrl('tipocontrato_update', array('id' => $entity->getId())),
             'method' => 'PUT',
         ));
 
@@ -170,20 +170,20 @@ class EstudiosPreviosController extends Controller
         return $form;
     }
     /**
-     * Edits an existing EstudiosPrevios entity.
+     * Edits an existing TipoContrato entity.
      *
-     * @Route("/{id}", name="estudiosprevios_update")
+     * @Route("/{id}", name="tipocontrato_update")
      * @Method("PUT")
-     * @Template("IDPCSolicitudBundle:EstudiosPrevios:edit.html.twig")
+     * @Template("IDPCBaseBundle:TipoContrato:edit.html.twig")
      */
     public function updateAction(Request $request, $id)
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entity = $em->getRepository('IDPCSolicitudBundle:EstudiosPrevios')->find($id);
+        $entity = $em->getRepository('IDPCBaseBundle:TipoContrato')->find($id);
 
         if (!$entity) {
-            throw $this->createNotFoundException('Unable to find EstudiosPrevios entity.');
+            throw $this->createNotFoundException('Unable to find TipoContrato entity.');
         }
 
         $deleteForm = $this->createDeleteForm($id);
@@ -193,7 +193,7 @@ class EstudiosPreviosController extends Controller
         if ($editForm->isValid()) {
             $em->flush();
 
-            return $this->redirect($this->generateUrl('estudiosprevios_edit', array('id' => $id)));
+            return $this->redirect($this->generateUrl('tipocontrato_edit', array('id' => $id)));
         }
 
         return array(
@@ -203,9 +203,9 @@ class EstudiosPreviosController extends Controller
         );
     }
     /**
-     * Deletes a EstudiosPrevios entity.
+     * Deletes a TipoContrato entity.
      *
-     * @Route("/{id}", name="estudiosprevios_delete")
+     * @Route("/{id}", name="tipocontrato_delete")
      * @Method("DELETE")
      */
     public function deleteAction(Request $request, $id)
@@ -215,21 +215,21 @@ class EstudiosPreviosController extends Controller
 
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();
-            $entity = $em->getRepository('IDPCSolicitudBundle:EstudiosPrevios')->find($id);
+            $entity = $em->getRepository('IDPCBaseBundle:TipoContrato')->find($id);
 
             if (!$entity) {
-                throw $this->createNotFoundException('Unable to find EstudiosPrevios entity.');
+                throw $this->createNotFoundException('Unable to find TipoContrato entity.');
             }
 
             $em->remove($entity);
             $em->flush();
         }
 
-        return $this->redirect($this->generateUrl('estudiosprevios'));
+        return $this->redirect($this->generateUrl('tipocontrato'));
     }
 
     /**
-     * Creates a form to delete a EstudiosPrevios entity by id.
+     * Creates a form to delete a TipoContrato entity by id.
      *
      * @param mixed $id The entity id
      *
@@ -238,7 +238,7 @@ class EstudiosPreviosController extends Controller
     private function createDeleteForm($id)
     {
         return $this->createFormBuilder()
-            ->setAction($this->generateUrl('estudiosprevios_delete', array('id' => $id)))
+            ->setAction($this->generateUrl('tipocontrato_delete', array('id' => $id)))
             ->setMethod('DELETE')
             ->add('submit', 'submit', array('label' => 'Delete'))
             ->getForm()

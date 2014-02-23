@@ -1,12 +1,12 @@
 <?php
 
-namespace IDPC\SolicitudBundle\Form;
+namespace IDPC\BaseBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
-class EstudiosPreviosType extends AbstractType
+class TipoContratoType extends AbstractType
 {
         /**
      * @param FormBuilderInterface $builder
@@ -15,13 +15,7 @@ class EstudiosPreviosType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('objeto')
-            ->add('valorContrato')
-            ->add('plazoMeses')
-            ->add('plazoDias')
-            ->add('created_at')
-            ->add('update_at')
-            ->add('contrato')
+            ->add('tipoContrato')
         ;
     }
     
@@ -31,7 +25,7 @@ class EstudiosPreviosType extends AbstractType
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'IDPC\SolicitudBundle\Entity\EstudiosPrevios'
+            'data_class' => 'IDPC\BaseBundle\Entity\TipoContrato'
         ));
     }
 
@@ -40,6 +34,6 @@ class EstudiosPreviosType extends AbstractType
      */
     public function getName()
     {
-        return 'idpc_solicitudbundle_estudiosprevios';
+        return 'idpc_basebundle_tipocontrato';
     }
 }

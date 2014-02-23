@@ -51,6 +51,16 @@ use Gedmo\Mapping\Annotation as Gedmo;
     protected $observaciones;
     
     /**
+     * @ORM\ManyToOne(targetEntity="IDPC\BaseBundle\Entity\Area", inversedBy="solicitudes")
+     * @ORM\JoinColumn(name="Area_id", referencedColumnName="id")
+     */
+    
+    protected $area;
+
+
+    
+    
+    /**
      * @var datetime $created
      * 
      * @ORM\Column( type="datetime")
@@ -75,13 +85,6 @@ use Gedmo\Mapping\Annotation as Gedmo;
      * @ORM\OneToMany(targetEntity="Noplanta", mappedBy="solicitud", cascade={"persist", "remove"})
      */
     Private $noplanta;
-    
-    /**
-     * @ORM\ManyToOne(targetEntity="Cdp", inversedBy="solicitudes")
-     * @ORM\JoinColumn(name="Cdp_id", referencedColumnName="id")
-     */
-    
-    protected $cdp;
 
 
     
@@ -299,27 +302,26 @@ use Gedmo\Mapping\Annotation as Gedmo;
     {
         return $this->noplanta;
     }
-
     /**
-     * Set cdp
+     * Set area
      *
-     * @param \IDPC\SolicitudBundle\Entity\Cdp $cdp
+     * @param \IDPC\BaseBundle\Entity\Area $area
      * @return Solicitud
      */
-    public function setCdp(\IDPC\SolicitudBundle\Entity\Cdp $cdp = null)
+    public function setArea(\IDPC\BaseBundle\Entity\Area $area = null)
     {
-        $this->cdp = $cdp;
+        $this->area = $area;
 
         return $this;
     }
 
     /**
-     * Get cdp
+     * Get area
      *
-     * @return \IDPC\SolicitudBundle\Entity\Cdp 
+     * @return \IDPC\BaseBundle\Entity\Area 
      */
-    public function getCdp()
+    public function getArea()
     {
-        return $this->cdp;
+        return $this->area;
     }
 }

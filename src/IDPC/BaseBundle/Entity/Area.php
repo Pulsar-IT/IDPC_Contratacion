@@ -46,7 +46,13 @@ use Gedmo\Mapping\Annotation as Gedmo;
      * @ORM\OneToMany(targetEntity="Security\SecurityBundle\Entity\UserDet", mappedBy="area", cascade={"persist", "remove"})
      */
     Private $usuarios;
+    
+    /**
+     * @ORM\OneToMany(targetEntity="IDPC\SolicitudBundle\Entity\Solicitud", mappedBy="area", cascade={"persist", "remove"})
+     */
+    Private $solicitudes;
 
+    
     
 
     
@@ -150,5 +156,38 @@ use Gedmo\Mapping\Annotation as Gedmo;
     public function getUsuarios()
     {
         return $this->usuarios;
+    }
+
+    /**
+     * Add solicitudes
+     *
+     * @param \IDPC\SolicitudBundle\Entity\Solicitud $solicitudes
+     * @return Area
+     */
+    public function addSolicitudes(\IDPC\SolicitudBundle\Entity\Solicitud $solicitudes)
+    {
+        $this->solicitudes[] = $solicitudes;
+
+        return $this;
+    }
+
+    /**
+     * Remove solicitudes
+     *
+     * @param \IDPC\SolicitudBundle\Entity\Solicitud $solicitudes
+     */
+    public function removeSolicitudes(\IDPC\SolicitudBundle\Entity\Solicitud $solicitudes)
+    {
+        $this->solicitudes->removeElement($solicitudes);
+    }
+
+    /**
+     * Get solicitudes
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getSolicitudes()
+    {
+        return $this->solicitudes;
     }
 }

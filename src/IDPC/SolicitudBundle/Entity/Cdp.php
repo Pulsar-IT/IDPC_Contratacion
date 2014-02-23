@@ -71,9 +71,9 @@ use Gedmo\Mapping\Annotation as Gedmo;
     protected $proyectoinversion;
     
     /**
-     * @ORM\OneToMany(targetEntity="Solicitud", mappedBy="cdp", cascade={"persist", "remove"})
+     * @ORM\OneToMany(targetEntity="EstudioPrevio", mappedBy="cdp", cascade={"persist", "remove"})
      */
-    Private $solicitudes;
+    Private $estudios;
 
 
 

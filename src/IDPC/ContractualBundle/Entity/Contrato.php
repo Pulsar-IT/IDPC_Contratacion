@@ -46,7 +46,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
     Private $pagos;
     
     /**
-     * @ORM\OneToOne(targetEntity="IDPC\SolicitudBundle\Entity\EstudiosPrevios", mappedBy="contrato")
+     * @ORM\OneToOne(targetEntity="IDPC\SolicitudBundle\Entity\EstudioPrevio", mappedBy="contrato")
      */
     
     protected $estudio;

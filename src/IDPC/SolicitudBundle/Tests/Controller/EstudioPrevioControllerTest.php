@@ -4,7 +4,7 @@ namespace IDPC\SolicitudBundle\Tests\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
-class EstudiosPreviosControllerTest extends WebTestCase
+class EstudioPrevioControllerTest extends WebTestCase
 {
     /*
     public function testCompleteScenario()

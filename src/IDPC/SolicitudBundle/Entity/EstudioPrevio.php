@@ -7,13 +7,13 @@ use Symfony\Component\Validator\Constraints as Assert;
 use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
- * IDPC\SolicitudBundle\Entity\EstudiosPrevios
+ * IDPC\SolicitudBundle\Entity\EstudioPrevio
  *
  * @ORM\Table(name="tb_sol_estudios")
- * @ORM\Entity(repositoryClass="IDPC\SolicitudBundle\Entity\EstudiosPreviosRepository")
+ * @ORM\Entity(repositoryClass="IDPC\SolicitudBundle\Entity\EstudioPrevioRepository")
  */
 
- class EstudiosPrevios {
+ class EstudioPrevio {
      
      /**
      * @var integer $id
@@ -68,14 +68,24 @@ use Gedmo\Mapping\Annotation as Gedmo;
      */
     
     protected $contrato;
+
     
     /**
-     * @ORM\Column(type="string")
-     * @Assert\NotBlank()
-     * @Assert\Length( max = "100" )
+     * @ORM\ManyToOne(targetEntity="IDPC\BaseBundle\Entity\Cdp", inversedBy="solicitudes")
+     * @ORM\JoinColumn(name="Cdp_id", referencedColumnName="id")
+     */
+    
+    protected $cdp;
+    
+    /**
+     * @ORM\ManyToOne(targetEntity="IDPC\BaseBundle\Entity\TipoContrato", inversedBy="estudiosPrevios")
+     * @ORM\JoinColumn(name="TipoContrato_id", referencedColumnName="id")
      */
     
     protected $tipoContrato;
+
+
+    
 
 
     
@@ -134,7 +144,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
      * Set objeto
      *
      * @param string $objeto
-     * @return EstudiosPrevios
+     * @return EstudioPrevio
      */
     public function setObjeto($objeto)
     {
@@ -157,7 +167,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
      * Set valorContrato
      *
      * @param integer $valorContrato
-     * @return EstudiosPrevios
+     * @return EstudioPrevio
      */
     public function setValorContrato($valorContrato)
     {
@@ -180,7 +190,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
      * Set plazoMeses
      *
      * @param integer $plazoMeses
-     * @return EstudiosPrevios
+     * @return EstudioPrevio
      */
     public function setPlazoMeses($plazoMeses)
     {
@@ -203,7 +213,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
      * Set plazoDias
      *
      * @param integer $plazoDias
-     * @return EstudiosPrevios
+     * @return EstudioPrevio
      */
     public function setPlazoDias($plazoDias)
     {
@@ -226,7 +236,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
      * Set created_at
      *
      * @param \DateTime $createdAt
-     * @return EstudiosPrevios
+     * @return EstudioPrevio
      */
     public function setCreatedAt($createdAt)
     {
@@ -249,7 +259,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
      * Set update_at
      *
      * @param \DateTime $updateAt
-     * @return EstudiosPrevios
+     * @return EstudioPrevio
      */
     public function setUpdateAt($updateAt)
     {
@@ -272,7 +282,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
      * Set contrato
      *
      * @param \IDPC\ContractualBundle\Entity\Contrato $contrato
-     * @return EstudiosPrevios
+     * @return EstudioPrevio
      */
     public function setContrato(\IDPC\ContractualBundle\Entity\Contrato $contrato = null)
     {
@@ -312,4 +322,30 @@ use Gedmo\Mapping\Annotation as Gedmo;
     public function getTipoContrato()     {
         return $this->tipoContrato;
     }
+    
+    
+
+    /**
+     * Set cdp
+     *
+     * @param \IDPC\SolicitudBundle\Entity\Cdp $cdp
+     * @return Solicitud
+     */
+    public function setCdp(\IDPC\SolicitudBundle\Entity\Cdp $cdp = null)
+    {
+        $this->cdp = $cdp;
+
+        return $this;
+    }
+
+    /**
+     * Get cdp
+     *
+     * @return \IDPC\SolicitudBundle\Entity\Cdp 
+     */
+    public function getCdp()
+    {
+        return $this->cdp;
+    }
+
 }
