@@ -68,6 +68,17 @@ use Gedmo\Mapping\Annotation as Gedmo;
      */
     
     protected $contrato;
+    
+    /**
+     * @ORM\Column(type="string")
+     * @Assert\NotBlank()
+     * @Assert\Length( max = "100" )
+     */
+    
+    protected $tipoContrato;
+
+
+    
 
 
     
@@ -278,5 +289,27 @@ use Gedmo\Mapping\Annotation as Gedmo;
     public function getContrato()
     {
         return $this->contrato;
+    }
+    
+    /**
+     * Set tipoContrato
+     *
+     * @param string $tipoContrato
+     * @return Factura
+     */
+    public function setTipoContrato($tipoContrato)     {
+        $this->tipoContrato = $tipoContrato;
+
+
+        return $this;
+    }
+
+    /**
+     * Get tipoContrato
+     *
+     * @return string 
+     */
+    public function getTipoContrato()     {
+        return $this->tipoContrato;
     }
 }

@@ -1,0 +1,7 @@
+parameters:
+#    idpc_base.example.class: IDPC\BaseBundle\Example
+
+services:
+#    idpc_base.example:
+#        class: %idpc_base.example.class%
+#        arguments: [@service_id, "plain_value", %parameter%]

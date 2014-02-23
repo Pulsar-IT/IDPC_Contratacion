@@ -1,7 +1,7 @@
 {% extends '::base.html.twig' %}
 
 {% block body -%}
-    <h1>Cumplimiento</h1>
+    <h1>Solicitud</h1>
 
     <table class="record_properties">
         <tbody>
@@ -10,8 +10,20 @@
                 <td>{{ entity.id }}</td>
             </tr>
             <tr>
-                <th>Planilla</th>
-                <td>{{ entity.planilla }}</td>
+                <th>Fechacierre</th>
+                <td>{{ entity.fechaCierre|date('Y-m-d H:i:s') }}</td>
+            </tr>
+            <tr>
+                <th>Estadosolicitud</th>
+                <td>{{ entity.estadoSolicitud }}</td>
+            </tr>
+            <tr>
+                <th>Estadoproceso</th>
+                <td>{{ entity.estadoProceso }}</td>
+            </tr>
+            <tr>
+                <th>Observaciones</th>
+                <td>{{ entity.observaciones }}</td>
             </tr>
             <tr>
                 <th>Created_at</th>
@@ -26,17 +38,12 @@
 
         <ul class="record_actions">
     <li>
-        <a href="{{ path('cumplimiento') }}">
+        <a href="{{ path('solicitud') }}">
             Back to the list
         </a>
     </li>
     <li>
-        <a href="{{ path('cumplimiento_certificado', { 'id': entity.id }) }}">
-            Generar Certificado
-        </a>
-    </li>
-    <li>
-        <a href="{{ path('cumplimiento_edit', { 'id': entity.id }) }}">
+        <a href="{{ path('solicitud_edit', { 'id': entity.id }) }}">
             Edit
         </a>
     </li>

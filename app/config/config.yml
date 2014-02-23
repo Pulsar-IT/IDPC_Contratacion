@@ -59,6 +59,13 @@ doctrine:
     orm:
         auto_generate_proxy_classes: "%kernel.debug%"
         auto_mapping: true
+        
+# Extensiones par timestamp y slug    
+stof_doctrine_extensions: 
+    orm: 
+        default: 
+            sluggable: true
+            timestampable: true
 
 # Swiftmailer Configuration
 swiftmailer:
@@ -67,3 +74,13 @@ swiftmailer:
     username:  "%mailer_user%"
     password:  "%mailer_password%"
     spool:     { type: memory }
+    
+knp_snappy:
+    pdf:
+        enabled:    true
+        binary:     /usr/local/bin/wkhtmltopdf
+        options:    []
+    image:
+        enabled:    true
+        binary:     /usr/local/bin/wkhtmltoimage
+        options:    []

@@ -36,7 +36,6 @@ class UserDetType extends AbstractType
                     'F'    =>  'Femenino',
                 )
             ))
-            ->add('estatura')
             ->add('fechaNacimiento', 'date', array(
                 'label' =>  'Fecha de Nacimiento',
                 'widget'    =>  'single_text'
@@ -50,6 +49,10 @@ class UserDetType extends AbstractType
             ->add('ciudadResidencia')
             ->add('telefonoFijo')
             ->add('telefonoMovil')
+            ->add('area', 'entity', array(
+                'class' => 'IDPCBaseBundle:Area',
+                'property' => 'nombre'
+            ))
             ->add('user', 'entity', array(
                 'class' =>  'SecuritySecurityBundle:User',
                 'property'  =>  'username'

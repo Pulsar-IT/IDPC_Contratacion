@@ -4,6 +4,7 @@ namespace IDPC\ContractualBundle\Controller;
 
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\Response;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
@@ -246,27 +247,45 @@ class CumplimientoController extends Controller
         ;
     }
     
-    public function upload()
-{
-    // the file property can be empty if the field is not required
-    if (null === $this->getFile()) {
-        return;
+    /**
+     * Generate PDF 
+     * 
+     * @Route("/{id}/certificado", name="cumplimiento_certificado")
+     * @Method("GET")
+     * @Template("IDPCContractualBundle:Cumplimiento:certificado.html.twig")
+     * 
+     */
+    
+    public function generateCertificadoAction($id)
+    {
+    $em = $this->getDoctrine()->getManager();
+
+        $entity = $em->getRepository('IDPCContractualBundle:Cumplimiento')->find($id);
+
+        if (!$entity) {
+            throw $this->createNotFoundException('Unable to find Cumplimiento entity.');
+        }
+
+        $deleteForm = $this->createDeleteForm($id);
+        
+        $html = $this->renderView('IDPCContractualBundle:Cumplimiento:certificado.html.twig', array(
+
+
+    'entity'      => $entity
+
+
+        ));
+        
+
+return new Response(
+    $this->get('knp_snappy.pdf')->getOutputFromHtml($html),
+    200,
+    array(
+        'Content-Type'          => 'application/pdf',
+        'Content-Disposition'   => 'attachment; filename="file.pdf"'
+    )
+);
     }
+    
 
-    // aquí usa el nombre de archivo original pero lo debes
-    // sanear al menos para evitar cualquier problema de seguridad
-
-    // move takes the target directory and then the
-    // target filename to move to
-    $this->getFile()->move(
-        $this->getUploadRootDir(),
-        $this->getFile()->getClientOriginalName()
-    );
-
-    // set the path property to the filename where you've saved the file
-    $this->path = $this->getFile()->getClientOriginalName();
-
-    // limpia la propiedad «file» ya que no la necesitas más
-    $this->file = null;
-}
 }

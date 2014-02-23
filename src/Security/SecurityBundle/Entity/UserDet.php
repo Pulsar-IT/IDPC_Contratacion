@@ -92,12 +92,6 @@ use Gedmo\Mapping\Annotation as Gedmo;
      */
     
     protected $genero;
-    
-    /**
-     * @ORM\Column(type="integer")
-     */
-    
-    protected $estatura;
 
     /**
      * @ORM\Column(type="date")
@@ -176,14 +170,6 @@ use Gedmo\Mapping\Annotation as Gedmo;
      */
     
     protected $telefonoMovil;
-    
-    /**
-     * @ORM\Column(type="string")
-     * @Assert\NotBlank()
-     * @Assert\Length( max = "100" )
-     */
-    
-    protected $ars;
 
 
     
@@ -195,6 +181,16 @@ use Gedmo\Mapping\Annotation as Gedmo;
      */
     
     protected $user;
+    
+    /**
+     * @ORM\ManyToOne(targetEntity="IDPC\BaseBundle\Entity\Area", inversedBy="usuarios")
+     * @ORM\JoinColumn(name="Area_id", referencedColumnName="id")
+     */
+    
+    protected $area;
+
+
+    
 
 
     
@@ -438,29 +434,6 @@ use Gedmo\Mapping\Annotation as Gedmo;
     public function getGenero()
     {
         return $this->genero;
-    }
-
-    /**
-     * Set estatura
-     *
-     * @param integer $estatura
-     * @return UserDet
-     */
-    public function setEstatura($estatura)
-    {
-        $this->estatura = $estatura;
-    
-        return $this;
-    }
-
-    /**
-     * Get estatura
-     *
-     * @return integer 
-     */
-    public function getEstatura()
-    {
-        return $this->estatura;
     }
 
     /**
@@ -761,5 +734,28 @@ use Gedmo\Mapping\Annotation as Gedmo;
     public function getUser()
     {
         return $this->user;
+    }
+
+    /**
+     * Set area
+     *
+     * @param \IDPC\BaseBundle\Entity\Area $area
+     * @return UserDet
+     */
+    public function setArea(\IDPC\BaseBundle\Entity\Area $area = null)
+    {
+        $this->area = $area;
+
+        return $this;
+    }
+
+    /**
+     * Get area
+     *
+     * @return \IDPC\BaseBundle\Entity\Area 
+     */
+    public function getArea()
+    {
+        return $this->area;
     }
 }
