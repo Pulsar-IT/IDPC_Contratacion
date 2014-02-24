@@ -15,8 +15,9 @@ class ProyectoInversionType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
+            ->add('id')
             ->add('codigo')
-            ->add('descipcion')
+            ->add('descripcion')
             ->add('vigencia')
         ;
     }

@@ -16,9 +16,15 @@ class ContratoType extends AbstractType
     {
         $builder
             ->add('numero')
-            ->add('fechaInicio')
-            ->add('created_at')
-            ->add('update_at')
+            ->add('estudio')
+            ->add('fechaInicio', 'date', array(
+                    'label' => 'Fecha de inicio',
+                    'widget' => 'single_text'
+                ))
+            ->add('estudio', 'entity', array(
+                'class' => 'IDPCSolicitudBundle:EstudioPrevio',
+                'property' => 'id'
+            ))
         ;
     }
     

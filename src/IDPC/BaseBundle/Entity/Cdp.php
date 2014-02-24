@@ -4,6 +4,7 @@ namespace IDPC\BaseBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
@@ -35,12 +36,13 @@ use Gedmo\Mapping\Annotation as Gedmo;
     protected $numero;
     
     /**
-     * @ORM\Column(type="string")
+     * @ORM\Column(type="text")
      * @Assert\NotBlank()
-     * @Assert\Length( max = "100" )
      */
     
     protected $objeto;
+
+
     
     /**
      *
@@ -57,7 +59,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
     protected $fecha;
     
     /**
-     * @ORM\Column(type="string")
+     * @ORM\Column(type="string", nullable=true)
      * @Assert\NotBlank()
      * @Assert\Length( max = "100" )
      */
@@ -72,8 +74,40 @@ use Gedmo\Mapping\Annotation as Gedmo;
     protected $proyecto;
     
     /**
-     * @ORM\Column(type="string", nullable=true)
+     * @ORM\Column(type="string")
      * @Assert\NotBlank()
+     * @Assert\Length( max = "100" )
+     */
+    
+    protected $fuente;
+    
+    /**
+     * @ORM\Column(type="string")
+     * @Assert\NotBlank()
+     * @Assert\Length( max = "100" )
+     */
+    
+    protected $concepto;
+    
+    /**
+     * @ORM\Column(type="string")
+     * @Assert\NotBlank()
+     * @Assert\Length( max = "100" )
+     */
+    
+    protected $producto;
+
+
+    
+
+
+    
+
+
+    
+    
+    /**
+     * @ORM\Column(type="string", nullable=true)
      * @Assert\Length( max = "255" )
      */
     
@@ -416,6 +450,72 @@ use Gedmo\Mapping\Annotation as Gedmo;
         if ($file = $this->getAbsolutePath()) {
             unlink($file);
         }
+    }
+    
+    /**
+     * Set fuente
+     *
+     * @param string $fuente
+     * @return Factura
+     */
+    public function setFuente($fuente)     {
+        $this->fuente = $fuente;
+
+
+        return $this;
+    }
+
+    /**
+     * Get fuente
+     *
+     * @return string 
+     */
+    public function getFuente()     {
+        return $this->fuente;
+    }
+    
+    /**
+     * Set concepto
+     *
+     * @param string $concepto
+     * @return Factura
+     */
+    public function setConcepto($concepto)     {
+        $this->concepto = $concepto;
+
+
+        return $this;
+    }
+
+    /**
+     * Get concepto
+     *
+     * @return string 
+     */
+    public function getConcepto()     {
+        return $this->concepto;
+    }
+    
+    /**
+     * Set producto
+     *
+     * @param string $producto
+     * @return Factura
+     */
+    public function setProducto($producto)     {
+        $this->producto = $producto;
+
+
+        return $this;
+    }
+
+    /**
+     * Get producto
+     *
+     * @return string 
+     */
+    public function getProducto()     {
+        return $this->producto;
     }
 
 

@@ -62,7 +62,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
     protected $solicitud;
     
     /**
-     * @ORM\ManyToOne(targetEntity="ProyectoInversion", inversedBy="noplanta")
+     * @ORM\ManyToOne(targetEntity="IDPC\BaseBundle\Entity\ProyectoInversion", inversedBy="noplanta")
      * @ORM\JoinColumn(name="ProyectoInversion_id", referencedColumnName="id")
      */
     
@@ -184,10 +184,10 @@ use Gedmo\Mapping\Annotation as Gedmo;
     /**
      * Set proyectoinversion
      *
-     * @param \IDPC\SolicitudBundle\Entity\ProyectoInversion $proyectoinversion
+     * @param IDPC\BaseBundle\Entity\ProyectoInversion $proyectoinversion
      * @return Noplanta
      */
-    public function setProyectoinversion(\IDPC\SolicitudBundle\Entity\ProyectoInversion $proyectoinversion = null)
+    public function setProyectoinversion(IDPC\BaseBundle\Entity\ProyectoInversion $proyectoinversion = null)
     {
         $this->proyectoinversion = $proyectoinversion;
 
@@ -197,7 +197,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
     /**
      * Get proyectoinversion
      *
-     * @return \IDPC\SolicitudBundle\Entity\ProyectoInversion 
+     * @return IDPC\BaseBundle\Entity\ProyectoInversion 
      */
     public function getProyectoinversion()
     {

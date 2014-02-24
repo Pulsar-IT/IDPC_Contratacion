@@ -63,12 +63,10 @@ use Gedmo\Mapping\Annotation as Gedmo;
     protected $plazoDias;
     
     /**
-     * @ORM\OneToOne(targetEntity="IDPC\ContractualBundle\Entity\Contrato", mappedBy="estudio", cascade={"all"})
-     * @ORM\JoinColumn(name="Contrato_id", referencedColumnName="id")
+     * @ORM\OneToOne(targetEntity="IDPC\ContractualBundle\Entity\Contrato", mappedBy="estudio")
      */
     
     protected $contrato;
-
     
     /**
      * @ORM\ManyToOne(targetEntity="IDPC\BaseBundle\Entity\Cdp", inversedBy="solicitudes")
@@ -328,10 +326,10 @@ use Gedmo\Mapping\Annotation as Gedmo;
     /**
      * Set cdp
      *
-     * @param \IDPC\SolicitudBundle\Entity\Cdp $cdp
+     * @param \IDPC\BaseBundle\Entity\Cdp $cdp
      * @return Solicitud
      */
-    public function setCdp(\IDPC\SolicitudBundle\Entity\Cdp $cdp = null)
+    public function setCdp(\IDPC\BaseBundle\Entity\Cdp $cdp = null)
     {
         $this->cdp = $cdp;
 
@@ -341,7 +339,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
     /**
      * Get cdp
      *
-     * @return \IDPC\SolicitudBundle\Entity\Cdp 
+     * @return \IDPC\BaseBundle\Entity\Cdp 
      */
     public function getCdp()
     {

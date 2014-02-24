@@ -88,10 +88,10 @@ use Gedmo\Mapping\Annotation as Gedmo;
     /**
      * Add estudiosPrevios
      *
-     * @param \IDPC\BaseBundle\Entity\EstudioPrevio $estudiosPrevios
+     * @param \IDPC\SolicitudBundle\Entity\EstudioPrevio $estudiosPrevios
      * @return TipoContrato
      */
-    public function addEstudiosPrevio(\IDPC\BaseBundle\Entity\EstudioPrevio $estudiosPrevios)
+    public function addEstudiosPrevio(\IDPC\SolicitudBundle\Entity\EstudioPrevio $estudiosPrevios)
     {
         $this->estudiosPrevios[] = $estudiosPrevios;
 
@@ -101,9 +101,9 @@ use Gedmo\Mapping\Annotation as Gedmo;
     /**
      * Remove estudiosPrevios
      *
-     * @param \IDPC\BaseBundle\Entity\EstudioPrevio $estudiosPrevios
+     * @param \IDPC\SolicitudBundle\Entity\EstudioPrevio $estudiosPrevios
      */
-    public function removeEstudiosPrevio(\IDPC\BaseBundle\Entity\EstudioPrevio $estudiosPrevios)
+    public function removeEstudiosPrevio(\IDPC\SolicitudBundle\Entity\EstudioPrevio $estudiosPrevios)
     {
         $this->estudiosPrevios->removeElement($estudiosPrevios);
     }

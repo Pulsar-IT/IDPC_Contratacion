@@ -46,7 +46,8 @@ use Gedmo\Mapping\Annotation as Gedmo;
     Private $pagos;
     
     /**
-     * @ORM\OneToOne(targetEntity="IDPC\SolicitudBundle\Entity\EstudioPrevio", mappedBy="contrato")
+     * @ORM\OneToOne(targetEntity="IDPC\SolicitudBundle\Entity\EstudioPrevio", mappedBy="contrato", cascade={"all"})
+     * @ORM\JoinColumn(name="EstudioPrevio_id", referencedColumnName="id")
      */
     
     protected $estudio;
@@ -230,10 +231,10 @@ use Gedmo\Mapping\Annotation as Gedmo;
     /**
      * Set estudio
      *
-     * @param \IDPC\SolicitudBundle\Entity\EstudiosPrevios $estudio
+     * @param \IDPC\SolicitudBundle\Entity\EstudioPrevio $estudio
      * @return Contrato
      */
-    public function setEstudio(\IDPC\SolicitudBundle\Entity\EstudiosPrevios $estudio = null)
+    public function setEstudio(\IDPC\SolicitudBundle\Entity\EstudioPrevio $estudio = null)
     {
         $this->estudio = $estudio;
 
@@ -243,7 +244,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
     /**
      * Get estudio
      *
-     * @return \IDPC\SolicitudBundle\Entity\EstudiosPrevios 
+     * @return \IDPC\SolicitudBundle\Entity\EstudioPrevio
      */
     public function getEstudio()
     {

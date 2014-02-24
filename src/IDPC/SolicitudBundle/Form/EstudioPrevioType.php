@@ -23,7 +23,10 @@ class EstudioPrevioType extends AbstractType
             ->add('valorContrato')
             ->add('plazoMeses')
             ->add('plazoDias')
-            ->add('contrato')
+            ->add('cdp', 'entity', array(
+                'class' => 'IDPCBaseBundle:Cdp',
+                'property' => 'numero'
+            ))
         ;
     }
     

@@ -23,12 +23,15 @@ class CdpType extends AbstractType
                     'widget' => 'single_text'
                 ))
             ->add('oficio')
-            ->add('path')
             ->add('proyecto')
             ->add('proyecto', 'entity', array(
                 'class' => 'IDPCBaseBundle:ProyectoInversion',
                 'property' => 'codigo'
             ))
+            ->add('fuente')
+            ->add('concepto')
+            ->add('producto')
+            ->add('file')
         ;
     }
     

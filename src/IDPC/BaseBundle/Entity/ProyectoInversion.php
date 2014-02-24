@@ -20,7 +20,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
      *
      * @ORM\Id
      * @ORM\Column(type="integer")
-     * @ORM\GeneratedValue(strategy="AUTO")
+     * @ORM\GeneratedValue(strategy="NONE")
      */
      
     protected $id;
@@ -40,11 +40,10 @@ use Gedmo\Mapping\Annotation as Gedmo;
      * @Assert\Length( max = "100" )
      */
     
-    protected $descipcion;
+    protected $descripcion;
     
     /**
-     * @ORM\Column(type="string")
-     * @Assert\NotBlank()
+     * @ORM\Column(type="string", nullable=true)
      * @Assert\Length( max = "100" )
      */
     
@@ -80,6 +79,21 @@ use Gedmo\Mapping\Annotation as Gedmo;
     {
         $this->cdp = new \Doctrine\Common\Collections\ArrayCollection();
     }
+    
+
+    /**
+     * Set id
+     *
+     * @param integer $id
+     * @return ProyectoInversion
+     */
+    public function setId($id)
+    {
+        $this->id = $id;
+
+        return $this;
+    }
+    
 
     /**
      * Get id
@@ -115,26 +129,26 @@ use Gedmo\Mapping\Annotation as Gedmo;
     }
 
     /**
-     * Set descipcion
+     * Set descripcion
      *
-     * @param string $descipcion
+     * @param string $descripcion
      * @return ProyectoInversion
      */
-    public function setDescipcion($descipcion)
+    public function setDescripcion($descripcion)
     {
-        $this->descipcion = $descipcion;
+        $this->descripcion = $descripcion;
 
         return $this;
     }
 
     /**
-     * Get descipcion
+     * Get descripcion
      *
      * @return string 
      */
-    public function getDescipcion()
+    public function getDescripcion()
     {
-        return $this->descipcion;
+        return $this->descripcion;
     }
 
     /**

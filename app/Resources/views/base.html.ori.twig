@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <title>{% block title %}Welcome!{% endblock %}</title>
+        {% block stylesheets %}{% endblock %}
+        <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+    </head>
+    <body>
+        
+
+            <ul class="toggle">
+                <li class="icn_settings"><a href="{{ path('contrato') }}">Contrato</a></li>
+                <li class="icn_settings"><a href="{{ path('cumplimiento') }}">Cumplimiento</a></li>
+                <li class="icn_settings"><a href="{{ path('informe') }}">Informe de Actividades</a></li>
+                <li class="icn_settings"><a href="{{ path('pago') }}">Pagos</a></li>
+            </ul>
+
+        
+        {% block body %}{% endblock %}
+        {% block javascripts %}{% endblock %}
+        </body>
+    </html>
