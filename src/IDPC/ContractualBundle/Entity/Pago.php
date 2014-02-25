@@ -48,6 +48,17 @@ use Gedmo\Mapping\Annotation as Gedmo;
      * 
      */
     
+    protected $valorAportes;
+
+
+    
+    
+    /**
+     *
+     * @ORM\Column(type="integer")
+     * 
+     */
+    
     protected $numeroPago;
     
     /**
@@ -276,5 +287,27 @@ use Gedmo\Mapping\Annotation as Gedmo;
     public function getContrato()
     {
         return $this->contrato;
+    }
+    
+    /**
+     * Set valorAportes
+     *
+     * @param integer $valorAportes
+     * @return Factura
+     */
+    public function setValorAportes($valorAportes)     {
+        $this->valorAportes = $valorAportes;
+
+
+        return $this;
+    }
+
+    /**
+     * Get valorAportes
+     *
+     * @return integer 
+     */
+    public function getValorAportes()     {
+        return $this->valorAportes;
     }
 }
