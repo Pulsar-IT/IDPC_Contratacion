@@ -84,6 +84,16 @@ use Gedmo\Mapping\Annotation as Gedmo;
      */
     
     protected $estudio;
+    
+    /**
+     * @ORM\ManyToOne(targetEntity="Security\SecurityBundle\Entity\UserDet", inversedBy="contratos")
+     * @ORM\JoinColumn(name="Usuario_id", referencedColumnName="id")
+     */
+    
+    protected $supervisor;
+
+
+    
 
 
     
@@ -348,5 +358,28 @@ use Gedmo\Mapping\Annotation as Gedmo;
      */
     public function getValorUltimoPago()     {
         return $this->valorUltimoPago;
+    }
+
+    /**
+     * Set supervisor
+     *
+     * @param \Security\SecurityBundle\Entity\UserDet $supervisor
+     * @return Contrato
+     */
+    public function setUsuario(\Security\SecurityBundle\Entity\UserDet $supervisor = null)
+    {
+        $this->supervisor = $supervisor;
+
+        return $this;
+    }
+
+    /**
+     * Get supervisor
+     *
+     * @return \Security\SecurityBundle\Entity\UserDet 
+     */
+    public function getSupervisor()
+    {
+        return $this->supervisor;
     }
 }

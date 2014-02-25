@@ -12,9 +12,8 @@
             <tr>
                 <th>Id</th>
                 <th>Numero</th>
+                <th>Contratista</th>
                 <th>Fechainicio</th>
-                <th>Created_at</th>
-                <th>Update_at</th>
                 <th>Actions</th>
             </tr>
         </thead>
@@ -23,9 +22,8 @@
             <tr>
                 <td><a href="{{ path('contrato_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
                 <td>{{ entity.numero }}</td>
-                <td>{% if entity.fechaInicio %}{{ entity.fechaInicio|date('Y-m-d H:i:s') }}{% endif %}</td>
-                <td>{% if entity.createdat %}{{ entity.createdat|date('Y-m-d H:i:s') }}{% endif %}</td>
-                <td>{% if entity.updateat %}{{ entity.updateat|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>{{ entity.estudio.usuario.primerApellido }}{{ entity.estudio.usuario.segundoApellido }}, {{ entity.estudio.usuario.primerNombre }}{{ entity.estudio.usuario.segundoNombre }}</td>
+                <td>{% if entity.fechaInicio %}{{ entity.fechaInicio|date('Y-m-d') }}{% endif %}</td>
                 <td>
                 <ul>
                     <li>

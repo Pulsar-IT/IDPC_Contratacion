@@ -48,6 +48,10 @@ class LoadDatosIniciales extends AbstractFixture implements OrderedFixtureInterf
                 'name' => 'ROLE_ADMIN',
                 'descripcion' => 'Administrador del sistema'
             ),
+            'supervisor' => array(
+                'name' => 'ROLE_SUPERVISOR',
+                'descripcion' => 'Supervisor de contratos'
+            ),
             
         );
         

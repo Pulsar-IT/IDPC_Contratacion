@@ -28,6 +28,10 @@ class ContratoType extends AbstractType
                 'class' => 'IDPCSolicitudBundle:EstudioPrevio',
                 'property' => 'id'
             ))
+            ->add('supervisor', 'entity', array(
+                'class' => 'SecuritySecurityBundle:UserDet',
+                'property' => 'documento'
+            ))
             
         ;
     }

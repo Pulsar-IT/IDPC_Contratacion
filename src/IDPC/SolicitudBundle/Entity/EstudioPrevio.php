@@ -64,6 +64,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
     
     /**
      * @ORM\OneToOne(targetEntity="IDPC\ContractualBundle\Entity\Contrato", mappedBy="estudio")
+     * @Assert\Valid()
      */
     
     protected $contrato;
