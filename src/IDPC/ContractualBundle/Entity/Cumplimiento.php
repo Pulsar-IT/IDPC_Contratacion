@@ -37,11 +37,18 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
     protected $planilla;
     
     /**
-     * @ORM\ManyToOne(targetEntity="Pago", inversedBy="cumplimientos")
+     * @ORM\OneToOne(targetEntity="Pago", inversedBy="cumplimiento", cascade={"persist", "remove"})
      * @ORM\JoinColumn(name="Pago_id", referencedColumnName="id")
+     * @Assert\Type(type="IDPC\ContractualBundle\Entity\Pago")
      */
     
+    
     protected $pago;
+
+
+    
+    
+    
     
     /**
      * @ORM\Column(type="string", nullable=true)
@@ -170,29 +177,6 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
     {
         return $this->update_at;
     }
-
-    /**
-     * Set pago
-     *
-     * @param \IDPC\ContractualBundle\Entity\Pago $pago
-     * @return Cumplimiento
-     */
-    public function setPago(\IDPC\ContractualBundle\Entity\Pago $pago = null)
-    {
-        $this->pago = $pago;
-
-        return $this;
-    }
-
-    /**
-     * Get pago
-     *
-     * @return \IDPC\ContractualBundle\Entity\Pago 
-     */
-    public function getPago()
-    {
-        return $this->pago;
-    }
     
     public function getAbsolutePath() {
         return null === $this->path 
@@ -294,4 +278,51 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
 	
 
  
+
+    /**
+     * Set path
+     *
+     * @param string $path
+     * @return Cumplimiento
+     */
+    public function setPath($path)
+    {
+        $this->path = $path;
+
+        return $this;
+    }
+
+    /**
+     * Get path
+     *
+     * @return string 
+     */
+    public function getPath()
+    {
+        return $this->path;
+    }
+
+
+    /**
+     * Set pago
+     *
+     * @param \IDPC\ContractualBundle\Entity\Pago $pago
+     * @return Cumplimiento
+     */
+    public function setPago(\IDPC\ContractualBundle\Entity\Pago $pago = null)
+    {
+        $this->pago = $pago;
+
+        return $this;
+    }
+
+    /**
+     * Get pago
+     *
+     * @return \IDPC\ContractualBundle\Entity\Pago 
+     */
+    public function getPago()
+    {
+        return $this->pago;
+    }
 }

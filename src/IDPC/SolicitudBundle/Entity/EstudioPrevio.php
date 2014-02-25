@@ -70,7 +70,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
     protected $contrato;
     
     /**
-     * @ORM\ManyToOne(targetEntity="IDPC\BaseBundle\Entity\Cdp", inversedBy="solicitudes")
+     * @ORM\ManyToOne(targetEntity="IDPC\BaseBundle\Entity\Cdp", inversedBy="estudiosPrevios")
      * @ORM\JoinColumn(name="Cdp_id", referencedColumnName="id")
      */
     
@@ -88,7 +88,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
      * @ORM\JoinColumn(name="UserDet_id", referencedColumnName="id")
      */
     
-    protected $usuario;
+    protected $contratista;
 
 
     
@@ -351,25 +351,25 @@ use Gedmo\Mapping\Annotation as Gedmo;
 
 
     /**
-     * Set usuario
+     * Set contratista
      *
-     * @param \Security\SecurityBundle\Entity\UserDet $usuario
+     * @param \Security\SecurityBundle\Entity\UserDet $contratista
      * @return EstudioPrevio
      */
-    public function setUsuario(\Security\SecurityBundle\Entity\UserDet $usuario = null)
+    public function setContratista(\Security\SecurityBundle\Entity\UserDet $contratista = null)
     {
-        $this->usuario = $usuario;
+        $this->contratista = $contratista;
 
         return $this;
     }
 
     /**
-     * Get usuario
+     * Get contratista
      *
      * @return \Security\SecurityBundle\Entity\UserDet 
      */
-    public function getUsuario()
+    public function getContratista()
     {
-        return $this->usuario;
+        return $this->contratista;
     }
 }

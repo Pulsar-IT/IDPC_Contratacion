@@ -96,7 +96,13 @@ use Gedmo\Mapping\Annotation as Gedmo;
      */
     
     protected $producto;
+    
+    /**
+     * @ORM\OneToMany(targetEntity="IDPC\SolicitudBundle\Entity\EstudioPrevio", mappedBy="cdp", cascade={"persist", "remove"})
+     */
+    Private $estudiosPrevios;
 
+    
 
     
 
@@ -519,4 +525,67 @@ use Gedmo\Mapping\Annotation as Gedmo;
     }
 
 
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->estudiosPrevios = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Set path
+     *
+     * @param string $path
+     * @return Cdp
+     */
+    public function setPath($path)
+    {
+        $this->path = $path;
+
+        return $this;
+    }
+
+    /**
+     * Get path
+     *
+     * @return string 
+     */
+    public function getPath()
+    {
+        return $this->path;
+    }
+
+    /**
+     * Add estudiosPrevios
+     *
+     * @param \IDPC\SolicitudBundle\Entity\EstudioPrevio $estudiosPrevios
+     * @return Cdp
+     */
+    public function addEstudiosPrevio(\IDPC\SolicitudBundle\Entity\EstudioPrevio $estudiosPrevios)
+    {
+        $this->estudiosPrevios[] = $estudiosPrevios;
+
+        return $this;
+    }
+
+    /**
+     * Remove estudiosPrevios
+     *
+     * @param \IDPC\SolicitudBundle\Entity\EstudioPrevio $estudiosPrevios
+     */
+    public function removeEstudiosPrevio(\IDPC\SolicitudBundle\Entity\EstudioPrevio $estudiosPrevios)
+    {
+        $this->estudiosPrevios->removeElement($estudiosPrevios);
+    }
+
+    /**
+     * Get estudiosPrevios
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getEstudiosPrevios()
+    {
+        return $this->estudiosPrevios;
+    }
 }

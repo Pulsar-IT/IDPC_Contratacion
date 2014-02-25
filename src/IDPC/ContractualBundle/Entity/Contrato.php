@@ -79,7 +79,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
     Private $pagos;
     
     /**
-     * @ORM\OneToOne(targetEntity="IDPC\SolicitudBundle\Entity\EstudioPrevio", mappedBy="contrato", cascade={"all"})
+     * @ORM\OneToOne(targetEntity="IDPC\SolicitudBundle\Entity\EstudioPrevio", inversedBy="contrato", cascade={"all"})
      * @ORM\JoinColumn(name="EstudioPrevio_id", referencedColumnName="id")
      */
     
@@ -366,7 +366,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
      * @param \Security\SecurityBundle\Entity\UserDet $supervisor
      * @return Contrato
      */
-    public function setUsuario(\Security\SecurityBundle\Entity\UserDet $supervisor = null)
+    public function setSupervisor(\Security\SecurityBundle\Entity\UserDet $supervisor = null)
     {
         $this->supervisor = $supervisor;
 

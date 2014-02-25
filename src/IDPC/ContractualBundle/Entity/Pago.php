@@ -71,9 +71,14 @@ use Gedmo\Mapping\Annotation as Gedmo;
     
     
     /**
-     * @ORM\OneToMany(targetEntity="Cumplimiento", mappedBy="pago", cascade={"persist", "remove"})
+     * @ORM\OneToOne(targetEntity="Cumplimiento", mappedBy="pago")
+     * @ORM\JoinColumn(name="Cumplimiento_id", referencedColumnName="id")
      */
-    Private $cumplimientos;
+    
+    protected $cumplimiento;
+
+
+    
     
     /**
      * @ORM\OneToMany(targetEntity="Informe", mappedBy="pago", cascade={"persist", "remove"})
@@ -94,7 +99,6 @@ use Gedmo\Mapping\Annotation as Gedmo;
      */
     public function __construct()
     {
-        $this->cumplimientos = new \Doctrine\Common\Collections\ArrayCollection();
         $this->informes = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
@@ -177,38 +181,6 @@ use Gedmo\Mapping\Annotation as Gedmo;
         return $this->numeroPago;
     }
 
-    /**
-     * Add cumplimientos
-     *
-     * @param \IDPC\ContractualBundle\Entity\Cumplimiento $cumplimientos
-     * @return Pago
-     */
-    public function addCumplimiento(\IDPC\ContractualBundle\Entity\Cumplimiento $cumplimientos)
-    {
-        $this->cumplimientos[] = $cumplimientos;
-
-        return $this;
-    }
-
-    /**
-     * Remove cumplimientos
-     *
-     * @param \IDPC\ContractualBundle\Entity\Cumplimiento $cumplimientos
-     */
-    public function removeCumplimiento(\IDPC\ContractualBundle\Entity\Cumplimiento $cumplimientos)
-    {
-        $this->cumplimientos->removeElement($cumplimientos);
-    }
-
-    /**
-     * Get cumplimientos
-     *
-     * @return \Doctrine\Common\Collections\Collection 
-     */
-    public function getCumplimientos()
-    {
-        return $this->cumplimientos;
-    }
 
     /**
      * Add informes
@@ -309,5 +281,29 @@ use Gedmo\Mapping\Annotation as Gedmo;
      */
     public function getValorAportes()     {
         return $this->valorAportes;
+    }
+
+
+    /**
+     * Set cumplimiento
+     *
+     * @param \IDPC\ContractualBundle\Entity\Cumplimiento $cumplimiento
+     * @return Pago
+     */
+    public function setCumplimiento(\IDPC\ContractualBundle\Entity\Cumplimiento $cumplimiento = null)
+    {
+        $this->cumplimiento = $cumplimiento;
+
+        return $this;
+    }
+
+    /**
+     * Get cumplimiento
+     *
+     * @return \IDPC\ContractualBundle\Entity\Cumplimiento 
+     */
+    public function getCumplimiento()
+    {
+        return $this->cumplimiento;
     }
 }

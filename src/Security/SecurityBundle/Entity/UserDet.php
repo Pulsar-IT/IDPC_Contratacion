@@ -143,11 +143,16 @@ use Gedmo\Mapping\Annotation as Gedmo;
 
 
     /**
-     * @ORM\OneToMany(targetEntity="IDPC\SolicitudBundle\Entity\EstudioPrevio", mappedBy="supervisor", cascade={"persist", "remove"})
+     * @ORM\OneToMany(targetEntity="IDPC\SolicitudBundle\Entity\EstudioPrevio", mappedBy="contratista", cascade={"persist", "remove"})
      */
     Private $estudiosPrevios;
 
-    
+    /**
+     * @ORM\OneToMany(targetEntity="IDPC\ContractualBundle\Entity\Contrato", mappedBy="supervisor", cascade={"persist", "remove"})
+     */
+    Private $contratos;
+
+        
 
     
 

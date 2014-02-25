@@ -58,7 +58,13 @@ use Gedmo\Mapping\Annotation as Gedmo;
      * @ORM\OneToMany(targetEntity="Pmr", mappedBy="proyecto", cascade={"persist", "remove"})
      */
     Private $pmrs;
+    
+    /**
+     * @ORM\OneToMany(targetEntity="IDPC\SolicitudBundle\Entity\Noplanta", mappedBy="proyectoinversion", cascade={"persist", "remove"})
+     */
+    Private $noplanta;
 
+    
     
 
 
@@ -238,5 +244,38 @@ use Gedmo\Mapping\Annotation as Gedmo;
     public function getPmrs()
     {
         return $this->pmrs;
+    }
+
+    /**
+     * Add noplanta
+     *
+     * @param \IDPC\SolicitudBundle\Entity\Noplanta $noplanta
+     * @return ProyectoInversion
+     */
+    public function addNoplantum(\IDPC\SolicitudBundle\Entity\Noplanta $noplanta)
+    {
+        $this->noplanta[] = $noplanta;
+
+        return $this;
+    }
+
+    /**
+     * Remove noplanta
+     *
+     * @param \IDPC\SolicitudBundle\Entity\Noplanta $noplanta
+     */
+    public function removeNoplantum(\IDPC\SolicitudBundle\Entity\Noplanta $noplanta)
+    {
+        $this->noplanta->removeElement($noplanta);
+    }
+
+    /**
+     * Get noplanta
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getNoplanta()
+    {
+        return $this->noplanta;
     }
 }

@@ -50,7 +50,8 @@ class PagoType extends AbstractType
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'IDPC\ContractualBundle\Entity\Pago'
+            'data_class' => 'IDPC\ContractualBundle\Entity\Pago',
+            'cascada_validation' => true
         ));
     }
 

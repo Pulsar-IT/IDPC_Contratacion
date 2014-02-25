@@ -16,13 +16,11 @@ class CumplimientoType extends AbstractType
     {
         $builder
             ->add('planilla')
-            ->add('created_at')
-            ->add('update_at')
+            ->add('file')
             ->add('pago', 'entity', array(
                 'class' => 'IDPCContractualBundle:Pago',
-                'property' => 'mes'
+                'property' => 'id'
             ))
-            ->add('file')
         ;
     }
     

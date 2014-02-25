@@ -22,7 +22,7 @@
             <tr>
                 <td><a href="{{ path('contrato_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
                 <td>{{ entity.numero }}</td>
-                <td>{{ entity.estudio.usuario.primerApellido }}{{ entity.estudio.usuario.segundoApellido }}, {{ entity.estudio.usuario.primerNombre }}{{ entity.estudio.usuario.segundoNombre }}</td>
+                <td>{{ entity.estudio.contratista.primerApellido }}{{ entity.estudio.contratista.segundoApellido }}, {{ entity.estudio.contratista.primerNombre }}{{ entity.estudio.contratista.segundoNombre }}</td>
                 <td>{% if entity.fechaInicio %}{{ entity.fechaInicio|date('Y-m-d') }}{% endif %}</td>
                 <td>
                 <ul>
