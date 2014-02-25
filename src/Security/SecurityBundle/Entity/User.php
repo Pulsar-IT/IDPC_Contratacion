@@ -40,8 +40,9 @@ class User implements UserInterface, \Serializable
     protected $email;
 
     /**
-     * @ORM\OneToOne(targetEntity="UserDet", mappedBy="user")
+     * @ORM\OneToOne(targetEntity="UserDet", mappedBy="user", cascade={"persist", "remove"})
      * @ORM\JoinColumn(name="UserDet_id", referencedColumnName="id")
+     * @Assert\Type(type="Security\SecurityBundle\Entity\UserDet")
      */
     
     protected $userdet;

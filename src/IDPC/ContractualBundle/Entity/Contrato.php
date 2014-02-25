@@ -41,6 +41,39 @@ use Gedmo\Mapping\Annotation as Gedmo;
     protected $fechaInicio;
     
     /**
+     *
+     * @ORM\Column(type="integer")
+     * 
+     */
+    
+    protected $valorPrimerPago;
+    
+    /**
+     *
+     * @ORM\Column(type="integer")
+     * 
+     */
+    
+    protected $valorPagoMensual;
+    
+    /**
+     *
+     * @ORM\Column(type="integer")
+     * 
+     */
+    
+    protected $valorUltimoPago;
+
+
+    
+
+
+    
+
+
+    
+    
+    /**
      * @ORM\OneToMany(targetEntity="Pago", mappedBy="contrato", cascade={"persist", "remove"})
      */
     Private $pagos;
@@ -249,5 +282,71 @@ use Gedmo\Mapping\Annotation as Gedmo;
     public function getEstudio()
     {
         return $this->estudio;
+    }
+    
+    /**
+     * Set valorPrimerPago
+     *
+     * @param integer $valorPrimerPago
+     * @return Factura
+     */
+    public function setValorPrimerPago($valorPrimerPago)     {
+        $this->valorPrimerPago = $valorPrimerPago;
+
+
+        return $this;
+    }
+
+    /**
+     * Get valorPrimerPago
+     *
+     * @return integer 
+     */
+    public function getValorPrimerPago()     {
+        return $this->valorPrimerPago;
+    }
+    
+    /**
+     * Set valorPagoMensual
+     *
+     * @param integer $valorPagoMensual
+     * @return Factura
+     */
+    public function setValorPagoMensual($valorPagoMensual)     {
+        $this->valorPagoMensual = $valorPagoMensual;
+
+
+        return $this;
+    }
+
+    /**
+     * Get valorPagoMensual
+     *
+     * @return integer 
+     */
+    public function getValorPagoMensual()     {
+        return $this->valorPagoMensual;
+    }
+    
+    /**
+     * Set valorUltimoPago
+     *
+     * @param integer $valorUltimoPago
+     * @return Factura
+     */
+    public function setValorUltimoPago($valorUltimoPago)     {
+        $this->valorUltimoPago = $valorUltimoPago;
+
+
+        return $this;
+    }
+
+    /**
+     * Get valorUltimoPago
+     *
+     * @return integer 
+     */
+    public function getValorUltimoPago()     {
+        return $this->valorUltimoPago;
     }
 }

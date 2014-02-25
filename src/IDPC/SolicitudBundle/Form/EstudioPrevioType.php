@@ -27,6 +27,10 @@ class EstudioPrevioType extends AbstractType
                 'class' => 'IDPCBaseBundle:Cdp',
                 'property' => 'numero'
             ))
+            ->add('usuario', 'entity', array(
+                'class' => 'SecuritySecurityBundle:UserDet',
+                'property' => 'documento'
+            ))
         ;
     }
     

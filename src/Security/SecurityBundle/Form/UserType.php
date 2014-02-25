@@ -16,13 +16,15 @@ class UserType extends AbstractType
             ->add('password', 'password')
             //->add('salt')
             ->add('user_roles')
+            ->add('userdet', new UserDetType())
         ;
     }
 
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'Security\SecurityBundle\Entity\User'
+            'data_class' => 'Security\SecurityBundle\Entity\User',
+            'cascada_validation' => true
         ));
     }
 

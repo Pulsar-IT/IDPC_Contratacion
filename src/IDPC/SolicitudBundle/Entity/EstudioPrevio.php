@@ -81,15 +81,17 @@ use Gedmo\Mapping\Annotation as Gedmo;
      */
     
     protected $tipoContrato;
+    
+    /**
+     * @ORM\ManyToOne(targetEntity="Security\SecurityBundle\Entity\UserDet", inversedBy="estudiosPrevios")
+     * @ORM\JoinColumn(name="UserDet_id", referencedColumnName="id")
+     */
+    
+    protected $usuario;
 
 
     
 
-
-    
-
-
-    
     
     /**
      * @var datetime $created
@@ -346,4 +348,27 @@ use Gedmo\Mapping\Annotation as Gedmo;
         return $this->cdp;
     }
 
+
+    /**
+     * Set usuario
+     *
+     * @param \Security\SecurityBundle\Entity\UserDet $usuario
+     * @return EstudioPrevio
+     */
+    public function setUsuario(\Security\SecurityBundle\Entity\UserDet $usuario = null)
+    {
+        $this->usuario = $usuario;
+
+        return $this;
+    }
+
+    /**
+     * Get usuario
+     *
+     * @return \Security\SecurityBundle\Entity\UserDet 
+     */
+    public function getUsuario()
+    {
+        return $this->usuario;
+    }
 }

@@ -105,55 +105,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
      * @Assert\Length( max = "100" )
      */
     
-    protected $paisNacimiento;
-
-    /**
-     * @ORM\Column(type="string")
-     * @Assert\NotBlank()
-     * @Assert\Length( max = "100" )
-     */
-    
-    protected $departamentoNacimiento;
-
-    /**
-     * @ORM\Column(type="string")
-     * @Assert\NotBlank()
-     * @Assert\Length( max = "100" )
-     */
-    
-    protected $ciudadNacimiento;
-
-    /**
-     * @ORM\Column(type="string")
-     * @Assert\NotBlank()
-     * @Assert\Length( max = "100" )
-     */
-    
     protected $direccionResidencia;
-
-    /**
-     * @ORM\Column(type="string")
-     * @Assert\NotBlank()
-     * @Assert\Length( max = "100" )
-     */
-    
-    protected $paisResidencia;
-
-    /**
-     * @ORM\Column(type="string")
-     * @Assert\NotBlank()
-     * @Assert\Length( max = "100" )
-     */
-    
-    protected $departamentoResidencia;
-
-    /**
-     * @ORM\Column(type="string")
-     * @Assert\NotBlank()
-     * @Assert\Length( max = "100" )
-     */
-    
-    protected $ciudadResidencia;
 
     /**
      * @ORM\Column(type="string")
@@ -190,8 +142,12 @@ use Gedmo\Mapping\Annotation as Gedmo;
     protected $area;
 
 
-    
+    /**
+     * @ORM\OneToMany(targetEntity="IDPC\SolicitudBundle\Entity\EstudioPrevio", mappedBy="usuario", cascade={"persist", "remove"})
+     */
+    Private $estudiosPrevios;
 
+    
 
     
 
@@ -460,75 +416,6 @@ use Gedmo\Mapping\Annotation as Gedmo;
     }
 
     /**
-     * Set paisNacimiento
-     *
-     * @param string $paisNacimiento
-     * @return UserDet
-     */
-    public function setPaisNacimiento($paisNacimiento)
-    {
-        $this->paisNacimiento = $paisNacimiento;
-    
-        return $this;
-    }
-
-    /**
-     * Get paisNacimiento
-     *
-     * @return string 
-     */
-    public function getPaisNacimiento()
-    {
-        return $this->paisNacimiento;
-    }
-
-    /**
-     * Set departamentoNacimiento
-     *
-     * @param string $departamentoNacimiento
-     * @return UserDet
-     */
-    public function setDepartamentoNacimiento($departamentoNacimiento)
-    {
-        $this->departamentoNacimiento = $departamentoNacimiento;
-    
-        return $this;
-    }
-
-    /**
-     * Get departamentoNacimiento
-     *
-     * @return string 
-     */
-    public function getDepartamentoNacimiento()
-    {
-        return $this->departamentoNacimiento;
-    }
-
-    /**
-     * Set ciudadNacimiento
-     *
-     * @param string $ciudadNacimiento
-     * @return UserDet
-     */
-    public function setCiudadNacimiento($ciudadNacimiento)
-    {
-        $this->ciudadNacimiento = $ciudadNacimiento;
-    
-        return $this;
-    }
-
-    /**
-     * Get ciudadNacimiento
-     *
-     * @return string 
-     */
-    public function getCiudadNacimiento()
-    {
-        return $this->ciudadNacimiento;
-    }
-
-    /**
      * Set direccionResidencia
      *
      * @param string $direccionResidencia
@@ -549,75 +436,6 @@ use Gedmo\Mapping\Annotation as Gedmo;
     public function getDireccionResidencia()
     {
         return $this->direccionResidencia;
-    }
-
-    /**
-     * Set paisResidencia
-     *
-     * @param string $paisResidencia
-     * @return UserDet
-     */
-    public function setPaisResidencia($paisResidencia)
-    {
-        $this->paisResidencia = $paisResidencia;
-    
-        return $this;
-    }
-
-    /**
-     * Get paisResidencia
-     *
-     * @return string 
-     */
-    public function getPaisResidencia()
-    {
-        return $this->paisResidencia;
-    }
-
-    /**
-     * Set departamentoResidencia
-     *
-     * @param string $departamentoResidencia
-     * @return UserDet
-     */
-    public function setDepartamentoResidencia($departamentoResidencia)
-    {
-        $this->departamentoResidencia = $departamentoResidencia;
-    
-        return $this;
-    }
-
-    /**
-     * Get departamentoResidencia
-     *
-     * @return string 
-     */
-    public function getDepartamentoResidencia()
-    {
-        return $this->departamentoResidencia;
-    }
-
-    /**
-     * Set ciudadResidencia
-     *
-     * @param string $ciudadResidencia
-     * @return UserDet
-     */
-    public function setCiudadResidencia($ciudadResidencia)
-    {
-        $this->ciudadResidencia = $ciudadResidencia;
-    
-        return $this;
-    }
-
-    /**
-     * Get ciudadResidencia
-     *
-     * @return string 
-     */
-    public function getCiudadResidencia()
-    {
-        return $this->ciudadResidencia;
     }
 
     /**
@@ -757,5 +575,45 @@ use Gedmo\Mapping\Annotation as Gedmo;
     public function getArea()
     {
         return $this->area;
+    }
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->estudiosPrevios = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Add estudiosPrevios
+     *
+     * @param \IDPC\SolicitudBundle\Entity\EstudioPrevio $estudiosPrevios
+     * @return UserDet
+     */
+    public function addEstudiosPrevio(\IDPC\SolicitudBundle\Entity\EstudioPrevio $estudiosPrevios)
+    {
+        $this->estudiosPrevios[] = $estudiosPrevios;
+
+        return $this;
+    }
+
+    /**
+     * Remove estudiosPrevios
+     *
+     * @param \IDPC\SolicitudBundle\Entity\EstudioPrevio $estudiosPrevios
+     */
+    public function removeEstudiosPrevio(\IDPC\SolicitudBundle\Entity\EstudioPrevio $estudiosPrevios)
+    {
+        $this->estudiosPrevios->removeElement($estudiosPrevios);
+    }
+
+    /**
+     * Get estudiosPrevios
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getEstudiosPrevios()
+    {
+        return $this->estudiosPrevios;
     }
 }

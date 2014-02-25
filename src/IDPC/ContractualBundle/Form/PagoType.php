@@ -19,7 +19,10 @@ class PagoType extends AbstractType
             ->add('valor')
             ->add('numeroPago')
             ->add('estado')
-            ->add('contrato')
+            ->add('contrato', 'entity', array(
+                'class' => 'IDPCContractualBundle:Contrato',
+                'property' => 'numero'
+            ))
         ;
     }
     

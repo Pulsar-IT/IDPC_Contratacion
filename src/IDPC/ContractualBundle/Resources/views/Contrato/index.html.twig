@@ -1,7 +1,11 @@
 {% extends '::base.html.twig' %}
 
 {% block body -%}
-    <h1>Contrato list</h1>
+<div class="page-header">
+    	<h1>Contratos</h1>
+		{# {% if is_granted("ROLE_ADMIN") %} #}<a href="{{ path('contrato_new') }}" class="btn btn-primary btn-mini"><i class="icon-plus icon-white"></i> Nuevo</a>{# {%endif%} #}
+		<br clear="all" />
+	</div>
 
     <table class="records_list">
         <thead>
@@ -37,11 +41,4 @@
         </tbody>
     </table>
 
-        <ul>
-        <li>
-            <a href="{{ path('contrato_new') }}">
-                Create a new entry
-            </a>
-        </li>
-    </ul>
     {% endblock %}

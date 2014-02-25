@@ -21,10 +21,14 @@ class ContratoType extends AbstractType
                     'label' => 'Fecha de inicio',
                     'widget' => 'single_text'
                 ))
+            ->add('valorPrimerPago')
+            ->add('valorPagoMensual')
+            ->add('valorUltimoPago')
             ->add('estudio', 'entity', array(
                 'class' => 'IDPCSolicitudBundle:EstudioPrevio',
                 'property' => 'id'
             ))
+            
         ;
     }
     

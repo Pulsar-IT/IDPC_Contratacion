@@ -40,30 +40,22 @@ class UserDetType extends AbstractType
                 'label' =>  'Fecha de Nacimiento',
                 'widget'    =>  'single_text'
                 ))
-            ->add('paisNacimiento')
-            ->add('departamentoNacimiento')
-            ->add('ciudadNacimiento')
             ->add('direccionResidencia')
-            ->add('paisResidencia')
-            ->add('departamentoResidencia')
-            ->add('ciudadResidencia')
             ->add('telefonoFijo')
             ->add('telefonoMovil')
             ->add('area', 'entity', array(
                 'class' => 'IDPCBaseBundle:Area',
                 'property' => 'nombre'
             ))
-            ->add('user', 'entity', array(
-                'class' =>  'SecuritySecurityBundle:User',
-                'property'  =>  'username'
-            ))
+
+            
         ;
     }
 
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'Security\SecurityBundle\Entity\UserDet'
+            'data_class' => 'Security\SecurityBundle\Entity\UserDet',
         ));
     }
 

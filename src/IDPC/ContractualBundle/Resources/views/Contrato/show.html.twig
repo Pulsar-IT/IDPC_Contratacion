@@ -1,7 +1,15 @@
 {% extends '::base.html.twig' %}
 
 {% block body -%}
-    <h1>Contrato</h1>
+<div class="page-header">
+    	<h1>Contrato</h1>
+		{# {% if is_granted("ROLE_ADMIN") %} #}
+        <a href="{{ path('contrato_new') }}" class="btn btn-primary btn-mini"><i class="icon-plus icon-white"></i> Nuevo</a>{# {%endif%} #}
+        <a href="{{ path('contrato') }}"class="btn btn-primary btn-mini"><i class="icon-plus icon-white"></i>Regresar</a>
+        <a href="{{ path('contrato_edit', { 'id': entity.id }) }}"class="btn btn-primary btn-mini"><i class="icon-plus icon-white"></i>Editar</a>
+        <a href="{{ path('pago_new') }}"class="btn btn-primary btn-mini"><i class="icon-plus icon-white"></i>Pagos</a>
+                <br clear="all" />
+	</div>
 
     <table class="record_properties">
         <tbody>
@@ -29,16 +37,7 @@
     </table>
 
         <ul class="record_actions">
-    <li>
-        <a href="{{ path('contrato') }}">
-            Back to the list
-        </a>
-    </li>
-    <li>
-        <a href="{{ path('contrato_edit', { 'id': entity.id }) }}">
-            Edit
-        </a>
-    </li>
+
     <li>{{ form(delete_form) }}</li>
 </ul>
 {% endblock %}
