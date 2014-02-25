@@ -76,6 +76,16 @@ use Gedmo\Mapping\Annotation as Gedmo;
      */
     
     protected $cumplimiento;
+    
+    
+    /**
+     * @ORM\OneToOne(targetEntity="Informe", mappedBy="pago")
+     * @ORM\JoinColumn(name="Informe_id", referencedColumnName="id")
+     */
+    
+    protected $informe;
+    
+    
 
 
     
@@ -305,5 +315,28 @@ use Gedmo\Mapping\Annotation as Gedmo;
     public function getCumplimiento()
     {
         return $this->cumplimiento;
+    }
+
+    /**
+     * Set informe
+     *
+     * @param \IDPC\ContractualBundle\Entity\Informe $informe
+     * @return Pago
+     */
+    public function setInforme(\IDPC\ContractualBundle\Entity\Informe $informe = null)
+    {
+        $this->informe = $informe;
+
+        return $this;
+    }
+
+    /**
+     * Get informe
+     *
+     * @return \IDPC\ContractualBundle\Entity\Informe 
+     */
+    public function getInforme()
+    {
+        return $this->informe;
     }
 }

@@ -15,9 +15,12 @@ class InformeType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('created_at')
-            ->add('update_at')
-            ->add('pago')
+            ->add('descripcion')
+            ->add('file')
+            ->add('pago', 'entity', array(
+                'class' => 'IDPCContractualBundle:Pago',
+                'property' => 'id'
+            ))
         ;
     }
     
