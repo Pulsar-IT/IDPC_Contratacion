@@ -38,6 +38,16 @@ class User implements UserInterface, \Serializable
      */
     
     protected $email;
+    
+    
+
+    /**
+     * @ORM\OneToOne(targetEntity="UserDet", mappedBy="user", cascade={"persist", "remove"})
+     * @ORM\JoinColumn(name="UserDet_id", referencedColumnName="id")
+     * @Assert\Type(type="Security\SecurityBundle\Entity\UserDet")
+     */
+    
+    protected $userdet;
 
     /**
      * @ORM\Column(name="password", type="string")
@@ -263,5 +273,30 @@ class User implements UserInterface, \Serializable
     public function removeUserRole(\Security\SecurityBundle\Entity\Role $userRoles)
     {
         $this->user_roles->removeElement($userRoles);
+    }
+    
+
+
+    /**
+     * Set userdet
+     *
+     * @param \Security\SecurityBundle\Entity\UserDet $userdet
+     * @return User
+     */
+    public function setUserdet(\Security\SecurityBundle\Entity\UserDet $userdet = null)
+    {
+        $this->userdet = $userdet;
+    
+        return $this;
+    }
+
+    /**
+     * Get userdet
+     *
+     * @return \Security\SecurityBundle\Entity\UserDet 
+     */
+    public function getUserdet()
+    {
+        return $this->userdet;
     }
 }
