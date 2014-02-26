@@ -129,6 +129,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
     
     /**
      * @ORM\OneToOne(targetEntity="User", inversedBy="userdet")
+     * @ORM\JoinColumn(name="User_id", referencedColumnName="id")
      */
     
     protected $user;
