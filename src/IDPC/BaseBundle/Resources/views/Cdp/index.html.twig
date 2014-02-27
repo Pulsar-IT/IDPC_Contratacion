@@ -20,7 +20,7 @@
                 <td><a href="{{ path('cdp_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
                 <td>{{ entity.numero }}</td>
                 <td>{{ entity.objeto }}</td>
-                <td>{{ entity.valor |number_format(2, ',', '.') }}</td>
+                <td>{{ entity.valor |number_format(0, ',', '.') }}</td>
                 <td>{% if entity.fecha %}{{ entity.fecha|date('Y-m-d') }}{% endif %}</td>
  
                 <td>

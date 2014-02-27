@@ -4,16 +4,17 @@
 <div class="page-header">
     	<h1>Contratos</h1>
 		{# {% if is_granted("ROLE_ADMIN") %} #}<a href="{{ path('contrato_new') }}" class="btn btn-primary btn-mini"><i class="icon-plus icon-white"></i> Nuevo</a>{# {%endif%} #}
-		<br clear="all" />
 	</div>
 
-    <table class="records_list">
+    <table class="table table-striped">
         <thead>
             <tr>
                 <th>Id</th>
                 <th>Numero</th>
                 <th>Contratista</th>
-                <th>Fechainicio</th>
+                <th>Fecha inicio</th>
+                <th>Valor</th>
+                <th>Area</th>
                 <th>Actions</th>
             </tr>
         </thead>
@@ -24,15 +25,12 @@
                 <td>{{ entity.numero }}</td>
                 <td>{{ entity.estudio.contratista.primerApellido }}{{ entity.estudio.contratista.segundoApellido }}, {{ entity.estudio.contratista.primerNombre }}{{ entity.estudio.contratista.segundoNombre }}</td>
                 <td>{% if entity.fechaInicio %}{{ entity.fechaInicio|date('Y-m-d') }}{% endif %}</td>
+                <td>{{entity.estudio.valorContrato|number_format(0, ',', '.') }}</td>
+                <td>{{entity.estudio.contratista.area.nombre}}</td>
                 <td>
-                <ul>
-                    <li>
-                        <a href="{{ path('contrato_show', { 'id': entity.id }) }}">show</a>
-                    </li>
-                    <li>
-                        <a href="{{ path('contrato_edit', { 'id': entity.id }) }}">edit</a>
-                    </li>
-                </ul>
+
+                        <a href="{{ path('contrato_edit', { 'id': entity.id }) }}"><i class="icon-edit"></i></a>
+
                 </td>
             </tr>
         {% endfor %}
