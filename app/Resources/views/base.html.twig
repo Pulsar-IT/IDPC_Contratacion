@@ -59,7 +59,7 @@
 			<div class="navbar-inner">
 				<div class="container-fluid">
 					<a href="#" class="brand">
-						<p style="font-size:14px; font-family:Arial; line-height: 3mm; margin-top:12px;">
+						<p style="font-size:14px; font-family:Arial; line-height: 3mm; margin-top:12px; color: white">
 						INSTITUTO DISTRITAL DE PATRIMONIO CULTURAL<br />
 						<small>Sector Cultura, Recreaci&oacute;n y Deporte</small>
 						</p>
@@ -72,7 +72,7 @@
 					</li>
 					{% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
 					<li class="green open" id="li-mensajes">
-						{ render(controller('IDPCContratacionBundle:Mensaje:index')) }}
+			         
 					</li>
 					<li class="light-blue">
 							<a data-toggle="dropdown" href="#" class="dropdown-toggle">
