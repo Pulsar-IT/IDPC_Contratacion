@@ -20,6 +20,7 @@ use IDPC\BaseBundle\Entity\Cdp;
 
 use IDPC\SolicitudBundle\Entity\EstudioPrevio;
 use IDPC\ContractualBundle\Entity\Contrato;
+use IDPC\ContractualBundle\Entity\Pago;
 
 class LoadDatosIniciales extends AbstractFixture implements OrderedFixtureInterface, ContainerAwareInterface {
 
@@ -5229,6 +5230,32 @@ class LoadDatosIniciales extends AbstractFixture implements OrderedFixtureInterf
 
             $this->addReference($referencia, $contrato);
             $manager->persist($contrato);
+        }
+
+        
+        $manager->flush();
+        
+        $pagos = array(
+          '1Pago' => array(
+'mes' => 'febrero',
+'valor' => '4200000',
+'valorAportes' => '0',
+'numeroPago' => '2',
+'estado' => '0',
+'contrato' => $manager->merge($this->getReference('1Cont')))  
+        );
+        
+        
+        foreach ($pagos as $referencia => $pagoName) {
+
+            $pago = new Pago();
+
+            foreach ($pagoName as $propiedad => $value) {
+                $pago->{'set' . ucfirst($propiedad)}($value);
+            }
+
+            $this->addReference($referencia, $pago);
+            $manager->persist($pago);
         }
 
         
