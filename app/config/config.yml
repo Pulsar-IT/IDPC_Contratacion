@@ -87,6 +87,5 @@ knp_snappy:
 
 jms_security_extra:
     expressions: true
-    method_access_control:
-        #'IDPCContractualBundle:Pago:IndexAction' : 'hasRole("ROLE_CONTRATISTA")'
-        #'IDPCContractualBundle:Pago:*' : 'hasRole("ROLE_SYSTEM") and hasRole("ROLE_ADMIN")'
+    #method_access_control:
+     #   'IDPCSolicitudBundle:.*:*' : 'hasRole("ROLE_SYSTEM") and hasRole("ROLE_ADMIN")'

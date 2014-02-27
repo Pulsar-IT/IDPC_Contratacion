@@ -20,7 +20,6 @@ use IDPC\BaseBundle\Entity\Cdp;
 
 use IDPC\SolicitudBundle\Entity\EstudioPrevio;
 use IDPC\ContractualBundle\Entity\Contrato;
-use IDPC\ContractualBundle\Entity\Pago;
 
 class LoadDatosIniciales extends AbstractFixture implements OrderedFixtureInterface, ContainerAwareInterface {
 
@@ -5235,6 +5234,7 @@ class LoadDatosIniciales extends AbstractFixture implements OrderedFixtureInterf
         
         $manager->flush();
         
+<<<<<<< HEAD
         $pagos = array(
             
             '1Pago' => array(
@@ -6187,6 +6187,8 @@ class LoadDatosIniciales extends AbstractFixture implements OrderedFixtureInterf
         
         $manager->flush();
         
+=======
+>>>>>>> parent of 7b21ea1... Merge branch 'master' of https://github.com/miguelplazasr/IDPC_Contratacion
     }
 
     public function getOrder() {
