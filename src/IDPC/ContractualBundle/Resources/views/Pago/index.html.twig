@@ -2,8 +2,9 @@
 
 {% block body -%}
 <div class="page-header">
-    	<h1>Pagos</h1>
+    <h1>Pagos</h1>
 		{# {% if is_granted("ROLE_ADMIN") %} #}
+<<<<<<< HEAD
         <a href="{{ path('cumplimiento_new') }}" class="btn btn-primary btn-mini"><i class="icon-plus icon-white"></i>Certificado</a>{# {%endif%} #}
         <a href="{{ path('informe_new') }}" class="btn btn-primary btn-mini"><i class="icon-plus icon-white"></i>Informe Actividades</a>{# {%endif%} #}
              
@@ -24,6 +25,24 @@
             </tr>
         </thead>
         <tbody>
+=======
+    <a href="{{ path('cumplimiento_new') }}" class="btn btn-primary btn-mini"><i class="icon-plus icon-white"></i>Certificado</a>{# {%endif%} #}
+    <a href="{{ path('informe_new') }}" class="btn btn-primary btn-mini"><i class="icon-plus icon-white"></i>Informe Actividades</a>{# {%endif%} #}
+    <br clear="all" />
+</div>
+<table class="records_list">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Mes</th>
+            <th>Valor</th>
+            <th>Numeropago</th>
+            <th>Estado</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+>>>>>>> 952ff7297790c90e6ce92bc237e6dfde93d39405
         {% for entity in entities %}
             <tr>
                 <td><a href="{{ path('pago_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
@@ -37,16 +56,27 @@
                 <td>{{ entity.numeroPago }}</td>
 
                 <td>
+<<<<<<< HEAD
 
                         <a href="{{ path('pago_edit', { 'id': entity.id }) }}"><i class="icon-edit"></i></a>
 
+=======
+                    <ul>
+                        <li>
+                            <a href="{{ path('pago_show', { 'id': entity.id }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('pago_edit', { 'id': entity.id }) }}">edit</a>
+                        </li>
+                    </ul>
+>>>>>>> 952ff7297790c90e6ce92bc237e6dfde93d39405
                 </td>
             </tr>
         {% endfor %}
         </tbody>
     </table>
 
-        <ul>
+    <ul>
         <li>
             <a href="{{ path('pago_new') }}">
                 Create a new entry

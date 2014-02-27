@@ -248,4 +248,24 @@ class ContratoController extends Controller
             ->getForm()
         ;
     }
+    
+     /**
+     * Lista los contratos de un contratista.
+     *
+     * @Route("/", name="indexContratista")
+     * @Method("GET")
+     * @Template("IDPCContractualBundle:Contrato:index.html.twig")
+     */
+    public function indexContratistaAction()
+    {
+        $user = $this->getUser();
+                
+        $em = $this->getDoctrine()->getManager();
+
+        $entities = $em->getRepository('IDPCContractualBundle:Contrato')->findContratosContratista($user);
+
+        return array(
+            'entities' => $entities,
+        );
+    }
 }
