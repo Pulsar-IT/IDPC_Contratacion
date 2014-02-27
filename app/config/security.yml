@@ -1,3 +1,7 @@
+jms_security_extra:
+    secure_all_services: false
+    expressions: true
+    
 security:
     encoders:
         Security\SecurityBundle\Entity\User:
@@ -6,8 +10,8 @@ security:
             iterations: 10
 
     role_hierarchy:
-        ROLE_ADMIN:       ROLE_USER
-        ROLE_SUPER_ADMIN: [ROLE_USER, ROLE_ADMIN, ROLE_ALLOWED_TO_SWITCH]
+        ROLE_ADMIN: ROLE_CONTRATISTA
+        ROLE_SYSTEM: [ROLE_CONTRATISTA, ROLE_ADMIN, ROLE_ALLOWED_TO_SWITCH]
 
     providers:
         user_db:
@@ -35,12 +39,14 @@ security:
                 check_path: login_check
                 login_path: login
             logout:
-                path:   logout
-                target: login
+                path:   /admin/logout
+                target: /admin
             #anonymous: ~
             #http_basic:
             #    realm: "Secured Demo Area"
 
     access_control:
         #- { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY, requires_channel: https }
-        - { path: ^/admin, roles: ROLE_SYSTEM }
+        #- { path: ^/admin, roles: ROLE_SYSTEM }
+        #- { path: ^/admin, access: 'hasRole("ROLE_SYSTEM")' }
+        - { path: ^/admin, access: "hasRole('ROLE_SYSTEM') and hasRole('ROLE_ADMIN')" }

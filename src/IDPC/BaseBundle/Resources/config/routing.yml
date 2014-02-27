@@ -1,4 +1,4 @@
 IDPCAnnotations:
     resource: "@IDPCBaseBundle/Controller/"
-    prefix:   /
+    prefix:   /admin/
     type:     annotation

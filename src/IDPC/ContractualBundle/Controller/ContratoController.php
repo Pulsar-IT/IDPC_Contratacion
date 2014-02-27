@@ -10,6 +10,9 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use IDPC\ContractualBundle\Entity\Contrato;
 use IDPC\ContractualBundle\Form\ContratoType;
 
+use JMS\SecurityExtraBundle\Annotation\Secure;
+
+
 /**
  * Contrato controller.
  *
@@ -87,6 +90,7 @@ class ContratoController extends Controller
      * @Route("/new", name="contrato_new")
      * @Method("GET")
      * @Template()
+     * @Secure(roles="ROLE_ADMIN")
      */
     public function newAction()
     {

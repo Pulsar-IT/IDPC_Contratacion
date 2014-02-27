@@ -84,3 +84,8 @@ knp_snappy:
         enabled:    true
         binary:     /usr/local/bin/wkhtmltoimage
         options:    []
+
+jms_security_extra:
+    expressions: true
+    #method_access_control:
+     #   'IDPCSolicitudBundle:.*:*' : 'hasRole("ROLE_SYSTEM") and hasRole("ROLE_ADMIN")'

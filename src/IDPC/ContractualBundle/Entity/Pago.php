@@ -44,7 +44,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
     
     /**
      *
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="integer", nullable=true)
      * 
      */
     
@@ -62,7 +62,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
     protected $numeroPago;
     
     /**
-     * @ORM\Column(type="boolean", nullable=true)
+     * @ORM\Column(type="smallint")
      */
     
     protected $estado;
@@ -226,9 +226,9 @@ use Gedmo\Mapping\Annotation as Gedmo;
     }
 
     /**
-     * Set estado
+     * Set smallint
      *
-     * @param boolean $estado
+     * @param smallint $estado
      * @return Pago
      */
     public function setEstado($estado)
@@ -241,7 +241,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
     /**
      * Get estado
      *
-     * @return boolean 
+     * @return smallint 
      */
     public function getEstado()
     {

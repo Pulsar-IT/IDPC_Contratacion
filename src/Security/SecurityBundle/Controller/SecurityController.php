@@ -36,5 +36,16 @@ class SecurityController extends Controller
             'error'         => $error,
         ));
     }
+    
+    /**
+     * Definimos las rutas para el login:
+     * @Route("/logout", name="logout")
+
+     */
+
+    public function logoutAction()
+    {
+        throw new \RuntimeException('You must activate the logout in your security firewall configuration');
+    }
 }
 ?>

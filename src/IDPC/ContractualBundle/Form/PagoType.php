@@ -34,7 +34,6 @@ class PagoType extends AbstractType
                     'label' => 'Mes'
                 ))
             ->add('valor')
-            ->add('valorAportes')
             ->add('numeroPago')
             ->add('estado')
             ->add('contrato', 'entity', array(

@@ -18,6 +18,8 @@ use IDPC\BaseBundle\Entity\Area;
 use IDPC\BaseBundle\Entity\ProyectoInversion;
 use IDPC\BaseBundle\Entity\Cdp;
 
+use IDPC\SolicitudBundle\Entity\EstudioPrevio;
+
 class LoadDatosIniciales extends AbstractFixture implements OrderedFixtureInterface, ContainerAwareInterface {
 
     protected $manager;
@@ -217,6 +219,10 @@ class LoadDatosIniciales extends AbstractFixture implements OrderedFixtureInterf
                 'name' => 'ROLE_SUPERVISOR',
                 'descripcion' => 'Supervisor de contratos'
             ),
+            'contratista' => array(
+                'name' => 'ROLE_CONTRATISTA',
+                'descripcion' => 'Contratista'
+            )
         );
 
         foreach ($roles as $referencia => $rolName) {
@@ -2387,7 +2393,7 @@ class LoadDatosIniciales extends AbstractFixture implements OrderedFixtureInterf
                 'email' => 'systemadmin@loc.loc',
                 'userRoles' => array($manager->merge($this->getReference('system'))),
                 'password' => 'uSqI5HwQq78pKYPwLqxs2eVNScLVC3AUEvGaxmRXk9tGul33HfHw+NuYTkFkyjmXeIkk+KdjIslcxJvAh08hiw==',
-                'salt' => 'cbe059ab2857a64b7ca4cf71f43a01b103'
+                'salt' => 'cbe059ab2857a64b7ca4cf71f43a01b7'
             ),
             'Admin' => array(
                 'username' => 'Admin',
@@ -2957,6 +2963,37 @@ class LoadDatosIniciales extends AbstractFixture implements OrderedFixtureInterf
          */
 
         $manager->flush();
+        
+        $estudios = array(
+            '1' => array(
+'objeto' => 'Prestar sus servicios profesionales al Instituto Distrital de Patrimonio Cultural para coordinar el desarrollo acad√©mico e implementaci√≥n de la C√°tedra de Patrimonio Cultural en los colegios distritales seleccionados en el Programa Jornada Escolar de 40 horas semanales.',
+'valorcontrato' => '41600000',
+'plazoMeses' => '8',
+'plazoDias' => '0',
+'tipoContrato' => $manager->merge($this->getReference('profesionales')),
+'cdp' => $manager->merge($this->getReference('0002-3')),
+'contratista' => $manager->merge($this->getReference('52485648'))),
+            
+        );
+        
+        
+        
+
+        foreach ($estudios as $referencia => $estudiosName) {
+
+            $estudio = new EstudioPrevio();
+
+            foreach ($estudiosName as $propiedad => $value) {
+                $estudio->{'set' . ucfirst($propiedad)}($value);
+            }
+
+            $this->addReference($referencia, $estudio);
+            $manager->persist($estudio);
+        }
+
+        $manager->flush();
+        
+        
     }
 
     public function getOrder() {

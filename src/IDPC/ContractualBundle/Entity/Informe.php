@@ -6,11 +6,15 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 use Gedmo\Mapping\Annotation as Gedmo;
 
+use Symfony\Component\HttpFoundation\File\UploadedFile;
+
+
 /**
  * IDPC\ContractualBundle\Entity\Informe
  *
  * @ORM\Table(name="tb_con_informe")
  * @ORM\Entity(repositoryClass="IDPC\ContractualBundle\Entity\InformeRepository")
+ * @ORM\HasLifecycleCallbacks
  */
 
  class Informe {
@@ -44,6 +48,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
     
     protected $pago;
     
+    
     /**
      * @ORM\Column(type="string", nullable=true)
      * @Assert\NotBlank()
@@ -54,7 +59,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
 
 
     /**
-     * @Assert\File(maxSize="6000000")
+     *
      */
     
     private $file;

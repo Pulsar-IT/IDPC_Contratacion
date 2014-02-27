@@ -7,6 +7,7 @@
         <thead>
             <tr>
                 <th>Id</th>
+                <th>Contratista</th>
                 <th>Objeto</th>
                 <th>Valor Contrato</th>
                 <th>Plazo Meses</th>
@@ -20,6 +21,7 @@
         {% for entity in entities %}
             <tr>
                 <td><a href="{{ path('estudiosprevios_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
+                <td>{{ entity.contratista.primerApellido }}</td>
                 <td>{{ entity.objeto }}</td>
                 <td>{{ entity.valorContrato }}</td>
                 <td>{{ entity.plazoMeses }}</td>
