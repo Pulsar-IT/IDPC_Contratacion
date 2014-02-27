@@ -1,93 +1,63 @@
 {% extends '::base.html.twig' %}
 
 {% block body -%}
-    <h1>UserDet</h1>
+    <h1>Usuario</h1>
 
-    <table class="record_properties">
-        <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ entity.id }}</td>
-            </tr>
-            <tr>
-                <th>Tipodocumento</th>
-                <td>{{ entity.tipoDocumento }}</td>
-            </tr>
-            <tr>
-                <th>Documento</th>
-                <td>{{ entity.documento }}</td>
-            </tr>
-            <tr>
-                <th>Expedicionlugar</th>
-                <td>{{ entity.expedicionLugar}}</td>
-            </tr>
-            <tr>
-                <th>Expediciondate</th>
-                <td>{{ entity.expedicionDate|date('Y-m-d') }}</td>
-            </tr>
-            <tr>
-                <th>Primernombre</th>
-                <td>{{ entity.primerNombre }}</td>
-            </tr>
-            <tr>
-                <th>Segundonombre</th>
-                <td>{{ entity.segundoNombre }}</td>
-            </tr>
-            <tr>
-                <th>Primerapellido</th>
-                <td>{{ entity.primerApellido }}</td>
-            </tr>
-            <tr>
-                <th>Segundoapellido</th>
-                <td>{{ entity.segundoApellido }}</td>
-            </tr>
-            <tr>
-                <th>Genero</th>
-                <td>{{ entity.genero }}</td>
-            </tr>
-            <tr>
-                <th>Fechanacimiento</th>
-                <td>{{ entity.fechaNacimiento|date('Y-m-d') }}</td>
-            </tr>
-            <tr>
-                <th>Direccionresidencia</th>
-                <td>{{ entity.direccionResidencia }}</td>
-            </tr>
-            <tr>
-                <th>Telefonofijo</th>
-                <td>{{ entity.telefonoFijo }}</td>
-            </tr>
-            <tr>
-                <th>Telefonomovil</th>
-                <td>{{ entity.telefonoMovil }}</td>
-            </tr>
-            <tr>
-                <th>Created_at</th>
-                <td>{{ entity.createdat|date('Y-m-d H:i:s') }}</td>
-            </tr>
-            <tr>
-                <th>Update_at</th>
-                <td>{{ entity.updateat|date('Y-m-d H:i:s') }}</td>
-            </tr>
-        </tbody>
-    </table>
-
+    <div class="profile-user-info profile-user-info-striped" style="width:600px">
+        <div class="profile-info-row"> 
+        <div class="profile-info-name">ID</div>
+        <div class="profile-info-value">{{ entity.id }}</div></div>
+        
+        <div class="profile-info-row"> 
+        <div class="profile-info-name">Tipo Documento</div>
+        <div class="profile-info-value">{{ entity.tipoDocumento }}</div></div>
+        
+        <div class="profile-info-row"> 
+        <div class="profile-info-name">Documento</div>
+        <div class="profile-info-value">{{ entity.documento }}</div></div>
+        
+        <div class="profile-info-row"> 
+        <div class="profile-info-name">Lugar Exp</div>
+        <div class="profile-info-value">: {{ entity.expedicionLugar }}</div></div>
+        
+        <div class="profile-info-row"> 
+        <div class="profile-info-name">Fecha Exp</div>
+        <div class="profile-info-value">: {{ entity.expedicionDate|date('Y-m-d') }}</div></div>
+        
+        <div class="profile-info-row">
+        <div class="profile-info-name">Nombres</div>
+        <div class="profile-info-value">{{ entity.primerNombre }}</div></div> 
+            
+        <div class="profile-info-row">
+        <div class="profile-info-name">Apellidos</div>
+        <div class="profile-info-value">{{ entity.primerApellido }}</div></div>
+        
+        <div class="profile-info-row">
+        <div class="profile-info-name">Genero</div>
+        <div class="profile-info-value">: {{ entity.genero }}</div></div>
+        
+        <div class="profile-info-row">
+        <div class="profile-info-name">Fecha Nac</div>
+        <div class="profile-info-value">{{ entity.fechaNacimiento|date('Y-m-d') }}</div></div>
+        
+    </div>
+   
         <ul class="record_actions">
     <li>
         <a href="{{ path('admin_security_userdet') }}">
-            Back to the list
+            Regresar
         </a>
     </li>
     <li>
         <a href="{{ path('admin_security_userdet_edit', { 'id': entity.id }) }}">
-            Edit
+            Editar
         </a>
     </li>
     <li>
         <form action="{{ path('admin_security_userdet_delete', { 'id': entity.id }) }}" method="post">
             <input type="hidden" name="_method" value="DELETE" />
             {{ form_widget(delete_form) }}
-            <button type="submit">Delete</button>
+            <button type="submit">Borrar</button>
         </form>
     </li>
 </ul>

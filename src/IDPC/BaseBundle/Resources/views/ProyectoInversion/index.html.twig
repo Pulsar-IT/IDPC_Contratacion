@@ -1,14 +1,14 @@
 {% extends '::base.html.twig' %}
 
 {% block body -%}
-    <h1>ProyectoInversion list</h1>
+    <h1>Proyectos de Inversión IDPC</h1>
 
-    <table class="records_list">
+    <table class="table table-striped">
         <thead>
             <tr>
                 <th>Id</th>
                 <th>Codigo</th>
-                <th>Descipcion</th>
+                <th>Descipción</th>
                 <th>Vigencia</th>
                 <th>Actions</th>
             </tr>
@@ -21,14 +21,8 @@
                 <td>{{ entity.descripcion }}</td>
                 <td>{{ entity.vigencia }}</td>
                 <td>
-                <ul>
-                    <li>
-                        <a href="{{ path('proyectoinversion_show', { 'id': entity.id }) }}">show</a>
-                    </li>
-                    <li>
-                        <a href="{{ path('proyectoinversion_edit', { 'id': entity.id }) }}">edit</a>
-                    </li>
-                </ul>
+                        <a href="{{ path('proyectoinversion_edit', { 'id': entity.id }) }}"><i class="icon-edit"></i></a>
+
                 </td>
             </tr>
         {% endfor %}
@@ -38,7 +32,7 @@
         <ul>
         <li>
             <a href="{{ path('proyectoinversion_new') }}">
-                Create a new entry
+               Nuevo
             </a>
         </li>
     </ul>
