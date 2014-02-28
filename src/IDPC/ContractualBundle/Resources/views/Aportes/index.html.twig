@@ -1,0 +1,56 @@
+{% extends '::base.html.twig' %}
+
+{% block body -%}
+    <h1>Aportes Pago: {{pago.valor |number_format(0, ',', '.')}}</h1>
+
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Tipo</th>
+                <th>Pago Minimo</th>
+                <th>Entidad</th>
+                <th>Valor Pagado</th>
+                <th>Adjunto</th>
+                <th>Ingresar</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% set tot = 0 %}
+        {% for entity in entities %}
+           {% set tot = tot + entity.valor %} 
+            <tr>
+                <td><a href="{{ path('aportes_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
+                <td>{{ entity.tipo }}</td>
+                <td>{{ entity.limite |number_format(0, ',', '.') }}</td>
+                <td>{{ entity.Referencia }}</td>
+                <td>{{ entity.valor |number_format(0, ',', '.') }}</td>
+                <td>{{ entity.path }}</td>
+                <td>
+                <ul>
+                <a href="{{ path('aportes_edit', { 'id': entity.id }) }}"><i class="icon-edit"></i></a>
+                </ul>
+                </td>
+            </tr>
+        {% endfor %}
+            
+                    <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td style="text-align: right">Total Aportes: </td>
+                <td>{{tot |number_format(0, ',', '.')}}</td>
+                <td></td>
+                <td></td>
+            </tr>    
+        </tbody>
+    </table>
+
+        <ul>
+        <li>
+            <a href="{{ path('aportes_new') }}">
+                Create a new entry
+            </a>
+        </li>
+    </ul>
+    {% endblock %}
