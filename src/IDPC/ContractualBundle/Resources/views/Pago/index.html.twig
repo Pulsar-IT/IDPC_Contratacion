@@ -3,19 +3,16 @@
 {% block body -%}
 <div class="page-header">
     	<h1>Pagos</h1>
-		{# {% if is_granted("ROLE_ADMIN") %} #}
-        <a href="{{ path('cumplimiento_new') }}" class="btn btn-primary btn-mini"><i class="icon-plus icon-white"></i>Certificado</a>{# {%endif%} #}
-        <a href="{{ path('informe_new') }}" class="btn btn-primary btn-mini"><i class="icon-plus icon-white"></i>Informe Actividades</a>{# {%endif%} #}
-             
+
 	</div>
+{% if (is_expr_granted("hasRole('ROLE_ADMIN')")) -%}
     <table class="table table-striped">
         <thead>
             <tr>
                 <th>Id</th>
                 <th>Estado</th>
                 <th>Identificación</th>
-                <th>Nombres</th>
-                <th>Apellidos</th>
+                <th>Nombre</th>
                 <th>Perido</th>
                 <th>No Contrato</th>
                 <th>Valor a Pagar</th>
@@ -26,26 +23,63 @@
         <tbody>
         {% for entity in entities %}
             <tr>
-                <td><a href="{{ path('pago_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
+                <td>{{ loop.index }}</td>
                 <td>{{ entity.estado }}</td>
                 <td>{{ entity.contrato.estudio.contratista.documento }}</td>
-                <td>{{ entity.contrato.estudio.contratista.primerNombre }}</td>
-                <td>{{ entity.contrato.estudio.contratista.primerApellido }}</td>
-                <td>{{ entity.mes }}</td>
+                <td>{{ entity.contrato.estudio.contratista.primerApellido }}, {{ entity.contrato.estudio.contratista.primerNombre }}</td>
+                <td>{% if entity.mes %}{{ entity.mes|date('M-Y') }}{% endif %}</td>
                 <td>{{ entity.contrato.id }}</td>
                 <td>{{ entity.valor |number_format(0, ',', '.')  }}</td>
                 <td>{{ entity.numeroPago }}</td>
 
                 <td>
 
-                        <a href="{{ path('pago_edit', { 'id': entity.id }) }}"><i class="icon-edit"></i></a>
+                        <a href="{{ path('pago_show', { 'id': entity.id }) }}"><i class="icon-edit"></i></a>
 
                 </td>
             </tr>
         {% endfor %}
         </tbody>
     </table>
+{% endif %}
+{% if (is_expr_granted("hasRole('ROLE_CONTRATISTA')")) -%}
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Estado</th>
+                <th>Identificación</th>
+                <th>Nombre</th>
+                <th>Perido</th>
+                <th>No Contrato</th>
+                <th>Valor a Pagar</th>
+                <th>Numero Pago</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for entity in entities if entity.contrato.estudio.contratista.documento == app.user.username %}
+            <tr>
+                <td>{{ loop.index }}</td>
+                <td>{{ entity.estado }}</td>
+                <td>{{ entity.contrato.estudio.contratista.documento }}</td>
+                <td>{{ entity.contrato.estudio.contratista.primerApellido }}, {{ entity.contrato.estudio.contratista.primerNombre }}</td>
+                <td>{% if entity.mes %}{{ entity.mes|date('M-Y') }}{% endif %}</td>
+                <td>{{ entity.contrato.id }}</td>
+                <td>{{ entity.valor |number_format(0, ',', '.')  }}</td>
+                <td>{{ entity.numeroPago }}</td>
 
+                <td>
+
+                        <a href="{{ path('pago_show', { 'id': entity.id }) }}"><i class="icon-edit"></i></a>
+
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endif %}
+<!--
         <ul>
         <li>
             <a href="{{ path('pago_new') }}">
@@ -53,4 +87,5 @@
             </a>
         </li>
     </ul>
+-->
     {% endblock %}

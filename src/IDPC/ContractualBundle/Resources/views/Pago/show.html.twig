@@ -1,32 +1,74 @@
 {% extends '::base.html.twig' %}
 
 {% block body -%}
-    <h1>Pago</h1>
-
-    <table class="record_properties">
-        <tbody>
+<div class="page-header">
+    	<h1>Pagos</h1>
+		{# {% if is_granted("ROLE_ADMIN") %} #}
+        <a href="{{ path('cumplimiento_new') }}" class="btn btn-primary btn-mini"><i class="icon-plus icon-white"></i>Certificado</a>{# {%endif%} #}
+        <a href="{{ path('informe_new') }}" class="btn btn-primary btn-mini"><i class="icon-plus icon-white"></i>Informe Actividades</a>{# {%endif%} #}
+             
+	</div>
+{% if (is_expr_granted("hasRole('ROLE_ADMIN')")) -%}
+    <table class="table table-striped">
+        <thead>
             <tr>
                 <th>Id</th>
-                <td>{{ entity.id }}</td>
-            </tr>
-            <tr>
                 <th>Mes</th>
-                <td>{{ entity.mes }}</td>
-            </tr>
-            <tr>
                 <th>Valor</th>
-                <td>{{ entity.valor }}</td>
-            </tr>
-            <tr>
                 <th>Numeropago</th>
-                <td>{{ entity.numeroPago }}</td>
-            </tr>
-            <tr>
                 <th>Estado</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>{{ entity.id }}</td>
+                <td>{% if entity.mes %}{{ entity.mes|date('M-Y') }}{% endif %}</td>
+                <td>{{ entity.valor }}</td>
+                <td>{{ entity.numeroPago }}</td>
                 <td>{{ entity.estado }}</td>
             </tr>
         </tbody>
     </table>
+{% endif %}
+
+{% if (is_expr_granted("hasRole('ROLE_CONTRATISTA')")) -%}
+        {% if entity.contrato.estudio.contratista.documento == app.user.username %}
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Mes</th>
+                <th>Valor</th>
+                <th>Numeropago</th>
+                <th>Estado</th>
+                <th>Informe</th>
+                <th>Aportes</th>
+                <th>Declaraci&oacute;n</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>{{ entity.id }}</td>
+                <td>{% if entity.mes %}{{ entity.mes|date('M-Y') }}{% endif %}</td>
+                <td>{{ entity.valor }}</td>
+                <td>{{ entity.numeroPago }}</td>
+                <td>{{ entity.estado }}</td>
+                <td>
+                    {% if entity.informe.pago is not defined or entity.informe.pago is null %}
+                        <span class="label label-danger arrowed">pendiente</span>
+                    {% endif %}
+                    {% if entity.informe.pago %}
+                        <span class="label label-success arrowed-in arrowed-in-right">approved</span>
+                    {% endif %}
+                        
+                </td>
+                <td><span class="label label-danger arrowed">pendiente</span></td>
+                <td><span class="label label-danger arrowed">pendiente</span></td>
+            </tr>
+        </tbody>
+    </table>
+{% endif %}
+{% endif %}
 
         <ul class="record_actions">
     <li>

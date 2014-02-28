@@ -19,10 +19,6 @@ class InformeType extends AbstractType
             ->add('file', 'file', array(
                 'required' => false
             ))
-            ->add('pago', 'entity', array(
-                'class' => 'IDPCContractualBundle:Pago',
-                'property' => 'id'
-            ))
         ;
     }
     

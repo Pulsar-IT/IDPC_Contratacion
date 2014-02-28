@@ -111,7 +111,9 @@ class PagoController extends Controller
         $em = $this->getDoctrine()->getManager();
 
         $entity = $em->getRepository('IDPCContractualBundle:Pago')->find($id);
-
+        
+        $this->getRequest()->getSession()->set('pagoId', $id);
+        
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find Pago entity.');
         }

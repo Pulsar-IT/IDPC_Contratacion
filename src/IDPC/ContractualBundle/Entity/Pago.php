@@ -24,15 +24,13 @@ use Gedmo\Mapping\Annotation as Gedmo;
      */
      
     protected $id;
-
-
-    /**
-     * @ORM\Column(type="string")
-     * @Assert\NotBlank()
-     * @Assert\Length( max = "100" )
-     */
     
+    /**
+     * @ORM\Column(type="date")
+     * @Assert\Date()
+     */
     protected $mes;
+
     
     /**
      *
@@ -79,21 +77,12 @@ use Gedmo\Mapping\Annotation as Gedmo;
     
     
     /**
-     * @ORM\OneToOne(targetEntity="Informe", mappedBy="pago")
-     * @ORM\JoinColumn(name="Informe_id", referencedColumnName="id")
+     * @ORM\OneToOne(targetEntity="Informe", mappedBy="pago", cascade={"persist", "remove"})
+     * @Assert\Valid()
      */
     
     protected $informe;
-    
-    
 
-
-    
-    
-    /**
-     * @ORM\OneToMany(targetEntity="Informe", mappedBy="pago", cascade={"persist", "remove"})
-     */
-    Private $informes;
     
     /**
      * @ORM\ManyToOne(targetEntity="Contrato", inversedBy="pagos")
@@ -215,15 +204,6 @@ use Gedmo\Mapping\Annotation as Gedmo;
         $this->informes->removeElement($informes);
     }
 
-    /**
-     * Get informes
-     *
-     * @return \Doctrine\Common\Collections\Collection 
-     */
-    public function getInformes()
-    {
-        return $this->informes;
-    }
 
     /**
      * Set smallint

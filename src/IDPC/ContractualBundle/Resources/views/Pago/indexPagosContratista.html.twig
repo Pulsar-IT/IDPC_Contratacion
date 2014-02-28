@@ -1,0 +1,53 @@
+{% extends '::base.html.twig' %}
+
+{% block body -%}
+<div class="page-header">
+    	<h1>Pagos</h1>
+
+	</div>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Estado</th>
+                <th>Identificación</th>
+                <th>Nombres</th>
+                <th>Apellidos</th>
+                <th>Perido</th>
+                <th>No Contrato</th>
+                <th>Valor a Pagar</th>
+                <th>Numero Pago</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for entity in entities %}
+            <tr>
+                <td><a href="{{ path('pago_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
+                <td>{{ entity.estado }}</td>
+                <td>{{ entity.contrato.estudio.contratista.documento }}</td>
+                <td>{{ entity.contrato.estudio.contratista.primerNombre }}</td>
+                <td>{{ entity.contrato.estudio.contratista.primerApellido }}</td>
+                <td>{% if entity.mes %}{{ entity.mes|date('M-Y') }}{% endif %}</td>
+                <td>{{ entity.contrato.id }}</td>
+                <td>{{ entity.valor |number_format(0, ',', '.')  }}</td>
+                <td>{{ entity.numeroPago }}</td>
+
+                <td>
+
+                        <a href="{{ path('pago_show', { 'id': entity.id }) }}"><i class="icon-edit"></i></a>
+
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+        <ul>
+        <li>
+            <a href="{{ path('pago_new') }}">
+                Create a new entry
+            </a>
+        </li>
+    </ul>
+    {% endblock %}

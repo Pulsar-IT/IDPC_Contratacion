@@ -47,9 +47,15 @@ class InformeController extends Controller
         $entity = new Informe();
         $form = $this->createCreateForm($entity);
         $form->handleRequest($request);
+        
+        $em = $this->getDoctrine()->getManager();
 
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();
+            
+            $pago = $em->getRepository('IDPCContractualBundle:Pago')->find($request->getSession()->get('pagoId'));
+                                
+            $entity->setPago($pago);
             $em->persist($entity);
             $em->flush();
 
@@ -88,7 +94,7 @@ class InformeController extends Controller
      * @Method("GET")
      * @Template()
      */
-    public function newAction()
+    public function newAction( )
     {
         $entity = new Informe();
         $form   = $this->createCreateForm($entity);

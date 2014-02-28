@@ -40,7 +40,7 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
     
     
     /**
-     * @ORM\OneToOne(targetEntity="Pago", inversedBy="informe", cascade={"persist", "remove"})
+     * @ORM\OneToOne(targetEntity="Pago", inversedBy="informe")
      * @ORM\JoinColumn(name="Pago_id", referencedColumnName="id")
      * @Assert\Type(type="IDPC\ContractualBundle\Entity\Pago")
      */

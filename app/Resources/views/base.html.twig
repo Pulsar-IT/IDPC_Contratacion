@@ -80,6 +80,7 @@
 								<span class="user-info"> 
 									<small>Usuario:</small>
 									{{app.user.username ? app.user.username : app.user.username}}
+                                                                        {{app.user.id}}
 								</span>
 
 								<i class="icon-caret-down"></i>
@@ -225,9 +226,9 @@
 
 						<ul class="submenu">
 							<li>
-								<a href="{{path('contrato')}}">
+								<a href="{{path('pago')}}">
 									<i class="icon-double-angle-right"></i>
-									Contratos
+									Pagos
 								</a>
 							</li>
 

@@ -12,4 +12,21 @@ use Doctrine\ORM\EntityRepository;
  */
 class PagoRepository extends EntityRepository
 {
+    
+        public function findPagosContratista($user) {
+
+        $dql = 'SELECT p FROM IDPC\ContractualBundle\Entity\Pago p
+                JOIN p.contrato c
+                JOIN c.estudio e
+                WHERE e.contratista = :user';
+
+        $query = $this->getEntityManager()
+                ->createQuery($dql)
+                ->setParameter('user', $user);
+        try {
+            return $query->getResult();
+        } catch (\Doctrine\ORM\NoResultException $e) {
+            return null;
+        }
+    }
 }
