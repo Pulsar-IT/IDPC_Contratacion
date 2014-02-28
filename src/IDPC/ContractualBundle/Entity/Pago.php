@@ -83,6 +83,15 @@ use Gedmo\Mapping\Annotation as Gedmo;
     
     protected $informe;
 
+    /**
+     * @ORM\OneToOne(targetEntity="Declaracion", mappedBy="pago", cascade={"persist", "remove"})
+     * @Assert\Valid()
+     */
+    
+    protected $declaracion;
+
+
+    
     
     /**
      * @ORM\ManyToOne(targetEntity="Contrato", inversedBy="pagos")
@@ -318,5 +327,28 @@ use Gedmo\Mapping\Annotation as Gedmo;
     public function getInforme()
     {
         return $this->informe;
+    }
+
+    /**
+     * Set declaracion
+     *
+     * @param \IDPC\ContractualBundle\Entity\Declaracion $declaracion
+     * @return Pago
+     */
+    public function setDeclaracion(\IDPC\ContractualBundle\Entity\Declaracion $declaracion = null)
+    {
+        $this->declaracion = $declaracion;
+
+        return $this;
+    }
+
+    /**
+     * Get declaracion
+     *
+     * @return \IDPC\ContractualBundle\Entity\Declaracion 
+     */
+    public function getDeclaracion()
+    {
+        return $this->declaracion;
     }
 }

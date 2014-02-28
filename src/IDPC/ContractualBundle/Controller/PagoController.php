@@ -15,8 +15,7 @@ use IDPC\ContractualBundle\Form\PagoType;
  *
  * @Route("/pago")
  */
-class PagoController extends Controller
-{
+class PagoController extends Controller {
 
     /**
      * Lists all Pago entities.
@@ -25,8 +24,7 @@ class PagoController extends Controller
      * @Method("GET")
      * @Template()
      */
-    public function indexAction()
-    {
+    public function indexAction() {
         $em = $this->getDoctrine()->getManager();
 
         $entities = $em->getRepository('IDPCContractualBundle:Pago')->findAll();
@@ -35,6 +33,7 @@ class PagoController extends Controller
             'entities' => $entities,
         );
     }
+
     /**
      * Creates a new Pago entity.
      *
@@ -42,8 +41,7 @@ class PagoController extends Controller
      * @Method("POST")
      * @Template("IDPCContractualBundle:Pago:new.html.twig")
      */
-    public function createAction(Request $request)
-    {
+    public function createAction(Request $request) {
         $entity = new Pago();
         $form = $this->createCreateForm($entity);
         $form->handleRequest($request);
@@ -58,19 +56,18 @@ class PagoController extends Controller
 
         return array(
             'entity' => $entity,
-            'form'   => $form->createView(),
+            'form' => $form->createView(),
         );
     }
 
     /**
-    * Creates a form to create a Pago entity.
-    *
-    * @param Pago $entity The entity
-    *
-    * @return \Symfony\Component\Form\Form The form
-    */
-    private function createCreateForm(Pago $entity)
-    {
+     * Creates a form to create a Pago entity.
+     *
+     * @param Pago $entity The entity
+     *
+     * @return \Symfony\Component\Form\Form The form
+     */
+    private function createCreateForm(Pago $entity) {
         $form = $this->createForm(new PagoType(), $entity, array(
             'action' => $this->generateUrl('pago_create'),
             'method' => 'POST',
@@ -88,14 +85,13 @@ class PagoController extends Controller
      * @Method("GET")
      * @Template()
      */
-    public function newAction()
-    {
+    public function newAction() {
         $entity = new Pago();
-        $form   = $this->createCreateForm($entity);
+        $form = $this->createCreateForm($entity);
 
         return array(
             'entity' => $entity,
-            'form'   => $form->createView(),
+            'form' => $form->createView(),
         );
     }
 
@@ -106,14 +102,13 @@ class PagoController extends Controller
      * @Method("GET")
      * @Template()
      */
-    public function showAction($id)
-    {
+    public function showAction($id) {
         $em = $this->getDoctrine()->getManager();
 
         $entity = $em->getRepository('IDPCContractualBundle:Pago')->find($id);
-        
+
         $this->getRequest()->getSession()->set('pagoId', $id);
-        
+
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find Pago entity.');
         }
@@ -121,7 +116,7 @@ class PagoController extends Controller
         $deleteForm = $this->createDeleteForm($id);
 
         return array(
-            'entity'      => $entity,
+            'entity' => $entity,
             'delete_form' => $deleteForm->createView(),
         );
     }
@@ -133,8 +128,7 @@ class PagoController extends Controller
      * @Method("GET")
      * @Template()
      */
-    public function editAction($id)
-    {
+    public function editAction($id) {
         $em = $this->getDoctrine()->getManager();
 
         $entity = $em->getRepository('IDPCContractualBundle:Pago')->find($id);
@@ -147,21 +141,20 @@ class PagoController extends Controller
         $deleteForm = $this->createDeleteForm($id);
 
         return array(
-            'entity'      => $entity,
-            'edit_form'   => $editForm->createView(),
+            'entity' => $entity,
+            'edit_form' => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
         );
     }
 
     /**
-    * Creates a form to edit a Pago entity.
-    *
-    * @param Pago $entity The entity
-    *
-    * @return \Symfony\Component\Form\Form The form
-    */
-    private function createEditForm(Pago $entity)
-    {
+     * Creates a form to edit a Pago entity.
+     *
+     * @param Pago $entity The entity
+     *
+     * @return \Symfony\Component\Form\Form The form
+     */
+    private function createEditForm(Pago $entity) {
         $form = $this->createForm(new PagoType(), $entity, array(
             'action' => $this->generateUrl('pago_update', array('id' => $entity->getId())),
             'method' => 'PUT',
@@ -171,6 +164,7 @@ class PagoController extends Controller
 
         return $form;
     }
+
     /**
      * Edits an existing Pago entity.
      *
@@ -178,8 +172,7 @@ class PagoController extends Controller
      * @Method("PUT")
      * @Template("IDPCContractualBundle:Pago:edit.html.twig")
      */
-    public function updateAction(Request $request, $id)
-    {
+    public function updateAction(Request $request, $id) {
         $em = $this->getDoctrine()->getManager();
 
         $entity = $em->getRepository('IDPCContractualBundle:Pago')->find($id);
@@ -199,19 +192,19 @@ class PagoController extends Controller
         }
 
         return array(
-            'entity'      => $entity,
-            'edit_form'   => $editForm->createView(),
+            'entity' => $entity,
+            'edit_form' => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
         );
     }
+
     /**
      * Deletes a Pago entity.
      *
      * @Route("/{id}", name="pago_delete")
      * @Method("DELETE")
      */
-    public function deleteAction(Request $request, $id)
-    {
+    public function deleteAction(Request $request, $id) {
         $form = $this->createDeleteForm($id);
         $form->handleRequest($request);
 
@@ -237,13 +230,36 @@ class PagoController extends Controller
      *
      * @return \Symfony\Component\Form\Form The form
      */
-    private function createDeleteForm($id)
-    {
+    private function createDeleteForm($id) {
         return $this->createFormBuilder()
-            ->setAction($this->generateUrl('pago_delete', array('id' => $id)))
-            ->setMethod('DELETE')
-            ->add('submit', 'submit', array('label' => 'Delete'))
-            ->getForm()
+                        ->setAction($this->generateUrl('pago_delete', array('id' => $id)))
+                        ->setMethod('DELETE')
+                        ->add('submit', 'submit', array('label' => 'Delete'))
+                        ->getForm()
         ;
     }
+
+    /**
+     * Bloquea un pago
+     *
+     * @Route("/lock/{id}", name="pago_lock")
+     * @Method("GET")
+     * @Template()
+     */
+    public function lockAction($id) {
+
+        $em = $this->getDoctrine()->getManager();
+        $pago = $em->getRepository('IDPCContractualBundle:Pago')->find($id);
+
+        if (!$pago) {
+            throw $this->createNotFoundException('Unable to find Pago entity.');
+        }
+        
+        $pago->setEstado(100);
+        $em->flush();
+        
+            return $this->redirect($this->generateUrl('pago'));
+
+    }
+
 }

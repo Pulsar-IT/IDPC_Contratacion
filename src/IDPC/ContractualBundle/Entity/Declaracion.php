@@ -10,14 +10,13 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 
 /**
- * IDPC\ContractualBundle\Entity\Informe
+ * IDPC\ContractualBundle\Entity\Declaracion
  *
- * @ORM\Table(name="tb_con_informe")
- * @ORM\Entity(repositoryClass="IDPC\ContractualBundle\Entity\InformeRepository")
- * @ORM\HasLifecycleCallbacks
+ * @ORM\Table(name="tb_con_declaracion")
+ * @ORM\Entity(repositoryClass="IDPC\ContractualBundle\Entity\DeclaracionRepository")
  */
 
- class Informe {
+ class Declaracion {
      
      /**
      * @var integer $id
@@ -28,26 +27,23 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
      */
      
     protected $id;
-    
+
+
     /**
-     * @ORM\Column(type="text")
+     * @ORM\Column(type="string")
      * @Assert\NotBlank()
+     * @Assert\Length( max = "100" )
      */
     
-    protected $descripcion;
-
-
-    
+    protected $nombre;
     
     /**
-     * @ORM\OneToOne(targetEntity="Pago", inversedBy="informe")
+     * @ORM\OneToOne(targetEntity="Pago", cascade={"all"})
      * @ORM\JoinColumn(name="Pago_id", referencedColumnName="id")
      * @Assert\Type(type="IDPC\ContractualBundle\Entity\Pago")
      */
     
-    
     protected $pago;
-    
     
     /**
      * @ORM\Column(type="string", nullable=true)
@@ -63,16 +59,7 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
      */
     
     private $file;
-
-
     
-
-
-    
-    
-    
-
-
     /**
      * @var datetime $created
      * 
@@ -93,6 +80,15 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
      */
     
     private $update_at;
+
+
+	
+
+
+    
+
+
+    
             
 
 
@@ -107,10 +103,56 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
     }
 
     /**
+     * Set nombre
+     *
+     * @param string $nombre
+     * @return Declaracion
+     */
+    public function setNombre($nombre)
+    {
+        $this->nombre = $nombre;
+
+        return $this;
+    }
+
+    /**
+     * Get nombre
+     *
+     * @return string 
+     */
+    public function getNombre()
+    {
+        return $this->nombre;
+    }
+
+    /**
+     * Set path
+     *
+     * @param string $path
+     * @return Declaracion
+     */
+    public function setPath($path)
+    {
+        $this->path = $path;
+
+        return $this;
+    }
+
+    /**
+     * Get path
+     *
+     * @return string 
+     */
+    public function getPath()
+    {
+        return $this->path;
+    }
+
+    /**
      * Set created_at
      *
      * @param \DateTime $createdAt
-     * @return Informe
+     * @return Declaracion
      */
     public function setCreatedAt($createdAt)
     {
@@ -133,7 +175,7 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
      * Set update_at
      *
      * @param \DateTime $updateAt
-     * @return Informe
+     * @return Declaracion
      */
     public function setUpdateAt($updateAt)
     {
@@ -156,7 +198,7 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
      * Set pago
      *
      * @param \IDPC\ContractualBundle\Entity\Pago $pago
-     * @return Informe
+     * @return Declaracion
      */
     public function setPago(\IDPC\ContractualBundle\Entity\Pago $pago = null)
     {
@@ -173,28 +215,6 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
     public function getPago()
     {
         return $this->pago;
-    }
-    
-    /**
-     * Set descripcion
-     *
-     * @param text $descripcion
-     * @return Factura
-     */
-    public function setDescripcion($descripcion)     {
-        $this->descripcion = $descripcion;
-
-
-        return $this;
-    }
-
-    /**
-     * Get descripcion
-     *
-     * @return text 
-     */
-    public function getDescripcion()     {
-        return $this->descripcion;
     }
     
     public function getAbsolutePath() {

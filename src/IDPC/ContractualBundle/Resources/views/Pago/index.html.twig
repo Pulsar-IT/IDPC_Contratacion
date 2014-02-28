@@ -47,8 +47,6 @@
         <thead>
             <tr>
                 <th>Id</th>
-                <th>Estado</th>
-                <th>Identificación</th>
                 <th>Nombre</th>
                 <th>Perido</th>
                 <th>No Contrato</th>
@@ -61,8 +59,6 @@
         {% for entity in entities if entity.contrato.estudio.contratista.documento == app.user.username %}
             <tr>
                 <td>{{ loop.index }}</td>
-                <td>{{ entity.estado }}</td>
-                <td>{{ entity.contrato.estudio.contratista.documento }}</td>
                 <td>{{ entity.contrato.estudio.contratista.primerApellido }}, {{ entity.contrato.estudio.contratista.primerNombre }}</td>
                 <td>{% if entity.mes %}{{ entity.mes|date('M-Y') }}{% endif %}</td>
                 <td>{{ entity.contrato.id }}</td>

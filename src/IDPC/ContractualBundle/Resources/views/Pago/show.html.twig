@@ -2,11 +2,17 @@
 
 {% block body -%}
 <div class="page-header">
-    	<h1>Pagos</h1>
-		{# {% if is_granted("ROLE_ADMIN") %} #}
-        <a href="{{ path('informe_new') }}" class="btn btn-primary btn-mini"><i class="icon-plus icon-white"></i>Informe Actividades</a>{# {%endif%} #}
-        <a href="{{ path('aportes_generar', {'id': entity.id }) }}" class="btn btn-primary btn-mini"><i class="icon-plus icon-white"></i>Aportes</a>{# {%endif%} #}
-        <a href="{{ path('cumplimiento_new') }}" class="btn btn-primary btn-mini"><i class="icon-plus icon-white"></i>Declaraci&oacute;n</a>{# {%endif%} #}
+    	<h1>Pago correspondiente a {{ entity.mes|date('F-Y') }}</h1>
+		{% if entity.estado != 100 %}
+        <a href="{{ path('informe_new') }}" class="btn btn-primary btn-mini"><i class="icon-plus icon-white"></i>Informe Actividades</a>
+        <a href="{{ path('aportes_generar', {'id': entity.id }) }}" class="btn btn-info btn-mini"><i class="icon-plus icon-white"></i>Aportes</a>
+        <a href="{{ path('declaracion_new') }}" class="btn btn-mini"><i class="icon-plus icon-white"></i>Declaraci&oacute;n</a>
+        
+        {% if entity.informe.pago is defined and entity.declaracion.pago is defined %}
+
+        <a href="{{ path('pago_lock', { 'id': entity.id } ) }}" class="btn btn-inverse btn-mini "><i class="icon-lock icon-white"> Confirmar</i></a>
+        {%endif%}
+{%endif%}
 </div>
 {% if (is_expr_granted("hasRole('ROLE_ADMIN')")) -%}
     <table class="table table-striped">
@@ -21,7 +27,7 @@
         </thead>
         <tbody>
             <tr>
-                <td>{{ entity.id }}</td>
+                <td><i class="icon-plus icon-white"></i>{{ entity.id }}</td>
                 <td>{% if entity.mes %}{{ entity.mes|date('M-Y') }}{% endif %}</td>
                 <td>{{ entity.valor }}</td>
                 <td>{{ entity.numeroPago }}</td>
@@ -36,7 +42,6 @@
     <table class="table table-striped">
         <thead>
             <tr>
-                <th>Id</th>
                 <th>Mes</th>
                 <th>Valor</th>
                 <th>Numeropago</th>
@@ -48,7 +53,6 @@
         </thead>
         <tbody>
             <tr>
-                <td>{{ entity.id }}</td>
                 <td>{% if entity.mes %}{{ entity.mes|date('M-Y') }}{% endif %}</td>
                 <td>{{ entity.valor }}</td>
                 <td>{{ entity.numeroPago }}</td>
@@ -57,12 +61,17 @@
                     {% if entity.informe.pago is not defined or entity.informe.pago is null %}
                         <span class="label label-danger arrowed">pendiente</span>
                     {% else %}
-                        <span class="label label-success arrowed-in arrowed-in-right">approved</span>
+                        <span class="label label-success arrowed-in arrowed-in-right">enviado</span>
                     {% endif %}
-                        
                 </td>
                 <td><span class="label label-danger arrowed">pendiente</span></td>
-                <td><span class="label label-danger arrowed">pendiente</span></td>
+                <td>
+                    {% if entity.declaracion.pago is not defined or entity.declaracion.pago is null %}
+                        <span class="label label-danger arrowed">pendiente</span>
+                    {% else %}
+                        <span class="label label-success arrowed-in arrowed-in-right">enviado</span>
+                    {% endif %}
+                    </td>
             </tr>
         </tbody>
     </table>
@@ -75,11 +84,5 @@
             Back to the list
         </a>
     </li>
-    <li>
-        <a href="{{ path('pago_edit', { 'id': entity.id }) }}">
-            Edit
-        </a>
-    </li>
-    <li>{{ form(delete_form) }}</li>
 </ul>
 {% endblock %}

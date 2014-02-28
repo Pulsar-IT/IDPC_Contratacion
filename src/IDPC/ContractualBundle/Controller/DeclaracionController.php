@@ -7,21 +7,21 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
-use IDPC\ContractualBundle\Entity\Informe;
-use IDPC\ContractualBundle\Form\InformeType;
+use IDPC\ContractualBundle\Entity\Declaracion;
+use IDPC\ContractualBundle\Form\DeclaracionType;
 
 /**
- * Informe controller.
+ * Declaracion controller.
  *
- * @Route("/informe")
+ * @Route("/declaracion")
  */
-class InformeController extends Controller
+class DeclaracionController extends Controller
 {
 
     /**
-     * Lists all Informe entities.
+     * Lists all Declaracion entities.
      *
-     * @Route("/", name="informe")
+     * @Route("/", name="declaracion")
      * @Method("GET")
      * @Template()
      */
@@ -29,22 +29,22 @@ class InformeController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entities = $em->getRepository('IDPCContractualBundle:Informe')->findAll();
+        $entities = $em->getRepository('IDPCContractualBundle:Declaracion')->findAll();
 
         return array(
             'entities' => $entities,
         );
     }
     /**
-     * Creates a new Informe entity.
+     * Creates a new Declaracion entity.
      *
-     * @Route("/", name="informe_create")
+     * @Route("/", name="declaracion_create")
      * @Method("POST")
-     * @Template("IDPCContractualBundle:Informe:new.html.twig")
+     * @Template("IDPCContractualBundle:Declaracion:new.html.twig")
      */
     public function createAction(Request $request)
     {
-        $entity = new Informe();
+        $entity = new Declaracion();
         $form = $this->createCreateForm($entity);
         $form->handleRequest($request);
         
@@ -52,7 +52,7 @@ class InformeController extends Controller
             $em = $this->getDoctrine()->getManager();
             
             $pago = $em->getRepository('IDPCContractualBundle:Pago')->find($request->getSession()->get('pagoId'));
-                                
+            
             $entity->setPago($pago);
             $em->persist($entity);
             $em->flush();
@@ -67,16 +67,16 @@ class InformeController extends Controller
     }
 
     /**
-    * Creates a form to create a Informe entity.
+    * Creates a form to create a Declaracion entity.
     *
-    * @param Informe $entity The entity
+    * @param Declaracion $entity The entity
     *
     * @return \Symfony\Component\Form\Form The form
     */
-    private function createCreateForm(Informe $entity)
+    private function createCreateForm(Declaracion $entity)
     {
-        $form = $this->createForm(new InformeType(), $entity, array(
-            'action' => $this->generateUrl('informe_create'),
+        $form = $this->createForm(new DeclaracionType(), $entity, array(
+            'action' => $this->generateUrl('declaracion_create'),
             'method' => 'POST',
         ));
 
@@ -86,15 +86,15 @@ class InformeController extends Controller
     }
 
     /**
-     * Displays a form to create a new Informe entity.
+     * Displays a form to create a new Declaracion entity.
      *
-     * @Route("/new", name="informe_new")
+     * @Route("/new", name="declaracion_new")
      * @Method("GET")
      * @Template()
      */
-    public function newAction( )
+    public function newAction()
     {
-        $entity = new Informe();
+        $entity = new Declaracion();
         $form   = $this->createCreateForm($entity);
 
         return array(
@@ -104,9 +104,9 @@ class InformeController extends Controller
     }
 
     /**
-     * Finds and displays a Informe entity.
+     * Finds and displays a Declaracion entity.
      *
-     * @Route("/{id}", name="informe_show")
+     * @Route("/{id}", name="declaracion_show")
      * @Method("GET")
      * @Template()
      */
@@ -114,10 +114,10 @@ class InformeController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entity = $em->getRepository('IDPCContractualBundle:Informe')->find($id);
+        $entity = $em->getRepository('IDPCContractualBundle:Declaracion')->find($id);
 
         if (!$entity) {
-            throw $this->createNotFoundException('Unable to find Informe entity.');
+            throw $this->createNotFoundException('Unable to find Declaracion entity.');
         }
 
         $deleteForm = $this->createDeleteForm($id);
@@ -129,9 +129,9 @@ class InformeController extends Controller
     }
 
     /**
-     * Displays a form to edit an existing Informe entity.
+     * Displays a form to edit an existing Declaracion entity.
      *
-     * @Route("/{id}/edit", name="informe_edit")
+     * @Route("/{id}/edit", name="declaracion_edit")
      * @Method("GET")
      * @Template()
      */
@@ -139,10 +139,10 @@ class InformeController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entity = $em->getRepository('IDPCContractualBundle:Informe')->find($id);
+        $entity = $em->getRepository('IDPCContractualBundle:Declaracion')->find($id);
 
         if (!$entity) {
-            throw $this->createNotFoundException('Unable to find Informe entity.');
+            throw $this->createNotFoundException('Unable to find Declaracion entity.');
         }
 
         $editForm = $this->createEditForm($entity);
@@ -156,16 +156,16 @@ class InformeController extends Controller
     }
 
     /**
-    * Creates a form to edit a Informe entity.
+    * Creates a form to edit a Declaracion entity.
     *
-    * @param Informe $entity The entity
+    * @param Declaracion $entity The entity
     *
     * @return \Symfony\Component\Form\Form The form
     */
-    private function createEditForm(Informe $entity)
+    private function createEditForm(Declaracion $entity)
     {
-        $form = $this->createForm(new InformeType(), $entity, array(
-            'action' => $this->generateUrl('informe_update', array('id' => $entity->getId())),
+        $form = $this->createForm(new DeclaracionType(), $entity, array(
+            'action' => $this->generateUrl('declaracion_update', array('id' => $entity->getId())),
             'method' => 'PUT',
         ));
 
@@ -174,20 +174,20 @@ class InformeController extends Controller
         return $form;
     }
     /**
-     * Edits an existing Informe entity.
+     * Edits an existing Declaracion entity.
      *
-     * @Route("/{id}", name="informe_update")
+     * @Route("/{id}", name="declaracion_update")
      * @Method("PUT")
-     * @Template("IDPCContractualBundle:Informe:edit.html.twig")
+     * @Template("IDPCContractualBundle:Declaracion:edit.html.twig")
      */
     public function updateAction(Request $request, $id)
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entity = $em->getRepository('IDPCContractualBundle:Informe')->find($id);
+        $entity = $em->getRepository('IDPCContractualBundle:Declaracion')->find($id);
 
         if (!$entity) {
-            throw $this->createNotFoundException('Unable to find Informe entity.');
+            throw $this->createNotFoundException('Unable to find Declaracion entity.');
         }
 
         $deleteForm = $this->createDeleteForm($id);
@@ -197,7 +197,7 @@ class InformeController extends Controller
         if ($editForm->isValid()) {
             $em->flush();
 
-            return $this->redirect($this->generateUrl('informe_edit', array('id' => $id)));
+            return $this->redirect($this->generateUrl('declaracion_edit', array('id' => $id)));
         }
 
         return array(
@@ -207,9 +207,9 @@ class InformeController extends Controller
         );
     }
     /**
-     * Deletes a Informe entity.
+     * Deletes a Declaracion entity.
      *
-     * @Route("/{id}", name="informe_delete")
+     * @Route("/{id}", name="declaracion_delete")
      * @Method("DELETE")
      */
     public function deleteAction(Request $request, $id)
@@ -219,21 +219,21 @@ class InformeController extends Controller
 
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();
-            $entity = $em->getRepository('IDPCContractualBundle:Informe')->find($id);
+            $entity = $em->getRepository('IDPCContractualBundle:Declaracion')->find($id);
 
             if (!$entity) {
-                throw $this->createNotFoundException('Unable to find Informe entity.');
+                throw $this->createNotFoundException('Unable to find Declaracion entity.');
             }
 
             $em->remove($entity);
             $em->flush();
         }
 
-        return $this->redirect($this->generateUrl('informe'));
+        return $this->redirect($this->generateUrl('declaracion'));
     }
 
     /**
-     * Creates a form to delete a Informe entity by id.
+     * Creates a form to delete a Declaracion entity by id.
      *
      * @param mixed $id The entity id
      *
@@ -242,7 +242,7 @@ class InformeController extends Controller
     private function createDeleteForm($id)
     {
         return $this->createFormBuilder()
-            ->setAction($this->generateUrl('informe_delete', array('id' => $id)))
+            ->setAction($this->generateUrl('declaracion_delete', array('id' => $id)))
             ->setMethod('DELETE')
             ->add('submit', 'submit', array('label' => 'Delete'))
             ->getForm()
