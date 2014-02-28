@@ -15,6 +15,7 @@
                 <th>Fecha inicio</th>
                 <th>Valor</th>
                 <th>Area</th>
+                <th>Supervisor</th>
                 <th>Actions</th>
             </tr>
         </thead>
@@ -27,6 +28,7 @@
                 <td>{% if entity.fechaInicio %}{{ entity.fechaInicio|date('Y-m-d') }}{% endif %}</td>
                 <td>{{entity.estudio.valorContrato|number_format(0, ',', '.') }}</td>
                 <td>{{entity.estudio.contratista.area.nombre}}</td>
+                <td>{{entity.supervisor.id}}</td>
                 <td>
 
                         <a href="{{ path('contrato_edit', { 'id': entity.id }) }}"><i class="icon-edit"></i></a>

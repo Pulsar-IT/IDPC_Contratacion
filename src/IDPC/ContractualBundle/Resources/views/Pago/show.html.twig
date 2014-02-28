@@ -4,10 +4,10 @@
 <div class="page-header">
     	<h1>Pagos</h1>
 		{# {% if is_granted("ROLE_ADMIN") %} #}
-        <a href="{{ path('cumplimiento_new') }}" class="btn btn-primary btn-mini"><i class="icon-plus icon-white"></i>Certificado</a>{# {%endif%} #}
         <a href="{{ path('informe_new') }}" class="btn btn-primary btn-mini"><i class="icon-plus icon-white"></i>Informe Actividades</a>{# {%endif%} #}
-             
-	</div>
+        <a href="{{ path('aportes_generar', {'id': entity.id }) }}" class="btn btn-primary btn-mini"><i class="icon-plus icon-white"></i>Aportes</a>{# {%endif%} #}
+        <a href="{{ path('cumplimiento_new') }}" class="btn btn-primary btn-mini"><i class="icon-plus icon-white"></i>Declaraci&oacute;n</a>{# {%endif%} #}
+</div>
 {% if (is_expr_granted("hasRole('ROLE_ADMIN')")) -%}
     <table class="table table-striped">
         <thead>
@@ -56,8 +56,7 @@
                 <td>
                     {% if entity.informe.pago is not defined or entity.informe.pago is null %}
                         <span class="label label-danger arrowed">pendiente</span>
-                    {% endif %}
-                    {% if entity.informe.pago %}
+                    {% else %}
                         <span class="label label-success arrowed-in arrowed-in-right">approved</span>
                     {% endif %}
                         
