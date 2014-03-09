@@ -9,6 +9,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use IDPC\ContractualBundle\Entity\Aportes;
 use IDPC\ContractualBundle\Form\AportesType;
+use IDPC\ContractualBundle\Form\SaludType;
 
 /**
  * Aportes controller.
@@ -206,6 +207,32 @@ class AportesController extends Controller
             'delete_form' => $deleteForm->createView(),
         );
     }
+    
+    
+        /**
+     * Displays a form to edit an existing Aportes entity.
+     *
+     * @Route("/{id}/salud", name="aportes_salud")
+     * @Method("GET")
+     * @Template()
+     */
+    public function saludAction($id)
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        $entity = $em->getRepository('IDPCContractualBundle:Aportes')->find($id);
+
+        if (!$entity) {
+            throw $this->createNotFoundException('Unable to find Aportes entity.');
+        }
+
+        $saludForm = $this->createSaludForm($entity);
+
+        return array(
+            'entity'      => $entity,
+            'edit_form'   => $saludForm->createView(),
+        );
+    }
 
     /**
     * Creates a form to edit a Aportes entity.
@@ -225,6 +252,26 @@ class AportesController extends Controller
 
         return $form;
     }
+    
+    /**
+    * crea formulario para salud
+    *
+    * @param Aportes $entity The entity
+    *
+    * @return \Symfony\Component\Form\Form The form
+    */
+    private function createSaludForm(Aportes $entity)
+    {
+        $form = $this->createForm(new SaludType(), $entity, array(
+            'action' => $this->generateUrl('aportes_updatesalud', array('id' => $entity->getId())),
+            'method' => 'PUT',
+        ));
+
+        $form->add('submit', 'submit', array('label' => 'Registrar'));
+
+        return $form;
+    }
+    
     /**
      * Edits an existing Aportes entity.
      *
@@ -258,6 +305,37 @@ class AportesController extends Controller
             'delete_form' => $deleteForm->createView(),
         );
     }
+    
+        /**
+     * Edits an existing Aportes entity.
+     *
+     * @Route("/update/{id}", name="aportes_updatesalud")
+     * @Method("PUT")
+     * @Template("IDPCContractualBundle:Aportes:salud.html.twig")
+     */
+    public function updateSaludAction(Request $request, $id)
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        $entity = $em->getRepository('IDPCContractualBundle:Aportes')->find($id);
+
+        if (!$entity) {
+            throw $this->createNotFoundException('Unable to find Aportes entity.');
+        }
+
+        $editForm = $this->createSaludForm($entity);
+        $editForm->handleRequest($request);
+
+        if ($editForm->isValid()) {
+            $em->flush();
+            return $this->redirect($this->generateUrl('pago'));
+        }
+          return array(
+            'entity'      => $entity,
+            'edit_form'   => $editForm->createView(),
+        );
+        }
+    
     /**
      * Deletes a Aportes entity.
      *
