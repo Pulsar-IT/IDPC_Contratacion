@@ -64,14 +64,6 @@ use Gedmo\Mapping\Annotation as Gedmo;
     
     protected $valorUltimoPago;
 
-
-    
-
-
-    
-
-
-    
     
     /**
      * @ORM\OneToMany(targetEntity="Pago", mappedBy="contrato", cascade={"persist", "remove"})
@@ -87,7 +79,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
     
     /**
      * @ORM\ManyToOne(targetEntity="Security\SecurityBundle\Entity\UserDet", inversedBy="contratos")
-     * @ORM\JoinColumn(name="Usuario_id", referencedColumnName="id")
+     * @ORM\JoinColumn(name="Supervisor", referencedColumnName="id")
      */
     
     protected $supervisor;

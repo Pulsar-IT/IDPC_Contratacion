@@ -229,7 +229,7 @@ class InformeController extends Controller
             $em->flush();
         }
 
-        return $this->redirect($this->generateUrl('informe'));
+        return $this->redirect($this->generateUrl('pago'));
     }
 
     /**
@@ -244,8 +244,36 @@ class InformeController extends Controller
         return $this->createFormBuilder()
             ->setAction($this->generateUrl('informe_delete', array('id' => $id)))
             ->setMethod('DELETE')
-            ->add('submit', 'submit', array('label' => 'Delete'))
+            ->add('submit', 'submit', array(
+                'label' => 'Eliminar',
+                'attr' => array('class' => 'btn btn-danger btn-mini')
+                ))
             ->getForm()
         ;
+    }
+    
+     /**
+     * Finds and displays a Informe entity.
+     *
+     * @Route("/{id}/showbypago", name="informe_showByPago")
+     * @Method("GET")
+     * @Template()
+     */
+    public function showByPagoAction($id)
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        $entity = $em->getRepository('IDPCContractualBundle:Informe')->findOneBy(Array('pago' => $id));
+
+        if (!$entity) {
+            throw $this->createNotFoundException('Unable to find Informe entity.');
+        }
+
+        $deleteForm = $this->createDeleteForm($entity->getId());
+
+        return array(
+            'entity'      => $entity,
+            'delete_form' => $deleteForm->createView(),
+        );
     }
 }

@@ -42,6 +42,57 @@
         </tbody>
     </table>
 {% endif %}
+
+
+{% if (is_expr_granted("hasRole('ROLE_SUPERVISOR')")) -%}
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Estado</th>
+                <th>Identificación</th>
+                <th>Nombre</th>
+                <th>Perido</th>
+                <th>No Contrato</th>
+                <th>Valor a Pagar</th>
+                <th>Numero Pago</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for entity in entities if entity.contrato.supervisor.documento == app.user.username %}
+            <tr>
+                <td>{{ loop.index }}</td>
+                <td>{{ entity.estado }}</td>
+                <td>{{ entity.contrato.estudio.contratista.documento }}</td>
+                <td>{{ entity.contrato.estudio.contratista.primerApellido }}, {{ entity.contrato.estudio.contratista.primerNombre }}</td>
+                <td>{% if entity.mes %}{{ entity.mes|date('M-Y') }}{% endif %}</td>
+                <td>{{ entity.contrato.id }}</td>
+                <td>{{ entity.valor |number_format(0, ',', '.')  }}</td>
+                <td>{{ entity.numeroPago }}</td>
+
+                <td>
+                    
+                    
+                    {% if entity.estado == 0 %}
+                        
+                    {% elseif  entity.estado == 100%}
+                        <span class="label label-danger arrowed">
+                        <a href="{{ path('pago_show', { 'id': entity.id }) }}">pendiente</a>
+                        
+                    {% endif %}
+                        
+
+                        
+
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endif %}
+
+
 {% if (is_expr_granted("hasRole('ROLE_CONTRATISTA')")) -%}
     <table class="table table-striped">
         <thead>
@@ -67,7 +118,7 @@
 
                 <td>
 
-                        <a href="{{ path('pago_show', { 'id': entity.id }) }}"><i class="icon-edit"></i></a>
+                        <a href="{{ path('pago_show', { 'id': entity.id }) }}"><i class="icon-unlock"></i></a>
 
                 </td>
             </tr>
@@ -85,3 +136,7 @@
     </ul>
 -->
     {% endblock %}
+
+{% block breadcumbs %}
+
+{% endblock %}

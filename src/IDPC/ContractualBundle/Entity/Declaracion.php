@@ -38,7 +38,7 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
     protected $nombre;
     
     /**
-     * @ORM\OneToOne(targetEntity="Pago", cascade={"all"})
+     * @ORM\OneToOne(targetEntity="Pago", inversedBy="declaracion")
      * @ORM\JoinColumn(name="Pago_id", referencedColumnName="id")
      * @Assert\Type(type="IDPC\ContractualBundle\Entity\Pago")
      */

@@ -15,9 +15,10 @@ class InformeType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('descripcion')
             ->add('file', 'file', array(
-                'required' => false
+                'label' => 'Archivo'))
+            ->add('submit', 'submit', array(
+                'label' => 'Enviar'
             ))
         ;
     }

@@ -6,12 +6,12 @@
 		{# {% if is_granted("ROLE_ADMIN") %} #}<a href="{{ path('contrato_new') }}" class="btn btn-primary btn-mini"><i class="icon-plus icon-white"></i> Nuevo</a>{# {%endif%} #}
 	</div>
 
+{% if (is_expr_granted("hasRole('ROLE_ADMIN')")) -%}
     <table class="table table-striped">
         <thead>
             <tr>
-                <th>Id</th>
-                <th>Numero</th>
-                <th>Contratista</th>
+                <th>Contrato</th>
+                <th colspan="2">Contratista</th>
                 <th>Fecha inicio</th>
                 <th>Valor</th>
                 <th>Area</th>
@@ -22,13 +22,13 @@
         <tbody>
         {% for entity in entities %}
             <tr>
-                <td><a href="{{ path('contrato_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
                 <td>{{ entity.numero }}</td>
+                <td>{{ entity.estudio.contratista.documento }}</td>
                 <td>{{ entity.estudio.contratista.primerApellido }}{{ entity.estudio.contratista.segundoApellido }}, {{ entity.estudio.contratista.primerNombre }}{{ entity.estudio.contratista.segundoNombre }}</td>
                 <td>{% if entity.fechaInicio %}{{ entity.fechaInicio|date('Y-m-d') }}{% endif %}</td>
                 <td>{{entity.estudio.valorContrato|number_format(0, ',', '.') }}</td>
                 <td>{{entity.estudio.contratista.area.nombre}}</td>
-                <td>{{entity.supervisor.id}}</td>
+                <td>{{entity.supervisor.documento}}</td>
                 <td>
 
                         <a href="{{ path('contrato_edit', { 'id': entity.id }) }}"><i class="icon-edit"></i></a>
@@ -38,5 +38,40 @@
         {% endfor %}
         </tbody>
     </table>
+{% endif %}
+
+{% if (is_expr_granted("hasRole('ROLE_SUPERVISOR')")) -%}
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Contrato</th>
+                <th colspan="2">Contratista</th>
+                <th>Fecha inicio</th>
+                <th>Valor</th>
+                <th>Area</th>
+                <th>Supervisor</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for entity in entities if entity.supervisor.documento == app.user.username %}
+            <tr>
+                <td>{{ entity.numero }}</td>
+                <td>{{ entity.estudio.contratista.documento }}</td>
+                <td>{{ entity.estudio.contratista.primerApellido }}{{ entity.estudio.contratista.segundoApellido }}, {{ entity.estudio.contratista.primerNombre }}{{ entity.estudio.contratista.segundoNombre }}</td>
+                <td>{% if entity.fechaInicio %}{{ entity.fechaInicio|date('Y-m-d') }}{% endif %}</td>
+                <td>{{entity.estudio.valorContrato|number_format(0, ',', '.') }}</td>
+                <td>{{entity.estudio.contratista.area.nombre}}</td>
+                <td>{{entity.supervisor.documento}}</td>
+                <td>
+
+                        <a href="{{ path('contrato_edit', { 'id': entity.id }) }}"><i class="icon-edit"></i></a>
+
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endif %}
 
     {% endblock %}
