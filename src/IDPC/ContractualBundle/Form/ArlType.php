@@ -6,7 +6,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
-class SaludType extends AbstractType
+class ArlType extends AbstractType
 {
         /**
      * @param FormBuilderInterface $builder
@@ -19,17 +19,15 @@ class SaludType extends AbstractType
             ->add('Referencia', 'choice', array(
             'empty_value' => 'Entidad',    
             'choices'   => array(
-            'NUEVA EPS' => 'NUEVA EPS', 
-            'COMPENSAR' => 'COMPENSAR',
-            'CAFAM' => 'CAFAM',
-            'CAFESALUD' => 'CAFESALUD',
-            'SANITAS'   => 'SANITAS' 
+            'SURA' => 'SURA', 
+            'BOLIVAR' => 'BOLIVAR',
+            'CAFAM' => 'CAFAM', 
              
                 ),
             'required'  => true,))
             ->add('valor')
             ->add('file', 'file', array(
-                'required' => true,
+                'required' => false,
                 'label'   => 'Archivo'
             ))
         ;
@@ -50,6 +48,6 @@ class SaludType extends AbstractType
      */
     public function getName()
     {
-        return 'idpc_contractualbundle_aportes_salud';
+        return 'idpc_contractualbundle_aportes_arl';
     }
 }

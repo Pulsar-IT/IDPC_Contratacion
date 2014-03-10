@@ -10,6 +10,9 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use IDPC\ContractualBundle\Entity\Aportes;
 use IDPC\ContractualBundle\Form\AportesType;
 use IDPC\ContractualBundle\Form\SaludType;
+use IDPC\ContractualBundle\Form\PensionType;
+use IDPC\ContractualBundle\Form\ArlType;
+
 
 /**
  * Aportes controller.
@@ -209,9 +212,7 @@ class AportesController extends Controller
     }
     
     
-        /**
-     * Displays a form to edit an existing Aportes entity.
-     *
+    /**
      * @Route("/{id}/salud", name="aportes_salud")
      * @Method("GET")
      * @Template()
@@ -230,9 +231,56 @@ class AportesController extends Controller
 
         return array(
             'entity'      => $entity,
-            'edit_form'   => $saludForm->createView(),
+            'salud_form'   => $saludForm->createView(),
         );
     }
+    
+        /**
+     * @Route("/{id}/pension", name="aportes_pension")
+     * @Method("GET")
+     * @Template()
+     */
+    public function pensionAction($id)
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        $entity = $em->getRepository('IDPCContractualBundle:Aportes')->find($id);
+
+        if (!$entity) {
+            throw $this->createNotFoundException('Unable to find Aportes entity.');
+        }
+
+        $pensionForm = $this->createPensionForm($entity);
+
+        return array(
+            'entity'      => $entity,
+            'pension_form'   => $pensionForm->createView(),
+        );
+    }
+    
+         /**
+     * @Route("/{id}/arl", name="aportes_arl")
+     * @Method("GET")
+     * @Template()
+     */
+    public function arlAction($id)
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        $entity = $em->getRepository('IDPCContractualBundle:Aportes')->find($id);
+
+        if (!$entity) {
+            throw $this->createNotFoundException('Unable to find Aportes entity.');
+        }
+
+        $arlForm = $this->createArlForm($entity);
+
+        return array(
+            'entity'      => $entity,
+            'arl_form'   => $arlForm->createView(),
+        );
+    }   
+    
 
     /**
     * Creates a form to edit a Aportes entity.
@@ -255,9 +303,7 @@ class AportesController extends Controller
     
     /**
     * crea formulario para salud
-    *
     * @param Aportes $entity The entity
-    *
     * @return \Symfony\Component\Form\Form The form
     */
     private function createSaludForm(Aportes $entity)
@@ -266,18 +312,46 @@ class AportesController extends Controller
             'action' => $this->generateUrl('aportes_updatesalud', array('id' => $entity->getId())),
             'method' => 'PUT',
         ));
-
         $form->add('submit', 'submit', array('label' => 'Registrar'));
-
+        return $form;
+    }
+    
+        /**
+    * crea formulario para pension
+    * @param Aportes $entity The entity
+    * @return \Symfony\Component\Form\Form The form
+    */
+    private function createPensionForm(Aportes $entity)
+    {
+            $form = $this->createForm(new pensionType(), $entity, array(
+            'action' => $this->generateUrl('aportes_pension', array('id' => $entity->getId())),
+            'method' => 'PUT',
+        ));
+        $form->add('submit', 'submit', array('label' => 'Registrar'));
+        return $form;
+    }
+    
+            /**
+    * crea formulario para ARL
+    * @param Aportes $entity The entity
+    * @return \Symfony\Component\Form\Form The form
+    */
+    private function createArlForm(Aportes $entity)
+    {
+            $form = $this->createForm(new ArlType(), $entity, array(
+            'action' => $this->generateUrl('aportes_arl', array('id' => $entity->getId())),
+            'method' => 'PUT',
+        ));
+        $form->add('submit', 'submit', array('label' => 'Registrar'));
         return $form;
     }
     
     /**
      * Edits an existing Aportes entity.
      *
-     * @Route("/{id}", name="aportes_update")
+     * @Route("/update-p/{id}", name="aportes_update")
      * @Method("PUT")
-     * @Template("IDPCContractualBundle:Aportes:edit.html.twig")
+     * @Template("IDPCContractualBundle:Aportes:ok.html.twig")
      */
     public function updateAction(Request $request, $id)
     {
@@ -288,30 +362,50 @@ class AportesController extends Controller
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find Aportes entity.');
         }
-
-        $deleteForm = $this->createDeleteForm($id);
-        $editForm = $this->createEditForm($entity);
+        $editForm = $this->createPensionForm($entity);
         $editForm->handleRequest($request);
-
         if ($editForm->isValid()) {
             $em->flush();
-
-            return $this->redirect($this->generateUrl('aportes_edit', array('id' => $id)));
+            return $this->render('IDPCContractualBundle:Aportes:ok.html.twig');
         }
+        else{
+            return $this->redirect($this->generateUrl('contrato'));
+        }
+    }
+    
+        /**
+     * Edits an existing Aportes ARL.
+     *
+     * @Route("/update-a/{id}", name="aportes_updatearl")
+     * @Method("PUT")
+     * @Template("IDPCContractualBundle:Aportes:ok.html.twig")
+     */
+    public function updateArlAction(Request $request, $id)
+    {
+        $em = $this->getDoctrine()->getManager();
 
-        return array(
-            'entity'      => $entity,
-            'edit_form'   => $editForm->createView(),
-            'delete_form' => $deleteForm->createView(),
-        );
+        $entity = $em->getRepository('IDPCContractualBundle:Aportes')->find($id);
+
+        if (!$entity) {
+            throw $this->createNotFoundException('Unable to find Aportes entity.');
+        }
+        $editForm = $this->createArlForm($entity);
+        $editForm->handleRequest($request);
+        if ($editForm->isValid()) {
+            $em->flush();
+            return $this->render('IDPCContractualBundle:Aportes:ok.html.twig');
+        }
+        else{
+            return $this->render('IDPCContractualBundle:Aportes:error.html.twig');
+        }
     }
     
         /**
      * Edits an existing Aportes entity.
      *
-     * @Route("/update/{id}", name="aportes_updatesalud")
+     * @Route("/update-s/{id}", name="aportes_updatesalud")
      * @Method("PUT")
-     * @Template("IDPCContractualBundle:Aportes:salud.html.twig")
+     * @Template("IDPCContractualBundle:Aportes:ok.html.twig")
      */
     public function updateSaludAction(Request $request, $id)
     {
@@ -328,7 +422,7 @@ class AportesController extends Controller
 
         if ($editForm->isValid()) {
             $em->flush();
-            return $this->redirect($this->generateUrl('pago'));
+            return $this->render('IDPCContractualBundle:Aportes:ok.html.twig');
         }
           return array(
             'entity'      => $entity,
@@ -378,4 +472,23 @@ class AportesController extends Controller
             ->getForm()
         ;
     }
+    
+        /**
+     * Lists all Aportes entities.
+     *
+     * @Route("/certiaportes/{id}", name="aportes_certifica")
+     * @Method("GET")
+     * @Template("IDPCContractualBundle:Aportes:certificado.html.twig")
+     */
+    
+    public function certificadoAction($id)
+    {
+      $em = $this->getDoctrine()->getManager();
+
+      $entity = $em->getRepository('IDPCContractualBundle:Aportes')->find($id);
+       return array(
+       'entity'      => $entity,
+       );
+    }
+    
 }

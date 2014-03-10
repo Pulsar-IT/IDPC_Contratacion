@@ -71,7 +71,6 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
     
     /**
      * @ORM\Column(type="string", nullable=true)
-     * @Assert\NotBlank()
      * @Assert\Length( max = "255" )
      */
     

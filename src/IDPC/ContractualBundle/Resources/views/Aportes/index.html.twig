@@ -1,7 +1,7 @@
 {% extends '::base.html.twig' %}
-
 {% block body -%}
-    <h1>Aportes Pago: {{pago.valor |number_format(0, ',', '.')}}</h1>
+
+    <h1>Aportes Al Pago de: {{pago.valor |number_format(0, ',', '.')}}</h1>
 
     <table class="table table-striped">
         <thead>
@@ -27,9 +27,10 @@
                 <td>{{ entity.valor |number_format(0, ',', '.') }}</td>
                 <td>{{ entity.path }}</td>
                 <td>
-                <ul>
-                <a href="{{ path('aportes_salud', { 'id': entity.id }) }}"><i class="icon-edit"></i></a>
-                </ul>
+    <button class="btn btn-sm" data-toggle="modal" data-target="#m{{ entity.tipo }}">
+Registrar
+</button>
+       
                 </td>
             </tr>
         {% endfor %}
@@ -46,11 +47,97 @@
         </tbody>
     </table>
 
-        <ul>
-        <li>
-            <a href="{{ path('aportes_new') }}">
-                Create a new entry
-            </a>
-        </li>
-    </ul>
-    {% endblock %}
+<button class="btn btn-sm btn-primary" data-toggle="modal" data-target="#mCertificado">
+Generar Certificado
+</button>
+    
+<!-- Modal SAlud -->
+<div class="modal fade" id="mSalud" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<div class="modal-dialog">
+<div class="modal-content">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+    <h4 class="modal-title" id="myModalLabel">Aportes de Salud</h4>
+  </div>
+  <div class="modal-body">
+ {% for entity in entities %}
+ {%if entity.tipo == 'Salud'%}     
+ <iframe src="{{ path('aportes_salud', { 'id': entity.id }) }}" width="550" height="250" frameborder="0" allowtransparency="true" scrolling=no></iframe>
+ {%endif%}
+ {%endfor%} 
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+  </div>
+</div><!-- /.modal-content -->
+</div><!-- /.modal-dialog -->
+</div><!-- /.modal -->    
+
+
+<!-- Modal Pensión-->
+<div class="modal fade" id="mPensión" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<div class="modal-dialog">
+<div class="modal-content">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+    <h4 class="modal-title" id="myModalLabel">Aportes de Pensión</h4>
+  </div>
+  <div class="modal-body">
+ {% for entity in entities %}
+ {%if entity.tipo == 'Pensión'%}     
+ <iframe src="{{ path('aportes_pension', { 'id': entity.id }) }}" width="550" height="250" frameborder="0" allowtransparency="true" scrolling=no></iframe>
+ {%endif%}
+ {%endfor%} 
+  </div>
+  <div class="modal-footer">
+    <button type="button" onclick="javascript:window.location.reload()" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+  </div>
+</div><!-- /.modal-content -->
+</div><!-- /.modal-dialog -->
+</div><!-- /.modal --> 
+
+
+<!-- Modal ARL-->
+<div class="modal fade" id="mARL" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<div class="modal-dialog">
+<div class="modal-content">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+    <h4 class="modal-title" id="myModalLabel">Aportes de ARL</h4>
+  </div>
+  <div class="modal-body">
+ {% for entity in entities %}
+ {%if entity.tipo == 'ARL'%}     
+ <iframe src="{{ path('aportes_arl', { 'id': entity.id }) }}" width="550" height="250" frameborder="0" allowtransparency="true" scrolling=no></iframe>
+ {%endif%}
+ {%endfor%} 
+  </div>
+  <div class="modal-footer">
+    <button type="button" onclick="javascript:window.location.reload()" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+  </div>
+</div><!-- /.modal-content -->
+</div><!-- /.modal-dialog -->
+</div><!-- /.modal --> 
+
+<!-- Modal Certificado-->
+<div class="modal fade" id="mCertificado" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<div class="modal-dialog">
+<div class="modal-content">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+    <h4 class="modal-title" id="myModalLabel">Certificado</h4>
+  </div>
+  <div class="modal-body">
+ {% for entity in entities %}
+ {%if entity.tipo == 'ARL'%}     
+<iframe src="{{ path('aportes_certifica', { 'id': entities[0].pago.id }) }}" width="550" height="250" frameborder="0" allowtransparency="true" scrolling=no></iframe> {%endif%}
+ {%endfor%} 
+  </div>
+  <div class="modal-footer">
+    <button type="button" onclick="javascript:window.location.reload()" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+  </div>
+</div><!-- /.modal-content -->
+</div><!-- /.modal-dialog -->
+</div><!-- /.modal --> 
+   
+{% endblock %}

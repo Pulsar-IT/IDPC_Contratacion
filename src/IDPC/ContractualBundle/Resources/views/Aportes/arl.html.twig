@@ -1,5 +1,4 @@
-
-{% block body -%}
+        {% block body -%}
 		<!--basic styles-->
 
 		<link href="{{asset('css/bootstrap.min.css')}}" rel="stylesheet" />
@@ -29,26 +28,23 @@
 		<![endif]-->
 
        <table>
-     <form action="{{ path('aportes_updatesalud', { 'id': entity.id }) }}" method="post" {{ form_enctype(salud_form) }}>
+     <form action="{{ path('aportes_updatearl', { 'id': entity.id }) }}" method="post" {{ form_enctype(arl_form) }}>
      <input type="hidden" name="_method" value="PUT" />
-     {{ form_errors(salud_form) }}
+     {{ form_errors(arl_form) }}
     <tr>
         <td>Refencia:</td>
-        <td>{{ form_widget(salud_form.Referencia)}}</td>
+        <td>{{ form_widget(arl_form.Referencia)}}</td>
     </tr>
     <tr>
         <td>Valor:</td>
-         <td>{{ form_widget(salud_form.valor)}}</td>
+         <td>{{ form_widget(arl_form.valor)}}</td>
      <tr/>
-         <tr>
-        <td>Archivo:</td>
-        <td>{{ form_widget(salud_form.file)}}</td>
-     <tr/>
+
      <tr>
         <td></td> 
         <td><button type="hidden">Guardar</button></td>
     </tr>
-      {{ form_widget(salud_form._token) }}
+      {{ form_widget(arl_form._token) }}
   </form>
 </table>                   
                   
