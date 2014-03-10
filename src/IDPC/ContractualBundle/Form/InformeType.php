@@ -16,9 +16,10 @@ class InformeType extends AbstractType
     {
         $builder
             ->add('file', 'file', array(
-                'label' => 'Archivo'))
+                'label' => ' '))
             ->add('submit', 'submit', array(
-                'label' => 'Enviar'
+                'label' => 'Enviar',
+                'attr' => array('class' => 'btn btn-sm btn-success')
             ))
         ;
     }

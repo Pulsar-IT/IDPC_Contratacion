@@ -5,15 +5,14 @@ namespace IDPC\ContractualBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 use Gedmo\Mapping\Annotation as Gedmo;
-
 use Symfony\Component\HttpFoundation\File\UploadedFile;
-
 
 /**
  * IDPC\ContractualBundle\Entity\Declaracion
  *
  * @ORM\Table(name="tb_con_declaracion")
  * @ORM\Entity(repositoryClass="IDPC\ContractualBundle\Entity\DeclaracionRepository")
+ * @ORM\HasLifecycleCallbacks
  */
 
  class Declaracion {
@@ -30,8 +29,7 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 
     /**
-     * @ORM\Column(type="string")
-     * @Assert\NotBlank()
+     * @ORM\Column(type="string", nullable=true)
      * @Assert\Length( max = "100" )
      */
     
@@ -100,52 +98,6 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
     public function getId()
     {
         return $this->id;
-    }
-
-    /**
-     * Set nombre
-     *
-     * @param string $nombre
-     * @return Declaracion
-     */
-    public function setNombre($nombre)
-    {
-        $this->nombre = $nombre;
-
-        return $this;
-    }
-
-    /**
-     * Get nombre
-     *
-     * @return string 
-     */
-    public function getNombre()
-    {
-        return $this->nombre;
-    }
-
-    /**
-     * Set path
-     *
-     * @param string $path
-     * @return Declaracion
-     */
-    public function setPath($path)
-    {
-        $this->path = $path;
-
-        return $this;
-    }
-
-    /**
-     * Get path
-     *
-     * @return string 
-     */
-    public function getPath()
-    {
-        return $this->path;
     }
 
     /**
@@ -245,7 +197,7 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
      */
     public function setFile(UploadedFile $file = null)     {
         $this->file = $file;
-
+        $this->nombre = 'Declaracion';
 
         if (isset($this->path)) {
             // store the old name to delete after the update

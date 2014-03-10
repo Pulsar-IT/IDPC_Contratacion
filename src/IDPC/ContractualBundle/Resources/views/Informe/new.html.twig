@@ -1,13 +1,22 @@
 {% extends '::base.html.twig' %}
 
 {% block body -%}
-<div class="page-header">
-    <h1>Subir Informe</h1>
-
-</div>
-    {{ form(form) }}
 
 
+<div class="widget-box">
+    <div class="widget-header">
+        <h4>Subir Informe</h4>
+    </div>
+        <div class="widget-body">
+            <div class="widget-main no-padding">
+                <fieldset>
+                    {{ form(form) }}
+                        </fieldset>
+                    <div class="form-actions">
+                        </div>
+                </div>
+            </div>
+    </div>
 {% endblock %}
 {% block breadcumbs %}
         <ul class="record_actions">

@@ -229,7 +229,7 @@ class DeclaracionController extends Controller
             $em->flush();
         }
 
-        return $this->redirect($this->generateUrl('declaracion'));
+        return $this->redirect($this->generateUrl('pago_show', array('id' => $request->getSession()->get('pagoId'))));
     }
 
     /**
@@ -247,5 +247,30 @@ class DeclaracionController extends Controller
             ->add('submit', 'submit', array('label' => 'Delete'))
             ->getForm()
         ;
+    }
+    
+         /**
+     * Finds and displays a Informe entity.
+     *
+     * @Route("/{id}/showbypago", name="declaracion_showByPago")
+     * @Method("GET")
+     * @Template()
+     */
+    public function showByPagoAction($id)
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        $entity = $em->getRepository('IDPCContractualBundle:Declaracion')->findOneBy(Array('pago' => $id));
+
+        if (!$entity) {
+            throw $this->createNotFoundException('Unable to find Informe entity.');
+        }
+
+        $deleteForm = $this->createDeleteForm($entity->getId());
+
+        return array(
+            'entity'      => $entity,
+            'delete_form' => $deleteForm->createView(),
+        );
     }
 }

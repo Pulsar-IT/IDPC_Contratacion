@@ -1,16 +1,28 @@
 {% extends '::base.html.twig' %}
 
 {% block body -%}
-    <h1>Declaracion edit</h1>
-
+<div class="widget-box">
+    <div class="widget-header">
+        <h4>Edici&oacute;n Declaraci&oacute;n</h4>
+        <span class="widget-toolbar"></span>
+    </div>
+        <div class="widget-body">
+            <div class="widget-main no-padding">
+                <fieldset>
     {{ form(edit_form) }}
+                        </fieldset>
+                    <div class="form-actions">
+                        </div>
+                </div>
+            </div>
+    </div>
 
+{% endblock %}
+{% block breadcumbs %}
         <ul class="record_actions">
     <li>
-        <a href="{{ path('declaracion') }}">
-            Back to the list
-        </a>
+                <a href="{{ path('pago_show', { 'id': entity.pago.id }) }}">Regresar</a>
+
     </li>
-    <li>{{ form(delete_form) }}</li>
 </ul>
 {% endblock %}

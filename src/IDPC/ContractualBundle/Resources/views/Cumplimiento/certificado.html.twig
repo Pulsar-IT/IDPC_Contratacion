@@ -1,3 +1,82 @@
-<h1>Generado</h1>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>Untitled Document</title>
+<link href="estilos.css" rel="stylesheet" type="text/css" />
+</head>
 
-{{ entity.createdat|date('Y-m-d H:i:s') }}
+<body>
+<table class="tablatitulo" width="100%">
+  <tr>
+    <td rowspan="3"><div align="center"><img src="img/logoreportheader.png" width="125" height="108" /></div></td>
+    <td rowspan="3"><b><p align="center">CERTIFICACI&Oacute;N DE CUMPLIMIENTO</p></b></td>
+    <td><p>C&oacute;digo: GF-F11</p></td>
+  </tr>
+  <tr>
+    <td><p>Versi&oacute;n: 3</p></td>
+  </tr>
+  <tr>
+    <td><p>P&aacute;g. 1 de 1 </p></td>
+  </tr>
+</table>
+<br>
+<table class="tabla" width="100%" style="border-style:solid; border-width:thin">
+      <tr>
+        <td colspan="2">
+               <p>Bogot&aacute; D.C., {{ entity.createdat|date('d-m-Y') }}</p></td>
+      </tr>
+      <tr>
+        <td colspan="2">
+                <b><p align="center">DATOS DEL CONTRATO</p></b>
+                <p>Nombre del Contratista: {{ entity.pago.contrato.estudio.contratista.primerapellido }} {{ entity.pago.contrato.estudio.contratista.segundoapellido }} {{ entity.pago.contrato.estudio.contratista.primernombre }} {{ entity.pago.contrato.estudio.contratista.segundonombre }}</p>
+                <p>Tipo de Contrato: No: {{ entity.pago.contrato.estudio.tipocontrato.tipocontrato }}</p>
+                <p>Fecha de Contrato: {{ entity.pago.contrato.fechainicio|date('Y-m-d') }}</p>
+                <b><p>Objeto del Contrato: </p></b>
+                <p>Texto Objeto contrato:</p>
+                <p>{{ entity.pago.contrato.estudio.objeto }}</p>
+           </td>
+      </tr>
+      <tr>
+        <td>No. de pago: {{ entity.pago.numeropago }}</td>
+        <td>Porcentaje a pagar (Si aplica):</td>
+      </tr>
+      <tr>
+        <td colspan="2">Periodo a pagar: {{ entity.pago.mes|date('F-Y') }}</td>
+      </tr>
+      <tr>
+        <td>Valor total del contrato: ${{ entity.pago.contrato.estudio.valorcontrato|number_format(0, ',', '.') }}</td>
+        <td>Valor pago actual: ${{ entity.pago.valor|number_format(0, ',', '.') }}</td>
+      </tr>
+      <tr>
+        <td colspan="2">Valor en letras: ( )</td>
+      </tr>
+      <tr>
+        <td>Adici&oacute;n:</td>
+        <td>No. planilla pago aportes: {{ entity.planilla }}</td>
+      </tr>
+      <tr>
+        <td colspan="2">Plazo del contrato: {{ entity.pago.contrato.estudio.plazomeses }} Meses {{ entity.pago.contrato.estudio.plazodias }} dias</td>
+      </tr>
+      <tr>
+        <td colspan="2"><p><b>Certificado de cumplimiento (acorde con las obligaciones del contratista)</b><br>
+        Certifico que la contratista cumpli&oacute; con las obligaciones contractuales durante el per&iacute;odo aqu&iacute; certificado, as&iacute; mismo que se encuentra al d&iacute;a        por concepto de pago de seguridad social y riesgos laborales correspondientes al mes de Enero de 2014.</p>
+        </td>
+      </tr>
+      <tr>
+        <td colspan="2">
+        __________________________
+        <br>Supervisor y/o interventor
+        </td>
+      </tr>
+      <tr>
+        <td colspan="2">Proyect&oacute;:
+        <br>Revis&oacute;:
+        </td>
+      </tr>
+    </table>
+</body>
+</html>
+
+
+
+Generado : {{ entity.createdat|date('Y-m-d H:i:s') }}

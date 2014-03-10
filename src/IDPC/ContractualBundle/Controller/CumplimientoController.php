@@ -52,10 +52,13 @@ class CumplimientoController extends Controller
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();
             
+            $pago = $em->getRepository('IDPCContractualBundle:Pago')->find($request->getSession()->get('pagoId'));
+            
+            $entity->setPago($pago);
             $em->persist($entity);
             $em->flush();
 
-            return $this->redirect($this->generateUrl('cumplimiento_show', array('id' => $entity->getId())));
+            return $this->redirect($this->generateUrl('cumplimiento_certificado', array('id' => $entity->getId())));
         }
 
         return array(

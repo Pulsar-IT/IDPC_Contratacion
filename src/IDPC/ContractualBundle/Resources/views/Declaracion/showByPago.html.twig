@@ -1,0 +1,59 @@
+{% extends '::base.html.twig' %}
+
+{% block body -%}
+<div class="widget-box">
+    <div class="widget-header">
+        <h4>Declaraci&oacute;n</h4>
+        <span class="widget-toolbar">
+            {% if entity.pago.estado != 100 %}
+    <a href="{{ path('declaracion_edit', { 'id': entity.id }) }}" ><i class="icon-edit icon-white"></i></a>
+    <div style="float:right;">{{ form(delete_form) }}</div>
+    {% endif %}
+        </span>
+    </div>
+        <div class="widget-body">
+            <div class="widget-main no-padding">
+                <fieldset>
+
+
+
+
+
+<table class="record_properties">
+    <tbody>
+        <tr>
+            <th>Fecha y hora de env&iacute;o</th>
+            <td>{{ entity.createdat|date('Y-m-d H:i:s') }}</td>
+        </tr>
+        <tr>
+            <th></th>
+            <td><a href="{{ asset('uploads/documents/') }}{{ entity.path }}" target="_blank" >Ver documento</a></td>
+        </tr>
+        <tr>
+            <th></th>
+            <td><br>
+                <iframe src="http://docs.google.com/gview?url=http://contratacion/{{ asset('uploads/documents/') }}{{ entity.path }}&embedded=true" style="width:600px; height:500px;" frameborder="0"></iframe></td>
+        </tr>
+    </tbody>
+</table>
+                        </fieldset>
+                    <div class="form-actions">
+                        </div>
+                </div>
+            </div>
+    </div>
+
+
+
+{% endblock %}
+
+{% block breadcumbs %}
+<ul class="pagination-sm">
+    <li>
+
+
+        <a href="{{ path('pago_show', { 'id': entity.pago.id }) }}">Regresar</a>
+
+    </li>
+</ul>
+{% endblock %}

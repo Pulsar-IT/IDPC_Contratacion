@@ -15,8 +15,8 @@ class DeclaracionType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('nombre')
-            ->add('file')
+            ->add('file', 'file', array(
+                'label' => ' '))
         ;
     }
     

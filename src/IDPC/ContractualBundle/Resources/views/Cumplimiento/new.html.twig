@@ -1,15 +1,39 @@
 {% extends '::base.html.twig' %}
 
 {% block body -%}
-    <h1>Cumplimiento creation</h1>
 
-    {{ form(form) }}
+<div class="widget-box">
+    <div class="widget-header">
+        <h4>Subir Declaraci&oacute;n</h4>
+    </div>
+    <form action="{{ path('cumplimiento_create') }}" method="post" {{ form_enctype(form) }}>
 
-        <ul class="record_actions">
-    <li>
-        <a href="{{ path('cumplimiento') }}">
-            Back to the list
-        </a>
-    </li>
-</ul>
+        <div class="widget-body">
+            <div class="widget-main no-padding">
+                <div class="validation">{{ form_errors(form) }}</div>
+                <fieldset>
+                    {{ form_label(form.planilla)}}
+                    {{ form_widget(form.planilla)}}
+                    </fieldset>
+               {{form_widget(form._token)}}
+                    <div class="form-actions">
+                        <button type="submit" value="Crear" class="btn btn-sm btn-success">
+                        Crear
+                            <i class="icon-arrow-right icon-on-right bigger-110"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+
+{% endblock %}
+{% block breadcumbs %}
+    <ul class="record_actions">
+        <li>
+            <a href="{{ path('cumplimiento') }}">
+                Regresar
+            </a>
+        </li>
+    </ul>
 {% endblock %}

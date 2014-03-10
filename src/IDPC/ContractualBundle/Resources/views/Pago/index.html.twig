@@ -77,9 +77,10 @@
                     {% if entity.estado == 0 %}
                         
                     {% elseif  entity.estado == 100%}
-                        <span class="label label-danger arrowed">
-                        <a href="{{ path('pago_show', { 'id': entity.id }) }}">pendiente</a>
-                        
+                    
+                        <a href="{{ path('pago_show', { 'id': entity.id }) }}">
+                            <span class="label label-purple arrowed-in arrowed-in-right">enviado</span>
+                        </a>
                     {% endif %}
                         
 
@@ -117,9 +118,16 @@
                 <td>{{ entity.numeroPago }}</td>
 
                 <td>
+                    
 
-                        <a href="{{ path('pago_show', { 'id': entity.id }) }}"><i class="icon-unlock"></i></a>
-
+                        <a href="{{ path('pago_show', { 'id': entity.id }) }}">
+                            {% if entity.estado == 100 %}
+                            <i class="icon-lock"></i>
+                            {% else %}
+                            <i class="icon-unlock"></i>
+                            {% endif %}
+                        </a>
+                        
                 </td>
             </tr>
         {% endfor %}

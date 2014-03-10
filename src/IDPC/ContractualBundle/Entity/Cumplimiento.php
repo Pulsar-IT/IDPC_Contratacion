@@ -51,16 +51,21 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
     
     
     /**
+     * 
      * @ORM\Column(type="string", nullable=true)
-     * @Assert\NotBlank()
      * @Assert\Length( max = "255" )
      */
     
     public $path;
 
 
-    /**
-     * @Assert\File(maxSize="6000000")
+     /**
+     * @ORM\Column(nullable=true)
+     * @Assert\File(
+     *     maxSize = "6000000",
+     *     mimeTypes = {"application/pdf", "application/x-pdf"},
+     *     mimeTypesMessage = "Tipo de archivo no válido"
+     * )
      */
     
     private $file;

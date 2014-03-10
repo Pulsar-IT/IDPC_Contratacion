@@ -229,7 +229,7 @@ class InformeController extends Controller
             $em->flush();
         }
 
-        return $this->redirect($this->generateUrl('pago'));
+        return $this->redirect($this->generateUrl('pago_show', array('id' => $request->getSession()->get('pagoId'))));
     }
 
     /**
@@ -245,8 +245,8 @@ class InformeController extends Controller
             ->setAction($this->generateUrl('informe_delete', array('id' => $id)))
             ->setMethod('DELETE')
             ->add('submit', 'submit', array(
-                'label' => 'Eliminar',
-                'attr' => array('class' => 'btn btn-danger btn-mini')
+                'label' => ' ',
+                'attr' => array('class' => 'icon-trash')
                 ))
             ->getForm()
         ;
