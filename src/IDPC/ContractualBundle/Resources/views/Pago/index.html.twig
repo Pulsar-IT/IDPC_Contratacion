@@ -2,7 +2,7 @@
 
 {% block body -%}
 <div class="page-header">
-    	<h1>Pagos</h1>
+    	<h1>Solicitud de Pago</h1>
 
 	</div>
 {% if (is_expr_granted("hasRole('ROLE_ADMIN')")) -%}
@@ -27,7 +27,7 @@
                 <td>{{ entity.estado }}</td>
                 <td>{{ entity.contrato.estudio.contratista.documento }}</td>
                 <td>{{ entity.contrato.estudio.contratista.primerApellido }}, {{ entity.contrato.estudio.contratista.primerNombre }}</td>
-                <td>{% if entity.mes %}{{ entity.mes|date('M-Y') }}{% endif %}</td>
+                <td>{% if entity.fechainicio %}{{ entity.fechainicio|date('M-Y') }}{% endif %}</td>
                 <td>{{ entity.contrato.id }}</td>
                 <td>{{ entity.valor |number_format(0, ',', '.')  }}</td>
                 <td>{{ entity.numeroPago }}</td>
@@ -66,7 +66,7 @@
                 <td>{{ entity.estado }}</td>
                 <td>{{ entity.contrato.estudio.contratista.documento }}</td>
                 <td>{{ entity.contrato.estudio.contratista.primerApellido }}, {{ entity.contrato.estudio.contratista.primerNombre }}</td>
-                <td>{% if entity.mes %}{{ entity.mes|date('M-Y') }}{% endif %}</td>
+                <td>{% if entity.fechainicio %}{{ entity.fechainicio|date('M-Y') }}{% endif %}</td>
                 <td>{{ entity.contrato.id }}</td>
                 <td>{{ entity.valor |number_format(0, ',', '.')  }}</td>
                 <td>{{ entity.numeroPago }}</td>
@@ -98,22 +98,20 @@
     <table class="table table-striped">
         <thead>
             <tr>
-                <th>Id</th>
+                <th>No. Contrato</th>
                 <th>Nombre</th>
                 <th>Perido</th>
-                <th>No Contrato</th>
                 <th>Valor a Pagar</th>
                 <th>Numero Pago</th>
-                <th>Actions</th>
+                <th>Estado</th>
             </tr>
         </thead>
         <tbody>
         {% for entity in entities if entity.contrato.estudio.contratista.documento == app.user.username %}
             <tr>
-                <td>{{ loop.index }}</td>
-                <td>{{ entity.contrato.estudio.contratista.primerApellido }}, {{ entity.contrato.estudio.contratista.primerNombre }}</td>
-                <td>{% if entity.mes %}{{ entity.mes|date('M-Y') }}{% endif %}</td>
                 <td>{{ entity.contrato.id }}</td>
+                <td>{{ entity.contrato.estudio.contratista.primerApellido }}, {{ entity.contrato.estudio.contratista.primerNombre }}</td>
+                <td>{% if entity.fechaInicio %}{{ entity.fechaInicio|date('M-Y') }}{% endif %}</td>
                 <td>{{ entity.valor |number_format(0, ',', '.')  }}</td>
                 <td>{{ entity.numeroPago }}</td>
 
@@ -122,9 +120,9 @@
 
                         <a href="{{ path('pago_show', { 'id': entity.id }) }}">
                             {% if entity.estado == 100 %}
-                            <i class="icon-lock"></i>
+                            <span class="label label-purple arrowed-in arrowed-in-right" data-rel="tooltip" title="" data-original-title="{{ entity.fechaContratista|date('d-m-Y H:i') }}">confirmado</span>
                             {% else %}
-                            <i class="icon-unlock"></i>
+                            <span class="label label-yellow arrowed">sin confirmar</span>
                             {% endif %}
                         </a>
                         

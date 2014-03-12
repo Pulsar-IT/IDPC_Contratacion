@@ -3,7 +3,7 @@
 
 {% block body -%}
 <div class="page-header">
-    	<h1>Pago correspondiente a {{ entity.mes|date('F-Y') }}</h1>
+    	<h1>Pago correspondiente a {{ entity.fechaInicio|date('F-Y') }}</h1>
         <br>
         {% if (is_expr_granted("hasRole('ROLE_CONTRATISTA')")) -%}
             {% if entity.estado != 100 %}
@@ -17,8 +17,13 @@
         {%endif%}
                     
         {% if (is_expr_granted("hasRole('ROLE_SUPERVISOR')")) -%}
+                    {% if entity.cumplimiento.pago is defined and entity.cumplimiento.pago is defined %}
+                <a href="{{ path('cumplimiento') }}" class="btn btn-primary btn-mini"><i class="icon-plus icon-white"></i>Certificaci&oacute;n de Cumplimiento</a>
+        {% else %}
                 <a href="{{ path('cumplimiento_new') }}" class="btn btn-primary btn-mini"><i class="icon-plus icon-white"></i>Certificaci&oacute;n de Cumplimiento</a>
-        {% endif %}
+
+{% endif %}
+{% endif %}
         <div class="page"></div>
 </div>
 {% if (is_expr_granted("hasRole('ROLE_ADMIN')")) -%}
@@ -35,7 +40,7 @@
         <tbody>
             <tr>
                 <td><i class="icon-plus icon-white"></i>{{ entity.id }}</td>
-                <td>{% if entity.mes %}{{ entity.mes|date('M-Y') }}{% endif %}</td>
+                <td>{% if entity.fechaInicio %}{{ entity.fechaInicio|date('M-Y') }}{% endif %}</td>
                 <td>{{ entity.valor }}</td>
                 <td>{{ entity.numeroPago }}</td>
                 <td>{{ entity.estado }}</td>
@@ -60,8 +65,8 @@
         </thead>
         <tbody>
             <tr>
-                <td>{% if entity.mes %}{{ entity.mes|date('M-Y') }}{% endif %}</td>
-                <td>{{ entity.valor }}</td>
+                <td>{% if entity.fechaInicio %}{{ entity.fechaInicio|date('M-Y') }}{% endif %}</td>
+                <td>{{ entity.valor|number_format(2, '.', ',') }}</td>
                 <td>{{ entity.numeroPago }}</td>
                 <td>{{ entity.estado }}</td>
                 <td>
@@ -97,7 +102,6 @@
                 <th>Mes</th>
                 <th>Valor</th>
                 <th>Numeropago</th>
-                <th>Estado</th>
                 <th>Informe</th>
                 <th>Aportes</th>
                 <th>Declaraci&oacute;n</th>
@@ -105,10 +109,9 @@
         </thead>
         <tbody>
             <tr>
-                <td>{% if entity.mes %}{{ entity.mes|date('M-Y') }}{% endif %}</td>
+                <td>{% if entity.fechaInicio %}{{ entity.fechaInicio|date('M-Y') }}{% endif %}</td>
                 <td>{{ entity.valor|number_format(2, '.', ',') }}</td>
                 <td>{{ entity.numeroPago }}</td>
-                <td>{{ entity.estado }}</td>
                 <td>
                     {% if entity.informe.pago is not defined or entity.informe.pago is null %}
                         <span class="label label-yellow arrowed">pendiente</span>

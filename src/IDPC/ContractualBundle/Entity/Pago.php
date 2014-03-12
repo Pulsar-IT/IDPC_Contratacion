@@ -26,35 +26,19 @@ use Gedmo\Mapping\Annotation as Gedmo;
     protected $id;
     
     /**
-     * @ORM\Column(type="date")
-     * @Assert\Date()
-     */
-    protected $mes;
-
-    
-    /**
-     *
      * @ORM\Column(type="integer")
-     * 
      */
     
     protected $valor;
     
     /**
-     *
      * @ORM\Column(type="integer", nullable=true)
-     * 
      */
     
     protected $valorAportes;
-
-
-    
     
     /**
-     *
      * @ORM\Column(type="integer")
-     * 
      */
     
     protected $numeroPago;
@@ -64,7 +48,42 @@ use Gedmo\Mapping\Annotation as Gedmo;
      */
     
     protected $estado;
+    
+    
+    /**
+     * @ORM\Column(type="datetime")
+     * @Assert\DateTime()
+     */
+    protected $fechaContratista;
+    
+    /**
+     * @ORM\Column(type="datetime")
+     * @Assert\DateTime()
+     */
+    protected $fechaSupervisor;
+    
+    /**
+     * @ORM\Column(type="datetime", options={"default"=null})
+     * @Assert\DateTime()
+     */
+    protected $fechaTesoreria;
+    
+    /**
+     * @ORM\Column(type="date", nullable=true)
+     * @Assert\Date()
+     */
+    protected $fechaInicio;
 
+    /**
+     *
+     * @ORM\Column(type="integer")
+     * 
+     */
+    
+    protected $diasPagados;
+
+
+    
 
     
     
@@ -99,6 +118,27 @@ use Gedmo\Mapping\Annotation as Gedmo;
      */
     
     protected $contrato;
+    
+    /**
+     * @var datetime $created
+     * 
+     * @ORM\Column( type="datetime")
+     * @Gedmo\Timestampable(on="create")
+     * 
+     */
+    
+    private $created_at;
+
+
+    
+    /**
+     * @var datetime $updated
+     * 
+     * @ORM\Column(type="datetime")
+     * @Gedmo\Timestampable(on="update")
+     */
+    
+    private $update_at;
 
   
 
@@ -118,29 +158,6 @@ use Gedmo\Mapping\Annotation as Gedmo;
     public function getId()
     {
         return $this->id;
-    }
-
-    /**
-     * Set mes
-     *
-     * @param string $mes
-     * @return Pago
-     */
-    public function setMes($mes)
-    {
-        $this->mes = $mes;
-
-        return $this;
-    }
-
-    /**
-     * Get mes
-     *
-     * @return string 
-     */
-    public function getMes()
-    {
-        return $this->mes;
     }
 
     /**
@@ -350,5 +367,166 @@ use Gedmo\Mapping\Annotation as Gedmo;
     public function getDeclaracion()
     {
         return $this->declaracion;
+    }
+
+    /**
+     * Set fechaContratista
+     *
+     * @param \DateTime $fechaContratista
+     * @return Pago
+     */
+    public function setFechaContratista($fechaContratista)
+    {
+        $this->fechaContratista = $fechaContratista;
+
+        return $this;
+    }
+
+    /**
+     * Get fechaContratista
+     *
+     * @return \DateTime 
+     */
+    public function getFechaContratista()
+    {
+        return $this->fechaContratista;
+    }
+
+    /**
+     * Set fechaSupervisor
+     *
+     * @param \DateTime $fechaSupervisor
+     * @return Pago
+     */
+    public function setFechaSupervisor($fechaSupervisor)
+    {
+        $this->fechaSupervisor = $fechaSupervisor;
+
+        return $this;
+    }
+
+    /**
+     * Get fechaSupervisor
+     *
+     * @return \DateTime 
+     */
+    public function getFechaSupervisor()
+    {
+        return $this->fechaSupervisor;
+    }
+
+    /**
+     * Set fechaTesoreria
+     *
+     * @param \DateTime $fechaTesoreria
+     * @return Pago
+     */
+    public function setFechaTesoreria($fechaTesoreria)
+    {
+        $this->fechaTesoreria = $fechaTesoreria;
+
+        return $this;
+    }
+
+    /**
+     * Get fechaTesoreria
+     *
+     * @return \DateTime 
+     */
+    public function getFechaTesoreria()
+    {
+        return $this->fechaTesoreria;
+    }
+
+    /**
+     * Set fechaInicio
+     *
+     * @param \DateTime $fechaInicio
+     * @return Pago
+     */
+    public function setFechaInicio($fechaInicio)
+    {
+        $this->fechaInicio = $fechaInicio;
+
+        return $this;
+    }
+
+    /**
+     * Get fechaInicio
+     *
+     * @return \DateTime 
+     */
+    public function getFechaInicio()
+    {
+        return $this->fechaInicio;
+    }
+
+    /**
+     * Set diasPagados
+     *
+     * @param integer $diasPagados
+     * @return Pago
+     */
+    public function setDiasPagados($diasPagados)
+    {
+        $this->diasPagados = $diasPagados;
+
+        return $this;
+    }
+
+    /**
+     * Get diasPagados
+     *
+     * @return integer 
+     */
+    public function getDiasPagados()
+    {
+        return $this->diasPagados;
+    }
+
+    /**
+     * Set created_at
+     *
+     * @param \DateTime $createdAt
+     * @return Pago
+     */
+    public function setCreatedAt($createdAt)
+    {
+        $this->created_at = $createdAt;
+
+        return $this;
+    }
+
+    /**
+     * Get created_at
+     *
+     * @return \DateTime 
+     */
+    public function getCreatedAt()
+    {
+        return $this->created_at;
+    }
+
+    /**
+     * Set update_at
+     *
+     * @param \DateTime $updateAt
+     * @return Pago
+     */
+    public function setUpdateAt($updateAt)
+    {
+        $this->update_at = $updateAt;
+
+        return $this;
+    }
+
+    /**
+     * Get update_at
+     *
+     * @return \DateTime 
+     */
+    public function getUpdateAt()
+    {
+        return $this->update_at;
     }
 }

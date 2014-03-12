@@ -30,7 +30,7 @@ security:
             security: false
 
         login:
-            pattern:  ^/admin/login$
+            pattern:  ^/login$
             security: false
 
         secured_area:
@@ -39,8 +39,8 @@ security:
                 check_path: login_check
                 login_path: login
             logout:
-                path:   /admin/logout
-                target: /admin
+                path:   /logout
+                target: /login
             #anonymous: ~
             #http_basic:
             #    realm: "Secured Demo Area"

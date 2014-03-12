@@ -1,5 +1,5 @@
 security_security_homepage:
-    pattern:  /admin/
+    pattern:  /
     defaults: { _controller: SecuritySecurityBundle:Default:index }
     
 SecurityAnnotations:

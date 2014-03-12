@@ -255,6 +255,7 @@ class PagoController extends Controller {
             throw $this->createNotFoundException('Unable to find Pago entity.');
         }
         
+        $pago->setFechaContratista(new \DateTime());
         $pago->setEstado(100);
         $em->flush();
         

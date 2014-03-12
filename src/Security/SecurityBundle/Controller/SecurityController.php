@@ -11,7 +11,7 @@ use Symfony\Component\Security\Core\SecurityContext;
 /**
  * Security controller.
  *
- * @Route("/admin")
+ * @Route("/")
  */
 class SecurityController extends Controller
 {
