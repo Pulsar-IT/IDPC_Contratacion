@@ -67,17 +67,8 @@ use Gedmo\Mapping\Annotation as Gedmo;
      */
     
     protected $proyectoinversion;
-
-
     
-
-
     
-
-
-    
-            
-
 
     /**
      * Get id
@@ -184,10 +175,10 @@ use Gedmo\Mapping\Annotation as Gedmo;
     /**
      * Set proyectoinversion
      *
-     * @param IDPC\BaseBundle\Entity\ProyectoInversion $proyectoinversion
+     * @param \IDPC\BaseBundle\Entity\ProyectoInversion $proyectoinversion
      * @return Noplanta
      */
-    public function setProyectoinversion(IDPC\BaseBundle\Entity\ProyectoInversion $proyectoinversion = null)
+    public function setProyectoinversion(\IDPC\BaseBundle\Entity\ProyectoInversion $proyectoinversion = null)
     {
         $this->proyectoinversion = $proyectoinversion;
 
@@ -197,7 +188,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
     /**
      * Get proyectoinversion
      *
-     * @return IDPC\BaseBundle\Entity\ProyectoInversion 
+     * @return \IDPC\BaseBundle\Entity\ProyectoInversion 
      */
     public function getProyectoinversion()
     {

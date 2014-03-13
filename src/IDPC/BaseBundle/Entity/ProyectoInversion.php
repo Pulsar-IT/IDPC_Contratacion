@@ -60,32 +60,19 @@ use Gedmo\Mapping\Annotation as Gedmo;
     Private $pmrs;
     
     /**
-     * @ORM\OneToMany(targetEntity="IDPC\SolicitudBundle\Entity\Noplanta", mappedBy="proyectoinversion", cascade={"persist", "remove"})
+     * @ORM\OneToMany(targetEntity="IDPC\SolicitudBundle\Entity\Noplanta", mappedBy="proyectoinversion")
      */
     Private $noplanta;
-
     
-    
-
-
-
-    
-
-
-    
-
-
-    
-            
-
     /**
      * Constructor
      */
     public function __construct()
     {
         $this->cdp = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->pmrs = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->noplanta = new \Doctrine\Common\Collections\ArrayCollection();
     }
-    
 
     /**
      * Set id
@@ -99,7 +86,6 @@ use Gedmo\Mapping\Annotation as Gedmo;
 
         return $this;
     }
-    
 
     /**
      * Get id
