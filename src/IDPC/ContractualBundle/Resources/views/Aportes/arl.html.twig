@@ -1,52 +1,30 @@
-        {% block body -%}
-		<!--basic styles-->
-
-		<link href="{{asset('css/bootstrap.min.css')}}" rel="stylesheet" />
-		<link href="{{asset('css/bootstrap-responsive.min.css')}}" rel="stylesheet" />
-		<link rel="stylesheet" href="{{asset('css/font-awesome.min.css')}}" />
-		<!--[if IE 7]>
-		  <link rel="stylesheet" href="{{asset('css/font-awesome-ie7.min.css')}}" />
-		<![endif]-->
-		<!--page specific plugin styles-->
-		<!--fonts-->
-
-		<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:400,300" />
-
-		<!--ace styles-->
-
-		<link rel="stylesheet" href="{{asset('css/ace.min.css')}}" />
-		<link rel="stylesheet" href="{{asset('css/ace-responsive.min.css')}}" />
-		<link rel="stylesheet" href="{{asset('css/ace-skins.min.css')}}" />
-		<link rel="stylesheet" href="{{asset('css/custom-theme/jquery-ui-1.10.0.custom.css')}}" />
-		<link rel="stylesheet" href="{{asset('css/ui.jqgrid.css')}}" />
-		<link rel="stylesheet" href="{{asset('css/jquery.gritter.css')}}" />
-		<link rel="stylesheet" href="{{asset('css/select2.css')}}" />
-		<!--[if lte IE 8]>
-		  <link rel="stylesheet" href="{{asset('css/ace-ie.min.css')}}" />
-		  <link rel="stylesheet" href="{{asset('css/css/custom-theme/jquery-ui-1.10.0.custom.ie
-		  .css')}}" />
-		<![endif]-->
-
+{% extends '::baseaportes.html.twig' %}
+{% block body -%}
        <table>
+          {%if error %}     
+      <div class="alert alert-danger">{{ error }}</div>
+      {% endif %}    
+   
      <form action="{{ path('aportes_updatearl', { 'id': entity.id }) }}" method="post" {{ form_enctype(arl_form) }}>
      <input type="hidden" name="_method" value="PUT" />
      {{ form_errors(arl_form) }}
     <tr>
-        <td>Refencia:</td>
-        <td>{{ form_widget(arl_form.Referencia)}}</td>
+     <td>Valor:</td>
+     <td>{{ form_widget(arl_form.valor, {'attr': {'onblur': "this.value=this.value.replace('.','');this.value=this.value.replace(',','');if (this.value>0){covertirNumLetras(this.value,'pmer1');}"}}) }}</td>
+    <tr/>
+    <tr>
+        <td>Valor en letras: </td>
+        <td><div id="pmer1"></div></td>
     </tr>
     <tr>
-        <td>Valor:</td>
-         <td>{{ form_widget(arl_form.valor)}}</td>
-     <tr/>
-
+        <td>Entidad ARL:</td>
+        <td>{{ form_widget(arl_form.Referencia)}}</td>
+    </tr>
      <tr>
         <td></td> 
-        <td><button type="hidden">Guardar</button></td>
+        <td><button type="hidden" onclick="javascript:window.location.reload()" class="btn btn-sm btn-primary">Guardar</button></td>
     </tr>
       {{ form_widget(arl_form._token) }}
   </form>
-</table>                   
-                  
-                  
+</table>                 
 {% endblock %}

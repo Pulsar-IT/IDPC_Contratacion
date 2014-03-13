@@ -19,13 +19,21 @@ class PensionType extends AbstractType
             ->add('Referencia', 'choice', array(
             'empty_value' => 'Entidad',    
             'choices'   => array(
-            'NUEVA EPS' => 'COLPENSIONES', 
-            'COMPENSAR' => 'COLFONFOS',
-            'CAFAM' => 'CAFAM',
-            'CAFESALUD' => 'CAFESALUD',
-            'SANITAS'   => 'SANITAS' 
-             
-                ),
+            'CAJA NACIONAL DE PREVISION SOCIAL'=>'CAJA NACIONAL DE PREVISION SOCIAL',
+            'CAJANAL'=>'CAJANAL',
+            'CAPRECOM'=>'CAPRECOM',
+            'FONDO ALTERNATIVO DE PENSIONES SKANDIA'=>'FONDO ALTERNATIVO DE PENSIONES SKANDIA',
+            'FONDO DE PENSIONES HORIZONTE'=>'FONDO DE PENSIONES HORIZONTE',
+            'FONDO DE PENSIONES SANTANDER / ING'=>'FONDO DE PENSIONES SANTANDER / ING',
+            'FONDO DE PREVISION SOCIAL DEL CONGRESO'=>'FONDO DE PREVISION SOCIAL DEL CONGRESO',
+            'FONDO OBLIGATORIO DE PENSIONES SKANDIA'=>'FONDO OBLIGATORIO DE PENSIONES SKANDIA',
+            'INSTITUTO DE SEGUROS SOCIALES'=>'INSTITUTO DE SEGUROS SOCIALES',
+            'PENSIONADO'=>'PENSIONADO',
+            'PENSIONES DE ANTIOQUIA'=>'PENSIONES DE ANTIOQUIA',
+            'PENSIONES OBLIGATORIAS COLFONDOS'=>'PENSIONES OBLIGATORIAS COLFONDOS',
+            'PENSIONES Y CESANTIAS PORVENIR SA'=>'PENSIONES Y CESANTIAS PORVENIR SA',
+            'PROTECCION FONDO DE PENSIONES'=>'PROTECCION FONDO DE PENSIONES'
+                            ),
             'required'  => true,))
             ->add('valor')
             ->add('file', 'file', array(

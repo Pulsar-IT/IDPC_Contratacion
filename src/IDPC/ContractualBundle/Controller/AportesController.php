@@ -228,9 +228,10 @@ class AportesController extends Controller
         }
 
         $saludForm = $this->createSaludForm($entity);
-
+        $error  = ''; 
         return array(
             'entity'      => $entity,
+            'error'        =>$error,
             'salud_form'   => $saludForm->createView(),
         );
     }
@@ -251,9 +252,10 @@ class AportesController extends Controller
         }
 
         $pensionForm = $this->createPensionForm($entity);
-
+        $error  = ''; 
         return array(
             'entity'      => $entity,
+            'error'        =>$error,
             'pension_form'   => $pensionForm->createView(),
         );
     }
@@ -274,9 +276,10 @@ class AportesController extends Controller
         }
 
         $arlForm = $this->createArlForm($entity);
-
+        $error  = ''; 
         return array(
             'entity'      => $entity,
+            'error'        =>$error,
             'arl_form'   => $arlForm->createView(),
         );
     }   
@@ -351,7 +354,7 @@ class AportesController extends Controller
      *
      * @Route("/update-p/{id}", name="aportes_update")
      * @Method("PUT")
-     * @Template("IDPCContractualBundle:Aportes:ok.html.twig")
+     * @Template("IDPCContractualBundle:Aportes:pension.html.twig")
      */
     public function updateAction(Request $request, $id)
     {
@@ -364,6 +367,15 @@ class AportesController extends Controller
         }
         $editForm = $this->createPensionForm($entity);
         $editForm->handleRequest($request);
+        if ($editForm["valor"]->getData() < $entity->getLimite()){
+         $error  = 'El valor debe ser superior a: '.$entity->getLimite(); 
+           return array(
+            'entity'      => $entity,
+            'error'   => $error,
+            'pension_form'   => $editForm->createView(),
+        );  
+        }
+        
         if ($editForm->isValid()) {
             $em->flush();
             return $this->render('IDPCContractualBundle:Aportes:ok.html.twig');
@@ -378,7 +390,7 @@ class AportesController extends Controller
      *
      * @Route("/update-a/{id}", name="aportes_updatearl")
      * @Method("PUT")
-     * @Template("IDPCContractualBundle:Aportes:ok.html.twig")
+     * @Template("IDPCContractualBundle:Aportes:arl.html.twig")
      */
     public function updateArlAction(Request $request, $id)
     {
@@ -391,6 +403,15 @@ class AportesController extends Controller
         }
         $editForm = $this->createArlForm($entity);
         $editForm->handleRequest($request);
+        
+        if ($editForm["valor"]->getData() < $entity->getLimite()){
+           $error  = 'El valor debe ser superior a: '.$entity->getLimite(); 
+           return array(
+            'entity'      => $entity,
+            'error'   => $error,
+            'arl_form'   => $editForm->createView(),
+        );  
+        }
         if ($editForm->isValid()) {
             $em->flush();
             return $this->render('IDPCContractualBundle:Aportes:ok.html.twig');
@@ -405,7 +426,7 @@ class AportesController extends Controller
      *
      * @Route("/update-s/{id}", name="aportes_updatesalud")
      * @Method("PUT")
-     * @Template("IDPCContractualBundle:Aportes:ok.html.twig")
+     * @Template("IDPCContractualBundle:Aportes:salud.html.twig")
      */
     public function updateSaludAction(Request $request, $id)
     {
@@ -419,15 +440,21 @@ class AportesController extends Controller
 
         $editForm = $this->createSaludForm($entity);
         $editForm->handleRequest($request);
+        
+        if ($editForm["valor"]->getData() < $entity->getLimite()){
+           $error  = 'El valor debe ser superior a: '.$entity->getLimite(); 
+           return array(
+            'entity'      => $entity,
+            'error'   => $error,
+            'salud_form'   => $editForm->createView(),
+        );    
+        }
 
         if ($editForm->isValid()) {
             $em->flush();
             return $this->render('IDPCContractualBundle:Aportes:ok.html.twig');
         }
-          return array(
-            'entity'      => $entity,
-            'edit_form'   => $editForm->createView(),
-        );
+
         }
     
     /**

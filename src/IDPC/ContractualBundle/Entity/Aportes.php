@@ -52,7 +52,7 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
     protected $Referencia;
         
     
-     /**
+     /** 
      *
      * @ORM\Column(type="integer")
      * 
@@ -62,8 +62,8 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
     
     
      /**
-     *
      * @ORM\Column(type="integer")
+     * )
      */
     
     protected $valor;
@@ -335,7 +335,8 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
     public function preUpload()     {
         if (null !== $this->getFile()) {
             // haz lo que quieras para generar un nombre único
-            $filename = sha1(uniqid(mt_rand(), true));
+            //$filename = sha1(uniqid(mt_rand(), true));
+            $filename = 'Aporte'.$this->getTipo().'-'.$this->getPago()->getId().'-'.$this->getId();
             $this->path = $filename . '.' . $this->getFile()->guessExtension();
         }
     }
@@ -390,6 +391,6 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
     }
 
     protected function getUploadDir() {
-        return 'uploads/documents';
+        return 'uploads/aportes';
     }
 }

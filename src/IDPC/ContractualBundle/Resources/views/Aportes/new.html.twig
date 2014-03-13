@@ -2,11 +2,12 @@
 
 {% block body -%}
     <h1>Aportes creation</h1>
-
+<div class="alert alert-danger">{{ error.message }}</div>
     {{ form(form) }}
 
         <ul class="record_actions">
     <li>
+        
         <a href="{{ path('aportes') }}">
             Back to the list
         </a>

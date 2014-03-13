@@ -20,9 +20,9 @@ class ArlType extends AbstractType
             'empty_value' => 'Entidad',    
             'choices'   => array(
             'SURA' => 'SURA', 
-            'BOLIVAR' => 'BOLIVAR',
-            'CAFAM' => 'CAFAM', 
-             
+            'POSITIVA' => 'POSITIVA',
+            'COLPATRIA' => 'COLPATRIA', 
+             'LIBERTY' => 'LIBERTY'
                 ),
             'required'  => true,))
             ->add('valor')
