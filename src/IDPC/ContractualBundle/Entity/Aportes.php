@@ -44,10 +44,9 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
     protected $pago;
     
         /**
-     * @ORM\Column(type="string")
+     * @ORM\Column(type="string", nullable=true)
      * @Assert\Length( max = "150" )
      */
-    
     protected $Referencia;
         
     
