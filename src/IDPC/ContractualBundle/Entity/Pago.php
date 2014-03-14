@@ -81,10 +81,6 @@ use Gedmo\Mapping\Annotation as Gedmo;
      */
     
     protected $diasPagados;
-
-
-    
-
     
     
     /**
@@ -108,9 +104,13 @@ use Gedmo\Mapping\Annotation as Gedmo;
      */
     
     protected $declaracion;
-
-
     
+     /**
+     * @ORM\OneToOne(targetEntity="CErtificacion", mappedBy="pago", cascade={"persist", "remove"})
+     * @Assert\Valid()
+     */
+    
+    protected $certificacion;
     
     /**
      * @ORM\ManyToOne(targetEntity="Contrato", inversedBy="pagos")
@@ -120,13 +120,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
     protected $contrato;
     
     
-    
      /**
-     * @ORM\OneToMany(targetEntity="Aportes", mappedBy="pago")
-     */
-    protected $aportes;
-    
-    /**
      * @ORM\OneToMany(targetEntity="Aportes", mappedBy="pago", cascade={"persist", "remove"})
      */
     Private $aportes;
@@ -543,28 +537,8 @@ use Gedmo\Mapping\Annotation as Gedmo;
         return $this->update_at;
     }
 
-    /**
-     * Add aportes
-     *
-     * @param \IDPC\ContractualBundle\Entity\Aportes $aportes
-     * @return Pago
-     */
-    public function addAporte(\IDPC\ContractualBundle\Entity\Aportes $aportes)
-    {
-        $this->aportes[] = $aportes;
-
-        return $this;
-    }
-
-    /**
-     * Remove aportes
-     *
-     * @param \IDPC\ContractualBundle\Entity\Aportes $aportes
-     */
-    public function removeAporte(\IDPC\ContractualBundle\Entity\Aportes $aportes)
-    {
-        $this->aportes->removeElement($aportes);
-    }
+   
+   
 
     /**
      * Get aportes
@@ -600,12 +574,25 @@ use Gedmo\Mapping\Annotation as Gedmo;
     }
 
     /**
-     * Get aportes
+     * Set certificacion
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @param \IDPC\ContractualBundle\Entity\CErtificacion $certificacion
+     * @return Pago
      */
-    public function getAportes()
+    public function setCertificacion(\IDPC\ContractualBundle\Entity\CErtificacion $certificacion = null)
     {
-        return $this->aportes;
+        $this->certificacion = $certificacion;
+
+        return $this;
+    }
+
+    /**
+     * Get certificacion
+     *
+     * @return \IDPC\ContractualBundle\Entity\CErtificacion 
+     */
+    public function getCertificacion()
+    {
+        return $this->certificacion;
     }
 }
