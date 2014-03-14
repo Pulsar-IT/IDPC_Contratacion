@@ -8,12 +8,11 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use IDPC\ContractualBundle\Entity\Aportes;
-//use IDPC\ContractualBundle\Entity\Certi;
 use IDPC\ContractualBundle\Form\AportesType;
 use IDPC\ContractualBundle\Form\SaludType;
 use IDPC\ContractualBundle\Form\PensionType;
 use IDPC\ContractualBundle\Form\ArlType;
-use IDPC\ContractualBundle\Form\CertiType;
+use IDPC\ContractualBundle\Form\CertificacionType;
 
 
 /**
@@ -502,55 +501,5 @@ class AportesController extends Controller
             $em->flush();
             $pago = $entity->getPago();
             return $this->redirect($this->generateUrl('aportes_index', array('id'=>$pago->getId())));
-    }
-    
-      /**
-     * @Route("/certi/{id}", name="aportes_certi")
-     * @Method("GET")
-     * @Template("IDPCContractualBundle:Aportes:certi.html.twig")
-     */ 
-    public function certiAction($id)
-    {
-      $em = $this->getDoctrine()->getManager();
-      $entity = $em->getRepository('IDPCContractualBundle:Aportes')->find($id);
-      
-      //$datoscerti = new Certi();
-      
-       $certi_form = $this->createForm(new CertiType());
-      //$certiForm = $this->createCertiForm($datoscerti); 
-       return array(
-       'entity'      => $entity,
-       'certi_form'   =>  $certi_form,
-       );
-    }
-    
-      /**
-    * crea formulario para certificacion
-    * @param Certi $entity The entity  
-    * @return \Symfony\Component\Form\Form The form
-    */
-    private function createCertiForm(Certi $datoscerti)
-    {
-     $id = 12;
-     $form = $this->createForm(new CertiType(), $datoscerti, array(
-            'action' => $this->generateUrl('aportes_certificado', array('id' => $id)),
-            'method' => 'PUT',
-     ));
-     $form->add('submit', 'submit', array('label' => 'Enviar'));
-     return $form;
-    }
-     /**
-     * @Route("/certiaportes/{id}", name="aportes_certificado")
-     * @Method("GET")
-     * @Template("IDPCContractualBundle:Aportes:certicado.html.twig")
-     */
-    
-    public function certificadoAction($id)
-    {
-      $em = $this->getDoctrine()->getManager();
-      $entity = $em->getRepository('IDPCContractualBundle:Pago')->find($id);
-       return array(
-       'entity'      => $entity,
-       );
     }
 }

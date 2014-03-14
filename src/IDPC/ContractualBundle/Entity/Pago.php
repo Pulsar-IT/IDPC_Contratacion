@@ -109,6 +109,12 @@ use Gedmo\Mapping\Annotation as Gedmo;
     
     protected $declaracion;
 
+    /**
+     * @ORM\OneToOne(targetEntity="Certificacion", mappedBy="pago", cascade={"persist", "remove"})
+     * @Assert\Valid()
+     */
+    
+    protected $certificacion;
 
     
     
@@ -528,5 +534,28 @@ use Gedmo\Mapping\Annotation as Gedmo;
     public function getUpdateAt()
     {
         return $this->update_at;
+    }
+
+    /**
+     * Set certificacion
+     *
+     * @param \IDPC\ContractualBundle\Entity\Certificacion $certificacion
+     * @return Pago
+     */
+    public function setCertificacion(\IDPC\ContractualBundle\Entity\Certificacion $certificacion = null)
+    {
+        $this->certificacion = $certificacion;
+
+        return $this;
+    }
+
+    /**
+     * Get certificacion
+     *
+     * @return \IDPC\ContractualBundle\Entity\Certificacion 
+     */
+    public function getCertificacion()
+    {
+        return $this->certificacion;
     }
 }

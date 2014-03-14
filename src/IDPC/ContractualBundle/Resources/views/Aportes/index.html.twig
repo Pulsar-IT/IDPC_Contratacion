@@ -32,11 +32,11 @@
                 <td>{{ entity.valor |number_format(0, ',', '.') }}</td>
                 <td>
                 {%if entity.path%}
-                    <button class="btn btn-sm btn-primary" data-toggle="modal" data-target="#mm{{ entity.id }}">Ver Adjunto</button>
+                    <button class="btn btn-link no-border" data-toggle="modal" data-target="#mm{{ entity.id }}">Ver Adjunto</button>
 <div class="modal fade" id="mm{{ entity.id }}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
-      <div class="modal-body"><iframe src="/uploads/aportes/{{ entity.path }}" width="850" height="330" frameborder="0" allowtransparency="true"></iframe>
+      <div class="modal-body"><iframe src="/uploads/aportes/{{ entity.path }}" width="850" height="630" frameborder="0" allowtransparency="true"></iframe>
       </div></div></div></div>
                 {%endif%}
                 </td>
@@ -146,7 +146,7 @@ Generar Certificado
   <div class="modal-body">
  {% for entity in entities %}
  {%if entity.tipo == 'ARL'%}     
-<iframe src="{{ path('aportes_certi', { 'id': entities[0].pago.id }) }}" width="840" height="330" frameborder="0" allowtransparency="true"></iframe> {%endif%}
+<iframe src="{{ path('certificacion_new', { 'id': entities[0].pago.id }) }}" width="840" height="330" frameborder="0" allowtransparency="true"></iframe> {%endif%}
  {%endfor%} 
   </div>
   <div class="modal-footer">
