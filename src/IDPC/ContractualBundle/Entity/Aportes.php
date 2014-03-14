@@ -45,8 +45,7 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
     
         /**
      * @ORM\Column(type="string")
-     * @Assert\NotBlank()
-     * @Assert\Length( max = "100" )
+     * @Assert\Length( max = "150" )
      */
     
     protected $Referencia;
@@ -115,28 +114,28 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
         return $this->id;
     }
 
-    /**
-     * Set tipo
-     *
-     * @param string $tipo
-     * @return Aportes
-     */
-    public function setTipo($tipo)
-    {
-        $this->tipo = $tipo;
+        /**
+         * Set tipo
+         *
+         * @param string $tipo
+         * @return Aportes
+         */
+        public function setTipo($tipo)
+        {
+            $this->tipo = $tipo;
 
-        return $this;
-    }
+            return $this;
+        }
 
-    /**
-     * Get tipo
-     *
-     * @return string 
-     */
-    public function getTipo()
-    {
-        return $this->tipo;
-    }
+        /**
+         * Get tipo
+         *
+         * @return string 
+         */
+        public function getTipo()
+        {
+            return $this->tipo;
+        }
 
     /**
      * Set Referencia

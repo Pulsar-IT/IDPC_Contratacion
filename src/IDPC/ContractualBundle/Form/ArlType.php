@@ -15,7 +15,6 @@ class ArlType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('Referencia')
             ->add('Referencia', 'choice', array(
             'empty_value' => 'Entidad',    
             'choices'   => array(

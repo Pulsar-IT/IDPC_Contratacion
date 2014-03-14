@@ -8,10 +8,12 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use IDPC\ContractualBundle\Entity\Aportes;
+//use IDPC\ContractualBundle\Entity\Certi;
 use IDPC\ContractualBundle\Form\AportesType;
 use IDPC\ContractualBundle\Form\SaludType;
 use IDPC\ContractualBundle\Form\PensionType;
 use IDPC\ContractualBundle\Form\ArlType;
+use IDPC\ContractualBundle\Form\CertiType;
 
 
 /**
@@ -22,28 +24,10 @@ use IDPC\ContractualBundle\Form\ArlType;
 class AportesController extends Controller
 {
 
-    /**
-     * Lists all Aportes entities.
-     *
-     * @Route("/", name="aportes")
-     * @Method("GET")
-     * @Template()
-     */
-    public function indexAction()
-    {
-        $em = $this->getDoctrine()->getManager();
-
-        $entities = $em->getRepository('IDPCContractualBundle:Aportes')->findAll();
-
-        return array(
-            'entities' => $entities,
-        );
-    }
-    
      /**
      * Lists all Aportes entities.
      *
-     * @Route("/gen/{id}", name="aportes_generar")
+     * @Route("/{id}", name="aportes_index")
      * @Method("GET")
      * @Template("IDPCContractualBundle:Aportes:index.html.twig")
      */
@@ -59,7 +43,7 @@ class AportesController extends Controller
         $salud = new Aportes();
         $salud->setLimite($pago->getValor()*0.40*0.125);
         $salud->setTipo('Salud');
-        $salud->setReferencia('-');
+        $salud->setReferencia(NULL);
         $salud->setValor(0);
         $salud->setPago($pago);
         $em->persist($salud);
@@ -68,7 +52,7 @@ class AportesController extends Controller
         $pension = new Aportes();
         $pension->setLimite($pago->getValor()*0.40*0.16);
         $pension->setTipo('Pensión');
-        $pension->setReferencia('-');
+        $pension->setReferencia(NULL);
         $pension->setValor(0);
         $pension->setPago($pago);
         $em->persist($pension);
@@ -77,7 +61,7 @@ class AportesController extends Controller
         $arl = new Aportes();
         $arl->setLimite($pago->getValor()*0.40*0.00522);
         $arl->setTipo('ARL');
-        $arl->setReferencia('-');
+        $arl->setReferencia(NULL);
         $arl->setValor(0);
         $arl->setPago($pago);
         $em->persist($arl);
@@ -326,7 +310,7 @@ class AportesController extends Controller
     */
     private function createPensionForm(Aportes $entity)
     {
-            $form = $this->createForm(new pensionType(), $entity, array(
+            $form = $this->createForm(new PensionType(), $entity, array(
             'action' => $this->generateUrl('aportes_pension', array('id' => $entity->getId())),
             'method' => 'PUT',
         ));
@@ -500,22 +484,73 @@ class AportesController extends Controller
         ;
     }
     
-        /**
-     * Lists all Aportes entities.
-     *
-     * @Route("/certiaportes/{id}", name="aportes_certifica")
+      
+    /**
+     * @Route("/borrar/{id}", name="aportes_borrar")
      * @Method("GET")
-     * @Template("IDPCContractualBundle:Aportes:certificado.html.twig")
+     * @Template("IDPCContractualBundle:Aportes:index.html.twig")
+     */
+        public function borrarAction($id)
+        {
+            $em = $this->getDoctrine()->getManager();
+            $entity = $em->getRepository('IDPCContractualBundle:Aportes')->find($id);
+            $entity->setReferencia(NULL);
+            $entity->setValor(0);
+            $entity->removeUpload();
+            $entity->setPath(NULL);
+            $em->persist($entity);
+            $em->flush();
+            $pago = $entity->getPago();
+            return $this->redirect($this->generateUrl('aportes_index', array('id'=>$pago->getId())));
+    }
+    
+      /**
+     * @Route("/certi/{id}", name="aportes_certi")
+     * @Method("GET")
+     * @Template("IDPCContractualBundle:Aportes:certi.html.twig")
+     */ 
+    public function certiAction($id)
+    {
+      $em = $this->getDoctrine()->getManager();
+      $entity = $em->getRepository('IDPCContractualBundle:Aportes')->find($id);
+      
+      //$datoscerti = new Certi();
+      
+       $certi_form = $this->createForm(new CertiType());
+      //$certiForm = $this->createCertiForm($datoscerti); 
+       return array(
+       'entity'      => $entity,
+       'certi_form'   =>  $certi_form,
+       );
+    }
+    
+      /**
+    * crea formulario para certificacion
+    * @param Certi $entity The entity  
+    * @return \Symfony\Component\Form\Form The form
+    */
+    private function createCertiForm(Certi $datoscerti)
+    {
+     $id = 12;
+     $form = $this->createForm(new CertiType(), $datoscerti, array(
+            'action' => $this->generateUrl('aportes_certificado', array('id' => $id)),
+            'method' => 'PUT',
+     ));
+     $form->add('submit', 'submit', array('label' => 'Enviar'));
+     return $form;
+    }
+     /**
+     * @Route("/certiaportes/{id}", name="aportes_certificado")
+     * @Method("GET")
+     * @Template("IDPCContractualBundle:Aportes:certicado.html.twig")
      */
     
     public function certificadoAction($id)
     {
       $em = $this->getDoctrine()->getManager();
-
-      $entity = $em->getRepository('IDPCContractualBundle:Aportes')->find($id);
+      $entity = $em->getRepository('IDPCContractualBundle:Pago')->find($id);
        return array(
        'entity'      => $entity,
        );
     }
-    
 }

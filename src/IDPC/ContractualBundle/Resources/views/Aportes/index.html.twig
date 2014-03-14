@@ -2,7 +2,8 @@
 {% block body -%}
 
     <h3>Pago de aportes obligatorios a pago de {{ pago.contrato.estudio.contratista.documento }}
-    por valor de {{pago.valor |number_format(0, ',', '.')}} del perido {% if pago.mes %}{{ pago.mes|date('M-Y') }}{% endif %}</h3>
+    por valor de {{pago.valor |number_format(0, ',', '.')}} del perido {% if pago.fechaInicio %}{{ pago.fechaInicio|date('M-Y') }}{% endif %}</h3>
+<h3>IBC: {{(pago.valor*0.40)|number_format(0, ',', '.')}}</h3>
     
 
     <table class="table table-striped">
@@ -13,8 +14,8 @@
                 <th>Pago Minimo</th>
                 <th>Entidad</th>
                 <th>Valor Pagado</th>
-                <th>Adjunto</th>
-                <th>Ingresar</th>
+                <th>Soporte</th>
+                <th>Acción</th>
             </tr>
         </thead>
         <tbody>
@@ -29,12 +30,23 @@
                 <td>{{ entity.limite |number_format(0, ',', '.') }}</td>
                 <td>{{ entity.Referencia }}</td>
                 <td>{{ entity.valor |number_format(0, ',', '.') }}</td>
-                <td>{{ entity.path }}</td>
                 <td>
-    <button class="btn btn-sm" data-toggle="modal" data-target="#m{{ entity.tipo }}">
-Registrar
-</button>
-       
+                {%if entity.path%}
+                    <button class="btn btn-sm btn-primary" data-toggle="modal" data-target="#mm{{ entity.id }}">Ver Adjunto</button>
+<div class="modal fade" id="mm{{ entity.id }}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-body"><iframe src="/uploads/aportes/{{ entity.path }}" width="850" height="330" frameborder="0" allowtransparency="true"></iframe>
+      </div></div></div></div>
+                {%endif%}
+                </td>
+                <td>
+                   {%if entity.Referencia %}
+                   <a href="{{ path('aportes_borrar', { 'id': entity.id }) }}" class="btn btn-sm btn-purple">
+                   Borrar<i class="icon-trash icon-on-right bigger-110"></i></a>
+                   {%else%}  
+    <button class="btn btn-sm" data-toggle="modal" data-target="#m{{ entity.tipo }}">Registrar</button>
+    {%endif%}
                 </td>
             </tr>
         {% endfor %}
@@ -134,7 +146,7 @@ Generar Certificado
   <div class="modal-body">
  {% for entity in entities %}
  {%if entity.tipo == 'ARL'%}     
-<iframe src="{{ path('aportes_certifica', { 'id': entities[0].pago.id }) }}" width="840" height="330" frameborder="0" allowtransparency="true"></iframe> {%endif%}
+<iframe src="{{ path('aportes_certi', { 'id': entities[0].pago.id }) }}" width="840" height="330" frameborder="0" allowtransparency="true"></iframe> {%endif%}
  {%endfor%} 
   </div>
   <div class="modal-footer">
@@ -143,4 +155,5 @@ Generar Certificado
 </div><!-- /.modal-content -->
 </div><!-- /.modal-dialog -->
 </div><!-- /.modal --> 
+
 {% endblock %}
