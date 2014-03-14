@@ -28,7 +28,7 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
 
     /**
      * @ORM\Column(type="string", nullable=true)
-     * @Assert\Length( max = "10" )
+     * @Assert\Length( max = "20" )
      */
     
     protected $categoria;
@@ -282,6 +282,7 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
     {
         return $this->categoria;
     }
+
 
     /**
      * Set path

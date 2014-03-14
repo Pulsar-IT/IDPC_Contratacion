@@ -14,7 +14,7 @@ class CertificacionType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder
+        $builder    
             ->add('categoria', 'choice', array(
             'empty_value' => ' ',    
             'choices'   => array(
@@ -26,12 +26,11 @@ class CertificacionType extends AbstractType
               ->add('declararenta', 'choice', array(
             'empty_value' => ' ',    
             'choices'   => array(
-            1 => 'SI', 
-            0 => 'NO',
+            '1' => 'SI', 
+            '2' => 'NO',
                 ),    
-           'required'  => true,))  
-            ->add('file', 'file', array(
-                'label' => ' '))
+           'required'  => true,)) 
+                
         ;
     }
     

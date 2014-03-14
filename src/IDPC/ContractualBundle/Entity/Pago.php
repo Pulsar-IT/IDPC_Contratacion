@@ -119,6 +119,13 @@ use Gedmo\Mapping\Annotation as Gedmo;
     
     protected $contrato;
     
+    
+    
+     /**
+     * @ORM\OneToMany(targetEntity="Aportes", mappedBy="pago")
+     */
+    protected $aportes;
+    
     /**
      * @ORM\OneToMany(targetEntity="Aportes", mappedBy="pago", cascade={"persist", "remove"})
      */
@@ -534,6 +541,39 @@ use Gedmo\Mapping\Annotation as Gedmo;
     public function getUpdateAt()
     {
         return $this->update_at;
+    }
+
+    /**
+     * Add aportes
+     *
+     * @param \IDPC\ContractualBundle\Entity\Aportes $aportes
+     * @return Pago
+     */
+    public function addAporte(\IDPC\ContractualBundle\Entity\Aportes $aportes)
+    {
+        $this->aportes[] = $aportes;
+
+        return $this;
+    }
+
+    /**
+     * Remove aportes
+     *
+     * @param \IDPC\ContractualBundle\Entity\Aportes $aportes
+     */
+    public function removeAporte(\IDPC\ContractualBundle\Entity\Aportes $aportes)
+    {
+        $this->aportes->removeElement($aportes);
+    }
+
+    /**
+     * Get aportes
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getAportes()
+    {
+        return $this->aportes;
     }
 
     /**
