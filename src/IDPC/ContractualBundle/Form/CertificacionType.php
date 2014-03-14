@@ -6,7 +6,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
-class ArlType extends AbstractType
+class CertificacionType extends AbstractType
 {
         /**
      * @param FormBuilderInterface $builder
@@ -15,20 +15,23 @@ class ArlType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('Referencia', 'choice', array(
-            'empty_value' => 'Entidad',    
+            ->add('categoria', 'choice', array(
+            'empty_value' => ' ',    
             'choices'   => array(
-            'SURA' => 'SURA', 
-            'POSITIVA' => 'POSITIVA',
-            'COLPATRIA' => 'COLPATRIA', 
-             'LIBERTY' => 'LIBERTY'
+            'empleado' => 'Empleado (Art 329 E.T.)', 
+            'independiente' => 'Trabajador por cuenta propia',
                 ),
             'required'  => true,))
-            ->add('valor')
+            
+              ->add('declararenta', 'choice', array(
+            'empty_value' => ' ',    
+            'choices'   => array(
+            1 => 'SI', 
+            0 => 'NO',
+                ),    
+           'required'  => true,))  
             ->add('file', 'file', array(
-                'required' => false,
-                'label'   => 'Archivo'
-            ))
+                'label' => ' '))
         ;
     }
     
@@ -38,7 +41,7 @@ class ArlType extends AbstractType
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'IDPC\ContractualBundle\Entity\Aportes'
+            'data_class' => 'IDPC\ContractualBundle\Entity\Certificacion'
         ));
     }
 
@@ -47,6 +50,6 @@ class ArlType extends AbstractType
      */
     public function getName()
     {
-        return 'idpc_contractualbundle_aportes_arl';
+        return 'idpc_contractualbundle_certificacion';
     }
 }

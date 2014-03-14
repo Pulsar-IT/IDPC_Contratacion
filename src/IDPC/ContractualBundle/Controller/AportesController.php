@@ -12,6 +12,7 @@ use IDPC\ContractualBundle\Form\AportesType;
 use IDPC\ContractualBundle\Form\SaludType;
 use IDPC\ContractualBundle\Form\PensionType;
 use IDPC\ContractualBundle\Form\ArlType;
+use IDPC\ContractualBundle\Form\CertificacionType;
 
 
 /**
@@ -22,28 +23,10 @@ use IDPC\ContractualBundle\Form\ArlType;
 class AportesController extends Controller
 {
 
-    /**
-     * Lists all Aportes entities.
-     *
-     * @Route("/", name="aportes")
-     * @Method("GET")
-     * @Template()
-     */
-    public function indexAction()
-    {
-        $em = $this->getDoctrine()->getManager();
-
-        $entities = $em->getRepository('IDPCContractualBundle:Aportes')->findAll();
-
-        return array(
-            'entities' => $entities,
-        );
-    }
-    
      /**
      * Lists all Aportes entities.
      *
-     * @Route("/gen/{id}", name="aportes_generar")
+     * @Route("/{id}", name="aportes_index")
      * @Method("GET")
      * @Template("IDPCContractualBundle:Aportes:index.html.twig")
      */
@@ -59,7 +42,7 @@ class AportesController extends Controller
         $salud = new Aportes();
         $salud->setLimite($pago->getValor()*0.40*0.125);
         $salud->setTipo('Salud');
-        $salud->setReferencia('-');
+        $salud->setReferencia(NULL);
         $salud->setValor(0);
         $salud->setPago($pago);
         $em->persist($salud);
@@ -68,7 +51,7 @@ class AportesController extends Controller
         $pension = new Aportes();
         $pension->setLimite($pago->getValor()*0.40*0.16);
         $pension->setTipo('Pensión');
-        $pension->setReferencia('-');
+        $pension->setReferencia(NULL);
         $pension->setValor(0);
         $pension->setPago($pago);
         $em->persist($pension);
@@ -77,7 +60,7 @@ class AportesController extends Controller
         $arl = new Aportes();
         $arl->setLimite($pago->getValor()*0.40*0.00522);
         $arl->setTipo('ARL');
-        $arl->setReferencia('-');
+        $arl->setReferencia(NULL);
         $arl->setValor(0);
         $arl->setPago($pago);
         $em->persist($arl);
@@ -228,9 +211,10 @@ class AportesController extends Controller
         }
 
         $saludForm = $this->createSaludForm($entity);
-
+        $error  = ''; 
         return array(
             'entity'      => $entity,
+            'error'        =>$error,
             'salud_form'   => $saludForm->createView(),
         );
     }
@@ -251,9 +235,10 @@ class AportesController extends Controller
         }
 
         $pensionForm = $this->createPensionForm($entity);
-
+        $error  = ''; 
         return array(
             'entity'      => $entity,
+            'error'        =>$error,
             'pension_form'   => $pensionForm->createView(),
         );
     }
@@ -274,9 +259,10 @@ class AportesController extends Controller
         }
 
         $arlForm = $this->createArlForm($entity);
-
+        $error  = ''; 
         return array(
             'entity'      => $entity,
+            'error'        =>$error,
             'arl_form'   => $arlForm->createView(),
         );
     }   
@@ -323,7 +309,7 @@ class AportesController extends Controller
     */
     private function createPensionForm(Aportes $entity)
     {
-            $form = $this->createForm(new pensionType(), $entity, array(
+            $form = $this->createForm(new PensionType(), $entity, array(
             'action' => $this->generateUrl('aportes_pension', array('id' => $entity->getId())),
             'method' => 'PUT',
         ));
@@ -351,7 +337,7 @@ class AportesController extends Controller
      *
      * @Route("/update-p/{id}", name="aportes_update")
      * @Method("PUT")
-     * @Template("IDPCContractualBundle:Aportes:ok.html.twig")
+     * @Template("IDPCContractualBundle:Aportes:pension.html.twig")
      */
     public function updateAction(Request $request, $id)
     {
@@ -364,6 +350,15 @@ class AportesController extends Controller
         }
         $editForm = $this->createPensionForm($entity);
         $editForm->handleRequest($request);
+        if ($editForm["valor"]->getData() < $entity->getLimite()){
+         $error  = 'El valor debe ser superior a: '.$entity->getLimite(); 
+           return array(
+            'entity'      => $entity,
+            'error'   => $error,
+            'pension_form'   => $editForm->createView(),
+        );  
+        }
+        
         if ($editForm->isValid()) {
             $em->flush();
             return $this->render('IDPCContractualBundle:Aportes:ok.html.twig');
@@ -378,7 +373,7 @@ class AportesController extends Controller
      *
      * @Route("/update-a/{id}", name="aportes_updatearl")
      * @Method("PUT")
-     * @Template("IDPCContractualBundle:Aportes:ok.html.twig")
+     * @Template("IDPCContractualBundle:Aportes:arl.html.twig")
      */
     public function updateArlAction(Request $request, $id)
     {
@@ -391,6 +386,15 @@ class AportesController extends Controller
         }
         $editForm = $this->createArlForm($entity);
         $editForm->handleRequest($request);
+        
+        if ($editForm["valor"]->getData() < $entity->getLimite()){
+           $error  = 'El valor debe ser superior a: '.$entity->getLimite(); 
+           return array(
+            'entity'      => $entity,
+            'error'   => $error,
+            'arl_form'   => $editForm->createView(),
+        );  
+        }
         if ($editForm->isValid()) {
             $em->flush();
             return $this->render('IDPCContractualBundle:Aportes:ok.html.twig');
@@ -405,7 +409,7 @@ class AportesController extends Controller
      *
      * @Route("/update-s/{id}", name="aportes_updatesalud")
      * @Method("PUT")
-     * @Template("IDPCContractualBundle:Aportes:ok.html.twig")
+     * @Template("IDPCContractualBundle:Aportes:salud.html.twig")
      */
     public function updateSaludAction(Request $request, $id)
     {
@@ -419,15 +423,21 @@ class AportesController extends Controller
 
         $editForm = $this->createSaludForm($entity);
         $editForm->handleRequest($request);
+        
+        if ($editForm["valor"]->getData() < $entity->getLimite()){
+           $error  = 'El valor debe ser superior a: '.$entity->getLimite(); 
+           return array(
+            'entity'      => $entity,
+            'error'   => $error,
+            'salud_form'   => $editForm->createView(),
+        );    
+        }
 
         if ($editForm->isValid()) {
             $em->flush();
             return $this->render('IDPCContractualBundle:Aportes:ok.html.twig');
         }
-          return array(
-            'entity'      => $entity,
-            'edit_form'   => $editForm->createView(),
-        );
+
         }
     
     /**
@@ -473,22 +483,23 @@ class AportesController extends Controller
         ;
     }
     
-        /**
-     * Lists all Aportes entities.
-     *
-     * @Route("/certiaportes/{id}", name="aportes_certifica")
+      
+    /**
+     * @Route("/borrar/{id}", name="aportes_borrar")
      * @Method("GET")
-     * @Template("IDPCContractualBundle:Aportes:certificado.html.twig")
+     * @Template("IDPCContractualBundle:Aportes:index.html.twig")
      */
-    
-    public function certificadoAction($id)
-    {
-      $em = $this->getDoctrine()->getManager();
-
-      $entity = $em->getRepository('IDPCContractualBundle:Aportes')->find($id);
-       return array(
-       'entity'      => $entity,
-       );
+        public function borrarAction($id)
+        {
+            $em = $this->getDoctrine()->getManager();
+            $entity = $em->getRepository('IDPCContractualBundle:Aportes')->find($id);
+            $entity->setReferencia(NULL);
+            $entity->setValor(0);
+            $entity->removeUpload();
+            $entity->setPath(NULL);
+            $em->persist($entity);
+            $em->flush();
+            $pago = $entity->getPago();
+            return $this->redirect($this->generateUrl('aportes_index', array('id'=>$pago->getId())));
     }
-    
 }

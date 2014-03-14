@@ -1,0 +1,30 @@
+{% extends '::base.html.twig' %}
+
+{% block body -%}
+
+<div class="widget-box">
+    <div class="widget-header">
+        <h4>Subir Certificacion</h4>
+    </div>
+        <div class="widget-body">
+            <div class="widget-main no-padding">
+                <fieldset>
+    {{ form(form) }}
+                        </fieldset>
+                    <div class="form-actions">
+                        </div>
+                </div>
+            </div>
+    </div>
+
+                        
+{% endblock %}
+{% block breadcumbs %}
+        <ul class="record_actions">
+    <li>
+        <a href="{{ path('declaracion') }}">
+            Regresar
+        </a>
+    </li>
+</ul>
+{% endblock %}

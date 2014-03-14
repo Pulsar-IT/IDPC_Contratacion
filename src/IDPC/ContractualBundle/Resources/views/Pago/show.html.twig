@@ -8,7 +8,7 @@
         {% if (is_expr_granted("hasRole('ROLE_CONTRATISTA')")) -%}
             {% if entity.estado != 100 %}
                 <a href="{{ path('informe_new') }}" class="btn btn-primary btn-mini"><i class="icon-plus icon-white"></i>Informe Actividades</a>
-                <a href="{{ path('aportes_generar', {'id': entity.id }) }}" class="btn btn-info btn-mini"><i class="icon-plus icon-white"></i>Aportes</a>
+                <a href="{{ path('aportes_index', {'id': entity.id }) }}" class="btn btn-info btn-mini"><i class="icon-plus icon-white"></i>Aportes</a>
                 <a href="{{ path('declaracion_new') }}" class="btn btn-mini"><i class="icon-plus icon-white"></i>Declaraci&oacute;n</a>
                 {% if entity.informe.pago is defined and entity.declaracion.pago is defined and entity.valorAportes != 0 %}
                     <a href="{{ path('pago_lock', { 'id': entity.id } ) }}" class="btn btn-inverse btn-mini "><i class="icon-lock icon-white"> Confirmar</i></a>
