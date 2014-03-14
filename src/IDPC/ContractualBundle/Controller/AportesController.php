@@ -70,7 +70,11 @@ class AportesController extends Controller
         $aportes = $em->getRepository('IDPCContractualBundle:Aportes')->findBy(array('pago' => $pago));
         
         }
-        
+        if($pago->getCertificacion()){
+        if($pago->getCertificacion()->getPath()!='nada'){
+        return $this->redirect($this->generateUrl('pago_show', array('id' => $pago->getId())));   
+        }
+        }
         return array(
             'entities' => $aportes,
             'pago' => $pago,

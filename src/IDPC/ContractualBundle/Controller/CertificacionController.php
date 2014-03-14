@@ -30,13 +30,10 @@ class CertificacionController extends Controller
         $entity->setPago($pago);
         $entity->setPath('nada');
         $form = $this->createCreateForm($entity);
-        $form->handleRequest($request);
-        
+        $form->handleRequest($request);  
         if ($form->isValid()) {
-
             $em->persist($entity);
             $em->flush();
-
             return $this->redirect($this->generateUrl('certificacion_pdf', array('id' => $request->getSession()->get('pagoId'))));
         }
 
@@ -71,7 +68,6 @@ class CertificacionController extends Controller
      */
     public function newAction()
     {
-        $em = $this->getDoctrine()->getManager();
        $entity = new Certificacion();
        $form   = $this->createCreateForm($entity);
         return array(

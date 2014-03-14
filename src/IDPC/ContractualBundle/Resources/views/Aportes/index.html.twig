@@ -62,11 +62,18 @@
             </tr>    
         </tbody>
     </table>
-
+{%if pago.certificacion %}
+<button class="btn btn-sm btn-primary" data-toggle="modal" data-target="#mCertificadopdf">
+Ver Certificado de Aportes
+</button>
+<button class="btn btn-sm btn-primary" data-toggle="modal" data-target="#mCertificadosubir">
+Cargar Certificado Firmado
+</button>
+{%else%}
 <button class="btn btn-sm btn-primary" data-toggle="modal" data-target="#mCertificado">
 Certificado de Aportes
 </button>
-    
+ {%endif%}   
 <!-- Modal SAlud -->
 <div class="modal fade" id="mSalud" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 <div class="modal-dialog">
@@ -141,12 +148,10 @@ Certificado de Aportes
 <div class="modal-content">
   <div class="modal-header">
     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-    <h4 class="modal-title" id="myModalLabel">Certificado de Aportes ok</h4>
+    <h4 class="modal-title" id="myModalLabel">Generar certificado de Aportes</h4>
   </div>
   <div class="modal-body">
-   
-<iframe src="{{ path('certificacion_new', { 'id': entities[0].pago.id }) }}" width="840" height="330" frameborder="0" allowtransparency="true"></iframe>
-
+<iframe src="{{ path('certificacion_new', { 'id': pago.id }) }}" width="840" height="330" frameborder="0" allowtransparency="true"></iframe>
   </div>
   <div class="modal-footer">
     <button type="button" onclick="javascript:window.location.reload()" class="btn btn-default" data-dismiss="modal">Cerrar</button>
@@ -155,4 +160,40 @@ Certificado de Aportes
 </div><!-- /.modal-dialog -->
 </div><!-- /.modal --> 
 
+
+<!-- Modal Certificado pdf-->
+<div class="bootbox modal fade in" id="mCertificadopdf" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<div class="modal-dialog modal-lg">
+<div class="modal-content">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+    <h4 class="modal-title" id="myModalLabel">Ver certificado de Aportes</h4>
+  </div>
+  <div class="modal-body">
+<iframe src="{{ path('certificacion_pdf', { 'id': pago.id }) }}" width="840" height="330" frameborder="0" allowtransparency="true"></iframe>
+  </div>
+  <div class="modal-footer">
+    <button type="button" onclick="javascript:window.location.reload()" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+  </div>
+</div><!-- /.modal-content -->
+</div><!-- /.modal-dialog -->
+</div><!-- /.modal --> 
+
+<!-- Modal Certificado Subir-->
+<div class="bootbox modal fade in" id="mCertificadosubir" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<div class="modal-dialog modal-lg">
+<div class="modal-content">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+    <h4 class="modal-title" id="myModalLabel">Ver certificado de Aportes</h4>
+  </div>
+  <div class="modal-body">
+<iframe src="{{ path('certificacion_subirform', { 'id': pago.id }) }}" width="840" height="330" frameborder="0" allowtransparency="true"></iframe>
+  </div>
+  <div class="modal-footer">
+    <button type="button" onclick="javascript:window.location.reload()" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+  </div>
+</div><!-- /.modal-content -->
+</div><!-- /.modal-dialog -->
+</div><!-- /.modal --> 
 {% endblock %}
