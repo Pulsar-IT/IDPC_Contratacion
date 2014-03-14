@@ -106,7 +106,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
     protected $declaracion;
     
      /**
-     * @ORM\OneToOne(targetEntity="CErtificacion", mappedBy="pago", cascade={"persist", "remove"})
+     * @ORM\OneToOne(targetEntity="Certificacion", mappedBy="pago", cascade={"persist", "remove"})
      * @Assert\Valid()
      */
     
