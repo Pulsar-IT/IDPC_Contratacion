@@ -284,29 +284,6 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
     }
 
     /**
-     * Set declararenta
-     *
-     * @param \bool $declararenta
-     * @return Certificacion
-     */
-    public function setDeclararenta(\bool $declararenta)
-    {
-        $this->declararenta = $declararenta;
-
-        return $this;
-    }
-
-    /**
-     * Get declararenta
-     *
-     * @return \bool 
-     */
-    public function getDeclararenta()
-    {
-        return $this->declararenta;
-    }
-
-    /**
      * Set path
      *
      * @param string $path
@@ -327,5 +304,28 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
     public function getPath()
     {
         return $this->path;
+    }
+
+    /**
+     * Set declararenta
+     *
+     * @param integer $declararenta
+     * @return Certificacion
+     */
+    public function setDeclararenta($declararenta)
+    {
+        $this->declararenta = $declararenta;
+
+        return $this;
+    }
+
+    /**
+     * Get declararenta
+     *
+     * @return integer 
+     */
+    public function getDeclararenta()
+    {
+        return $this->declararenta;
     }
 }
