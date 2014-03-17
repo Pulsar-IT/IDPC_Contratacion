@@ -41,7 +41,7 @@
         <td>Porcentaje a pagar (Si aplica):</td>
       </tr>
       <tr>
-        <td colspan="2">Periodo a pagar: {{ entity.pago.mes|date('F-Y') }}</td>
+        <td colspan="2">Periodo a pagar: {{ entity.pago.fechaInicio|date('d-m-Y') }}</td>
       </tr>
       <tr>
         <td>Valor total del contrato: ${{ entity.pago.contrato.estudio.valorcontrato|number_format(0, ',', '.') }}</td>

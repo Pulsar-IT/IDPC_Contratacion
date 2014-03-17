@@ -78,7 +78,13 @@
                         </a>
                     {% endif %}
                 </td>
-                <td><span class="label label-yellow arrowed">pendiente</span></td>
+                <td>
+                    {% if entity.valorAportes == 0 %}
+                        <span class="label label-yellow arrowed">pendiente</span>
+                    {% else %}
+                            <span class="label label-purple arrowed-in arrowed-in-right">enviado</span>
+                    {% endif %}
+                </td>
                 <td>
                     {% if entity.declaracion.pago is not defined or entity.declaracion.pago is null %}
                         <span class="label label-yellow arrowed">pendiente</span>
@@ -121,7 +127,13 @@
                         </a>
                     {% endif %}
                 </td>
-                <td><span class="label label-yellow arrowed">pendiente</span></td>
+                <td>
+                    {% if entity.valorAportes == 0 %}
+                        <span class="label label-yellow arrowed">pendiente</span>
+                    {% else %}
+                            <span class="label label-purple arrowed-in arrowed-in-right">enviado</span>
+                    {% endif %}
+                </td>
                 <td>
                     {% if entity.declaracion.pago is not defined or entity.declaracion.pago is null %}
                         <span class="label label-yellow arrowed">pendiente</span>
