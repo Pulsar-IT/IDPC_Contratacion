@@ -20,7 +20,7 @@ class CertificacionController extends Controller
      *
      * @Route("/", name="certificacion_create")
      * @Method("POST")
-     * @Template("IDPCContractualBundle:certificacion:new.html.twig")
+     * @Template("IDPCContractualBundle:Certificacion:new.html.twig")
      */
     public function createAction(Request $request)
     {
@@ -80,7 +80,7 @@ class CertificacionController extends Controller
      /**
      * @Route("/pdf/{id}", name="certificacion_pdf")
      * @Method("GET")
-     * @Template("IDPCContractualBundle:certificacion:pdf.html.twig")
+     * @Template("IDPCContractualBundle:Certificacion:pdf.html.twig")
      */
     public function pdfAction($id)
     {
@@ -104,7 +104,7 @@ class CertificacionController extends Controller
      /**
      * @Route("/subir/{id}", name="certificacion_subirform")
      * @Method("GET")
-     * @Template("IDPCContractualBundle:certificacion:subir.html.twig")
+     * @Template("IDPCContractualBundle:Certificacion:subir.html.twig")
      */
     public function subirformAction($id)
     {
@@ -125,7 +125,7 @@ class CertificacionController extends Controller
      *
      * @Route("/subirpdf", name="certificacion_subir")
      * @Method("POST")
-     * @Template("IDPCContractualBundle:certificacion:subir.html.twig")
+     * @Template("IDPCContractualBundle:Certificacion:subir.html.twig")
      */
     public function subirAction(Request $request)
     {
