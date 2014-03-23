@@ -45,7 +45,11 @@ class Informe {
     public $path;
 
     /**
-     * @Assert\File(maxSize="6000000")
+     * @Assert\File(
+     *     maxSize = "6000000",
+     *     mimeTypes = {"application/pdf", "application/x-pdf"},
+     *     mimeTypesMessage = "Tipo de archivo no válido"
+     * )
      */
     private $file;
 

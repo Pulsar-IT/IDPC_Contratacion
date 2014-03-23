@@ -3,27 +3,50 @@
 {% block body -%}
 
 
+<div class="row">
+    <div class="col-sm-7">
 <div class="widget-box">
     <div class="widget-header">
         <h4>Subir Informe</h4>
     </div>
         <div class="widget-body">
             <div class="widget-main no-padding">
-                <fieldset>
-                    {{ form(form) }}
-                        </fieldset>
+    <form action="{{ path('informe_create') }}" method="post" {{ form_enctype(form) }}>
+        {% if form_errors(form) %}
+        <div class="alert alert-danger">{{ form_errors(form) }}</div>
+        {% endif %} 
+        <fieldset>
+                    
+                    {{ form_label(form.file) }}
+                    {{ form_widget(form.file) }}
+            {% if form_errors(form.file) %}
+            <div class="alert alert-danger">
+            {{ form_errors(form.file) }}
+            </div>
+            {% endif %}
+                        
+                </fieldset>
+                       {{form_widget(form._token)}}
+
                     <div class="form-actions">
+                        
+{{ form_widget(form.submit) }} 
+                        
                         </div>
+                
+                
+    </form>
                 </div>
             </div>
+    </div>
+        </div>
     </div>
 {% endblock %}
 {% block breadcumbs %}
         <ul class="record_actions">
     <li>
-        <a href="{{ path('informe') }}">
-            Regresar
-        </a>
+            <a href="{{ path('pago_show', { 'id': app.session.get('pagoId') }) }}">Regresar</a>
+
     </li>
 </ul>
 {% endblock %}

@@ -1,46 +1,37 @@
 {% extends '::base.html.twig' %}
 
 {% block body -%}
+<div class="row">
+    <div class="col-sm-7">
 <div class="widget-box">
     <div class="widget-header">
         <h4>Declaraci&oacute;n</h4>
-        <span class="widget-toolbar">
-            {% if entity.pago.estado != 100 %}
-    <a href="{{ path('declaracion_edit', { 'id': entity.id }) }}" ><i class="icon-edit icon-white"></i></a>
-    <div style="float:right;">{{ form(delete_form) }}</div>
-    {% endif %}
-        </span>
-    </div>
+        <span class="widget-toolbar"> 
+            </span>
+        </div>
         <div class="widget-body">
-            <div class="widget-main no-padding">
-                <fieldset>
-
-
-
-
-
-<table class="record_properties">
-    <tbody>
-        <tr>
-            <th>Fecha y hora de env&iacute;o</th>
-            <td>{{ entity.createdat|date('Y-m-d H:i:s') }}</td>
-        </tr>
-        <tr>
-            <th></th>
-            <td><a href="{{ asset('uploads/documents/') }}{{ entity.path }}" target="_blank" >Ver documento</a></td>
-        </tr>
-        <tr>
-            <th></th>
-            <td><br>
-                <iframe src="http://docs.google.com/gview?url=http://190.26.194.251/scontratos/current/web/{{ asset('uploads/documents/') }}{{ entity.path }}&embedded=true" style="width:600px; height:500px;" frameborder="0"></iframe></td>
-        </tr>
-    </tbody>
-</table>
-                        </fieldset>
-                    <div class="form-actions">
-                        </div>
-                </div>
+            <div class="widget-main">
+                <p>
+                                <label>Fecha y hora de env&iacute;o</label>
+                                <span>{{ entity.createdat|date('d-m-Y H:i:s') }}</span>
+                </p>
+                                    <a href="{{ asset('uploads/documents/') }}{{ entity.path }}" target="_blank" >Ver documento</a>
+                          
+                                    
+                                    <!-- <iframe src="http://docs.google.com/gview?url=http://contratacion/{{ asset('uploads/documents/') }}{{ entity.path }}&embedded=true" style="width:600px; height:500px;" frameborder="0"></iframe></td> -->
+                       
+                
             </div>
+                <div class="widget-toolbox padding-8 clearfix">
+            {% if (is_expr_granted("hasRole('ROLE_CONTRATISTA')")) -%}
+            {% if entity.pago.estado != 100 %}
+                {{ form(delete_form) }}
+            {% endif %}
+            {% endif %}   
+                </div>
+        </div>
+    </div>
+        </div>
     </div>
 
 
@@ -48,12 +39,12 @@
 {% endblock %}
 
 {% block breadcumbs %}
-<ul class="pagination-sm">
-    <li>
+    <ul class="pagination-sm">
+        <li>
 
 
-        <a href="{{ path('pago_show', { 'id': entity.pago.id }) }}">Regresar</a>
+            <a href="{{ path('pago_show', { 'id': entity.pago.id }) }}">Regresar</a>
 
-    </li>
-</ul>
+        </li>
+    </ul>
 {% endblock %}

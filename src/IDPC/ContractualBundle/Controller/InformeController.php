@@ -79,8 +79,13 @@ class InformeController extends Controller
             'action' => $this->generateUrl('informe_create'),
             'method' => 'POST',
         ));
+        
+        
+            $form->add('submit', 'submit', array(
+                'label' => 'Enviar',
+                'attr' => array('class' => 'btn btn-success')
+                ));
 
-        $form->add('submit', 'submit', array('label' => 'Create'));
 
         return $form;
     }
@@ -245,8 +250,8 @@ class InformeController extends Controller
             ->setAction($this->generateUrl('informe_delete', array('id' => $id)))
             ->setMethod('DELETE')
             ->add('submit', 'submit', array(
-                'label' => ' ',
-                'attr' => array('class' => 'icon-trash')
+                'label' => 'Eliminar',
+                'attr' => array('class' => 'btn btn-danger')
                 ))
             ->getForm()
         ;
