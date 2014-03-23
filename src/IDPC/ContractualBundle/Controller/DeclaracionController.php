@@ -79,8 +79,12 @@ class DeclaracionController extends Controller
             'action' => $this->generateUrl('declaracion_create'),
             'method' => 'POST',
         ));
-
-        $form->add('submit', 'submit', array('label' => 'Create'));
+        
+        
+            $form->add('submit', 'submit', array(
+                'label' => 'Enviar',
+                'attr' => array('class' => 'btn btn-success')
+                ));
 
         return $form;
     }
@@ -244,7 +248,10 @@ class DeclaracionController extends Controller
         return $this->createFormBuilder()
             ->setAction($this->generateUrl('declaracion_delete', array('id' => $id)))
             ->setMethod('DELETE')
-            ->add('submit', 'submit', array('label' => 'Delete'))
+            ->add('submit', 'submit', array(
+                'label' => 'Eliminar',
+                'attr' => array('class' => 'btn btn-danger')
+                ))
             ->getForm()
         ;
     }

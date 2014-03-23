@@ -17,7 +17,7 @@
         {%endif%}
                     
         {% if (is_expr_granted("hasRole('ROLE_SUPERVISOR')")) -%}
-                    {% if entity.cumplimiento.pago is defined and entity.cumplimiento.pago is defined %}
+                    {% if entity.cumplimiento is defined or entity.declaracion.pago is not null  %}
                 <a href="{{ path('cumplimiento') }}" class="btn btn-primary btn-mini"><i class="icon-plus icon-white"></i>Certificaci&oacute;n de Cumplimiento</a>
         {% else %}
                 <a href="{{ path('cumplimiento_new') }}" class="btn btn-primary btn-mini"><i class="icon-plus icon-white"></i>Certificaci&oacute;n de Cumplimiento</a>

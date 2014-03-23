@@ -1,16 +1,44 @@
 {% extends '::base.html.twig' %}
 
 {% block body -%}
-    <h1>Pago edit</h1>
 
-    {{ form(edit_form) }}
+<div class="widget-box">
+    <div class="widget-header">
+        <h4>Editar Pago</h4>
+    </div>
+    <form action="{{ path('pago_update', { 'id': entity.id }) }}" method="post" {{ form_enctype(edit_form) }}>
+        <input type="hidden" name="_method" value="PUT" />
+        <div class="widget-body">
+            <div class="widget-main no-padding">
+                <div class="validation">{{ form_errors(edit_form) }}</div>
+                <fieldset>
+                    {{ form_label(edit_form.numeroPago)}}
+                    {{ form_widget(edit_form.numeroPago)}}
+                </fieldset>
+                {{form_widget(edit_form._token)}}
+                
+                    <div class="form-actions">
+                        <button type="submit" value="Crear" class="btn btn-sm btn-success">
+                        Crear
+                            <i class="icon-arrow-right icon-on-right bigger-110"></i>
+                        </button>
+                    </div>
+                
+            </div>
+                
+            </div>
+        
+    </form>
 
-        <ul class="record_actions">
-    <li>
-        <a href="{{ path('pago') }}">
-            Back to the list
-        </a>
-    </li>
-    <li>{{ form(delete_form) }}</li>
-</ul>
+        
+    </div>
+{% endblock %}
+{% block breadcumbs %}
+    <ul class="record_actions">
+        <li>
+            <a href="{{ path('pago') }}">
+                Regresar
+            </a>
+        </li>
+    </ul>
 {% endblock %}

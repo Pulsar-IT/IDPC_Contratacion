@@ -2,25 +2,25 @@
 
 {% block body -%}
 <div class="page-header">
-    	<h1>Solicitud de Pago</h1>
+    <h1>Solicitud de Pago</h1>
 
-	</div>
+</div>
 {% if (is_expr_granted("hasRole('ROLE_ADMIN')")) -%}
-    <table class="table table-striped">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Estado</th>
-                <th>Identificación</th>
-                <th>Nombre</th>
-                <th>Perido</th>
-                <th>No Contrato</th>
-                <th>Valor a Pagar</th>
-                <th>Numero Pago</th>
-                <th>Actions</th>
-            </tr>
-        </thead>
-        <tbody>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Estado</th>
+            <th>Identificación</th>
+            <th>Nombre</th>
+            <th>Perido</th>
+            <th>No Contrato</th>
+            <th>Valor a Pagar</th>
+            <th>Numero Pago</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
         {% for entity in entities %}
             <tr>
                 <td>{{ loop.index }}</td>
@@ -34,7 +34,7 @@
 
                 <td>
 
-                        <a href="{{ path('pago_show', { 'id': entity.id }) }}"><i class="icon-edit"></i></a>
+                    <a href="{{ path('pago_show', { 'id': entity.id }) }}"><i class="icon-edit"></i></a>
 
                 </td>
             </tr>
@@ -49,98 +49,96 @@
         <thead>
             <tr>
                 <th>Id</th>
-                <th>Estado</th>
                 <th>Identificación</th>
                 <th>Nombre</th>
                 <th>Perido</th>
                 <th>No Contrato</th>
                 <th>Valor a Pagar</th>
                 <th>Numero Pago</th>
-                <th>Actions</th>
+                <th>Dias Pagados</th>
+                <th>Estado</th>
+                <th>Acciones</th>
             </tr>
         </thead>
         <tbody>
         {% for entity in entities if entity.contrato.supervisor.documento == app.user.username %}
-            <tr>
-                <td>{{ loop.index }}</td>
-                <td>{{ entity.estado }}</td>
-                <td>{{ entity.contrato.estudio.contratista.documento }}</td>
-                <td>{{ entity.contrato.estudio.contratista.primerApellido }}, {{ entity.contrato.estudio.contratista.primerNombre }}</td>
-                <td>{% if entity.fechainicio %}{{ entity.fechainicio|date('M-Y') }}{% endif %}</td>
-                <td>{{ entity.contrato.id }}</td>
-                <td>{{ entity.valor |number_format(0, ',', '.')  }}</td>
-                <td>{{ entity.numeroPago }}</td>
-
-                <td>
-                    
-                    
+                <tr>
+                    <td>{{ loop.index }}</td>
+                    <td>{{ entity.contrato.estudio.contratista.documento }}</td>
+                    <td>{{ entity.contrato.estudio.contratista.primerApellido }}, {{ entity.contrato.estudio.contratista.primerNombre }}</td>
+                    <td>{% if entity.fechainicio %}{{ entity.fechainicio|date('M-Y') }}{% endif %}</td>
+                    <td>{{ entity.contrato.id }}</td>
+                    <td>{{ entity.valor |number_format(0, ',', '.')  }}</td>
+                    <td>{{ entity.numeroPago }}</td>
+                    <td>{{ entity.diasPagados }}</td>
+                    <td>
                     {% if entity.estado == 0 %}
-                        
                     {% elseif  entity.estado == 100%}
-                    
                         <a href="{{ path('pago_show', { 'id': entity.id }) }}">
-                            <span class="label label-purple arrowed-in arrowed-in-right">enviado</span>
+                            <span class="label label-purple arrowed-in arrowed-in-right"> {{ entity.fechaContratista|date('Y-m-d H:i:s') }}</span>
                         </a>
                     {% endif %}
-                        
 
-                        
 
-                </td>
-            </tr>
+
+
+                    </td>
+                    <td><a href="{{ path('pago_edit', { 'id': entity.id }) }}">editar</a></td>
+                </tr>
         {% endfor %}
-        </tbody>
-    </table>
+            </tbody>
+        </table>
 {% endif %}
 
 
 {% if (is_expr_granted("hasRole('ROLE_CONTRATISTA')")) -%}
-    <table class="table table-striped">
-        <thead>
-            <tr>
-                <th>No. Contrato</th>
-                <th>Nombre</th>
-                <th>Perido</th>
-                <th>Valor a Pagar</th>
-                <th>Numero Pago</th>
-                <th>Estado</th>
-            </tr>
-        </thead>
-        <tbody>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>No. Contrato</th>
+                    <th>Nombre</th>
+                    <th>Perido</th>
+                    <th>Valor a Pagar</th>
+                    <th>Numero Pago</th>
+                    <th>Dias Pagados</th>
+                    <th>Estado</th>
+                </tr>
+            </thead>
+            <tbody>
         {% for entity in entities if entity.contrato.estudio.contratista.documento == app.user.username %}
-            <tr>
-                <td>{{ entity.contrato.id }}</td>
-                <td>{{ entity.contrato.estudio.contratista.primerApellido }}, {{ entity.contrato.estudio.contratista.primerNombre }}</td>
-                <td>{% if entity.fechaInicio %}{{ entity.fechaInicio|date('M-Y') }}{% endif %}</td>
-                <td>{{ entity.valor |number_format(0, ',', '.')  }}</td>
-                <td>{{ entity.numeroPago }}</td>
+                    <tr>
+                        <td>{{ entity.contrato.id }}</td>
+                        <td>{{ entity.contrato.estudio.contratista.primerApellido }}, {{ entity.contrato.estudio.contratista.primerNombre }}</td>
+                        <td>{% if entity.fechaInicio %}{{ entity.fechaInicio|date('M-Y') }}{% endif %}</td>
+                        <td>{{ entity.valor |number_format(0, ',', '.')  }}</td>
+                        <td>{{ entity.numeroPago }}</td>
+                        <td>{{ entity.diasPagados }}</td>
+                        <td>
 
-                <td>
-                    
 
-                        <a href="{{ path('pago_show', { 'id': entity.id }) }}">
+                            <a href="{{ path('pago_show', { 'id': entity.id }) }}">
                             {% if entity.estado == 100 %}
-                            <span class="label label-purple arrowed-in arrowed-in-right" data-rel="tooltip" title="" data-original-title="{{ entity.fechaContratista|date('d-m-Y H:i') }}">confirmado</span>
+                                    <span class="label label-purple arrowed-in arrowed-in-right" data-rel="tooltip" title="" data-original-title="{{ entity.fechaContratista|date('d-m-Y H:i') }}">confirmado</span>
                             {% else %}
-                            <span class="label label-yellow arrowed">sin confirmar</span>
+                                    <span class="label label-yellow arrowed">sin confirmar</span>
                             {% endif %}
-                        </a>
-                        
-                </td>
-            </tr>
+                                </a>
+
+                            </td>
+                        </tr>
         {% endfor %}
-        </tbody>
-    </table>
+                    </tbody>
+                </table>
 {% endif %}
-<!--
-        <ul>
-        <li>
-            <a href="{{ path('pago_new') }}">
-                Create a new entry
-            </a>
-        </li>
-    </ul>
--->
+                <!--
+                        <ul>
+                        <li>
+                            <a href="{{ path('pago_new') }}">
+                                Create a new entry
+                            </a>
+                        </li>
+                    </ul>
+                -->
     {% endblock %}
 
 {% block breadcumbs %}

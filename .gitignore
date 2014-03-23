@@ -18,3 +18,5 @@ Capfile
 
 app/config/deploy.rb
 
+
+web/bundles/idpcbase/css/htmltopdf.css

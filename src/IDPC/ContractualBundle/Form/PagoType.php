@@ -15,24 +15,6 @@ class PagoType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-                ->add('mes', 'choice', array(
-                    'choices' => array(
-                        'empty_value' => '--Seleccione Mes--',
-                        'Enero' => 'Enero',
-                        'Febrero' => 'Febrero',
-                        'Marzo' => 'Marzo',
-                        'Abril' => 'Abril',
-                        'Mayo' => 'Mayo',
-                        'Junio' => 'Junio',
-                        'Julio' => 'Julio',
-                        'Agosto' => 'Agosto',
-                        'Septiembre' => 'Septiembre',
-                        'Octubre' => 'Octubre',
-                        'Noviembre' => 'Noviembre',
-                        'Diciembre' => 'Diciembre',
-                    ),
-                    'label' => 'Mes'
-                ))
             ->add('valor')
             ->add('numeroPago')
             ->add('estado')
