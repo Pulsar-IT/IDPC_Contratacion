@@ -279,7 +279,9 @@ class CumplimientoController extends Controller
 
         ));
         
+        return $this->redirect($this->generateUrl('cumplimiento'));
 
+        /*
 return new Response(
     $this->get('knp_snappy.pdf')->getOutputFromHtml($html),
     200,
@@ -288,6 +290,8 @@ return new Response(
         'Content-Disposition'   => 'attachment; filename="file.pdf"'
     )
 );
+         * 
+         */
     }
     
 
