@@ -173,9 +173,6 @@ class Informe {
         $this->descripcion = 'sdssd';
         
         if (isset($this->path)) {
-            // store the old name to delete after the update
-
-
             $this->temp = $this->path;
             $this->path = null;
         } else {

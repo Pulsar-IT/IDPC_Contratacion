@@ -58,7 +58,7 @@ class CumplimientoController extends Controller
             $em->persist($entity);
             $em->flush();
 
-            return $this->redirect($this->generateUrl('cumplimiento_certificado', array('id' => $entity->getId())));
+            return $this->redirect($this->generateUrl('cumplimiento_showByPago', array('id' => $pago->getId())));
         }
 
         return array(
@@ -170,7 +170,10 @@ class CumplimientoController extends Controller
             'method' => 'PUT',
         ));
 
-        $form->add('submit', 'submit', array('label' => 'Update'));
+        $form->add('submit', 'submit', array(
+                'label' => 'Actualizar',
+                'attr' => array('class' => 'btn btn-success')
+                ));
 
         return $form;
     }
@@ -245,9 +248,37 @@ class CumplimientoController extends Controller
         return $this->createFormBuilder()
             ->setAction($this->generateUrl('cumplimiento_delete', array('id' => $id)))
             ->setMethod('DELETE')
-            ->add('submit', 'submit', array('label' => 'Delete'))
+            ->add('submit', 'submit', array(
+                'label' => 'Eliminar',
+                'attr' => array('class' => 'btn btn-danger')
+                ))
             ->getForm()
         ;
+    }
+    
+         /**
+     * Finds and displays a Informe entity.
+     *
+     * @Route("/{id}/showbypago", name="cumplimiento_showByPago")
+     * @Method("GET")
+     * @Template()
+     */
+    public function showByPagoAction($id)
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        $entity = $em->getRepository('IDPCContractualBundle:Cumplimiento')->findOneBy(Array('pago' => $id));
+
+        if (!$entity) {
+            throw $this->createNotFoundException('Unable to find Cumplimiento entity.');
+        }
+
+        $deleteForm = $this->createDeleteForm($entity->getId());
+
+        return array(
+            'entity'      => $entity,
+            'delete_form' => $deleteForm->createView(),
+        );
     }
     
     /**
@@ -279,9 +310,9 @@ class CumplimientoController extends Controller
 
         ));
         
-        return $this->redirect($this->generateUrl('cumplimiento'));
+        //return $this->redirect($this->generateUrl('cumplimiento'));
 
-        /*
+        
 return new Response(
     $this->get('knp_snappy.pdf')->getOutputFromHtml($html),
     200,
@@ -290,8 +321,7 @@ return new Response(
         'Content-Disposition'   => 'attachment; filename="file.pdf"'
     )
 );
-         * 
-         */
+         
     }
     
 

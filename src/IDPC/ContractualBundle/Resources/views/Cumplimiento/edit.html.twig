@@ -1,16 +1,67 @@
 {% extends '::base.html.twig' %}
 
 {% block body -%}
-    <h1>Cumplimiento edit</h1>
 
-    {{ form(edit_form) }}
+<div class="row">
+    <div class="col-sm-7">
+        <div class="widget-box">
+            <div class="widget-header">
+                <h4>Subir Certificado de Cumplimiento</h4>
+                <span class="widget-toolbar"> 
+                </span>
+            </div>
+            <div class="widget-body">
+                <div class="widget-main no-padding">
 
-        <ul class="record_actions">
+
+                    <form action="{{ path('cumplimiento_update', { 'id': entity.id }) }}" method="post" {{ form_enctype(edit_form) }}>
+                        <input type="hidden" name="_method" value="PUT" />
+        {% if form_errors(edit_form) %}
+                        <div class="alert alert-danger">{{ form_errors(edit_form) }}</div>
+        {% endif %}
+                        <fieldset>
+                            <label>N&uacute;mero de Planilla : </label>
+                        {{ entity.planilla }}
+                        </fieldset>
+                        
+                        <fieldset>
+                    {{ form_label(edit_form.planilla)}}
+                    {{ form_widget(edit_form.planilla)}}
+                                {% if form_errors(edit_form.planilla) %}
+                                <div class="alert alert-danger">{{ form_errors(edit_form.planilla) }}</div>    
+                                {% endif %}
+                            </fieldset>
+                        
+
+                        <fieldset>
+                    {{ form_label(edit_form.file)}}
+                    {{ form_widget(edit_form.file)}}
+                                {% if form_errors(edit_form.file) %}
+                                <div class="alert alert-danger">{{ form_errors(edit_form.file) }}</div>    
+                                {% endif %}
+                            </fieldset>
+               {{form_widget(edit_form._token)}}
+
+                    </div>
+                    <div class="widget-toolbox padding-8 clearfix">
+                        {{ form_widget(edit_form.submit)}}
+
+                    </div>
+                </div>
+            </div>
+            </form>
+        </div>
+    </div>
+</div>
+</div>
+
+{% endblock %}
+{% block breadcumbs %}
+<ul class="record_actions">
     <li>
-        <a href="{{ path('cumplimiento') }}">
-            Back to the list
-        </a>
+            <a href="{{ path('cumplimiento_showByPago', { 'id': app.session.get('pagoId') }) }}">Regresar</a>
+
     </li>
-    <li>{{ form(delete_form) }}</li>
 </ul>
 {% endblock %}
+

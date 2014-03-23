@@ -45,7 +45,7 @@
 {% block breadcumbs %}
         <ul class="record_actions">
     <li>
-            <a href="{{ path('pago_show', { 'id': app.session.get('pagoId') }) }}">Regresar</a>
+            <a href="{{ path('cumplimiento_showByPago', { 'id': app.session.get('pagoId') }) }}">Regresar</a>
 
     </li>
 </ul>
