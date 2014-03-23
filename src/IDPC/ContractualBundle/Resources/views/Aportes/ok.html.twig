@@ -1,4 +1,11 @@
-
+{% extends '::baseaportes.html.twig' %}
 {% block body -%}
+<script>
+window.onload=cerrar();  
+ function cerrar(){     
+ 
+ window.parent.location.reload();
+ }   
+</script>
     <h1>Aportes registrados correctamente</h1>
 {% endblock %}

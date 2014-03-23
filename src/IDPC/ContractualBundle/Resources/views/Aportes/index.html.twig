@@ -1,6 +1,5 @@
 {% extends '::base.html.twig' %}
 {% block body -%}
-
     <h3>Pago de aportes obligatorios a pago de {{ pago.contrato.estudio.contratista.documento }}
     por valor de {{pago.valor |number_format(0, ',', '.')}} del perido {% if pago.fechaInicio %}{{ pago.fechaInicio|date('M-Y') }}{% endif %}</h3>
 <h3>IBC: {{(pago.valor*0.40)|number_format(0, ',', '.')}}</h3>
@@ -75,7 +74,7 @@ Certificado de Aportes
 </button>
  {%endif%}   
 <!-- Modal SAlud -->
-<div class="modal fade" id="mSalud" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<div class="modal fade" id="mSalud" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-backdrop="static">
 <div class="modal-dialog">
 <div class="modal-content">
   <div class="modal-header">
@@ -89,16 +88,13 @@ Certificado de Aportes
  {%endif%}
  {%endfor%} 
   </div>
-  <div class="modal-footer">
-    <button type="button" onclick="javascript:window.location.reload()" class="btn btn-default" data-dismiss="modal">Cerrar</button>
-  </div>
 </div><!-- /.modal-content -->
 </div><!-- /.modal-dialog -->
 </div><!-- /.modal -->    
 
 
 <!-- Modal Pensión-->
-<div class="modal fade" id="mPensión" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<div class="modal fade" id="mPensión" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-backdrop="static">
 <div class="modal-dialog">
 <div class="modal-content">
   <div class="modal-header">
@@ -112,16 +108,13 @@ Certificado de Aportes
  {%endif%}
  {%endfor%} 
   </div>
-  <div class="modal-footer">
-    <button type="button" onclick="javascript:window.location.reload()" class="btn btn-default" data-dismiss="modal">Cerrar</button>
-  </div>
 </div><!-- /.modal-content -->
 </div><!-- /.modal-dialog -->
 </div><!-- /.modal --> 
 
 
 <!-- Modal ARL-->
-<div class="modal fade" id="mARL" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<div class="modal fade" id="mARL" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-backdrop="static">
 <div class="modal-dialog">
 <div class="modal-content">
   <div class="modal-header">
@@ -135,15 +128,13 @@ Certificado de Aportes
  {%endif%}
  {%endfor%} 
   </div>
-  <div class="modal-footer">
-    <button type="button" onclick="javascript:window.location.reload()" class="btn btn-default" data-dismiss="modal">Cerrar</button>
-  </div>
+
 </div><!-- /.modal-content -->
 </div><!-- /.modal-dialog -->
 </div><!-- /.modal --> 
 
 <!-- Modal Certificado-->
-<div class="bootbox modal fade in" id="mCertificado" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<div class="modal fade" id="mCertificado" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-backdrop="static">
 <div class="modal-dialog modal-lg">
 <div class="modal-content">
   <div class="modal-header">
@@ -151,10 +142,10 @@ Certificado de Aportes
     <h4 class="modal-title" id="myModalLabel">Generar certificado de Aportes</h4>
   </div>
   <div class="modal-body">
-<iframe src="{{ path('certificacion_new', { 'id': pago.id }) }}" width="840" height="330" frameborder="0" allowtransparency="true"></iframe>
+<iframe src="{{ path('certificacion_new', { 'id': pago.id }) }}" width="540" height="330" frameborder="0" allowtransparency="true"></iframe>
   </div>
   <div class="modal-footer">
-    <button type="button" onclick="javascript:window.location.reload()" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+    <button type="button" onclick="javascript:window.location.reload();" class="btn btn-default" data-dismiss="modal">Cerrar</button>
   </div>
 </div><!-- /.modal-content -->
 </div><!-- /.modal-dialog -->
@@ -162,7 +153,7 @@ Certificado de Aportes
 
 
 <!-- Modal Certificado pdf-->
-<div class="bootbox modal fade in" id="mCertificadopdf" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<div class="modal fade" id="mCertificadopdf" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 <div class="modal-dialog modal-lg">
 <div class="modal-content">
   <div class="modal-header">
@@ -173,7 +164,7 @@ Certificado de Aportes
 <iframe src="{{ path('certificacion_pdf', { 'id': pago.id }) }}" width="840" height="330" frameborder="0" allowtransparency="true"></iframe>
   </div>
   <div class="modal-footer">
-    <button type="button" onclick="javascript:window.location.reload()" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+    <button type="button" onclick="javascript:window.location.reload();" class="btn btn-default" data-dismiss="modal">Cerrar</button>
   </div>
 </div><!-- /.modal-content -->
 </div><!-- /.modal-dialog -->
@@ -191,7 +182,7 @@ Certificado de Aportes
 <iframe src="{{ path('certificacion_subirform', { 'id': pago.id }) }}" width="840" height="330" frameborder="0" allowtransparency="true"></iframe>
   </div>
   <div class="modal-footer">
-    <button type="button" onclick="javascript:window.location.reload()" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+    <button type="button" onclick="javascript:window.location.reload();" class="btn btn-default" data-dismiss="modal">Cerrar</button>
   </div>
 </div><!-- /.modal-content -->
 </div><!-- /.modal-dialog -->
