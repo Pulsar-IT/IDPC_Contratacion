@@ -17,8 +17,9 @@ class CumplimientoType extends AbstractType
         $builder
             ->add('planilla')
             ->add('file', 'file', array(
-                'label' => ' ',
-                'required' => false))
+                'required' => true,
+                'label'   => 'Archivo'
+            ))
                 
         ;
     }

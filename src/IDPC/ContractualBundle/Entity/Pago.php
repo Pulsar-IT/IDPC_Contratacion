@@ -84,8 +84,8 @@ use Gedmo\Mapping\Annotation as Gedmo;
     
     
     /**
-     * @ORM\OneToOne(targetEntity="Cumplimiento", mappedBy="pago")
-     * @ORM\JoinColumn(name="Cumplimiento_id", referencedColumnName="id")
+     * @ORM\OneToOne(targetEntity="Cumplimiento", mappedBy="pago", cascade={"persist", "remove"})
+     * @Assert\Valid()
      */
     
     protected $cumplimiento;

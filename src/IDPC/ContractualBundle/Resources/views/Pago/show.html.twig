@@ -17,10 +17,10 @@
         {%endif%}
                     
         {% if (is_expr_granted("hasRole('ROLE_SUPERVISOR')")) -%}
-                    {% if entity.cumplimiento is defined or entity.declaracion.pago is not null  %}
-                <a href="{{ path('cumplimiento') }}" class="btn btn-primary btn-mini"><i class="icon-plus icon-white"></i>Certificaci&oacute;n de Cumplimiento</a>
-        {% else %}
+{% if entity.cumplimiento.pago is not defined or entity.cumplimiento.pago is null  %}
                 <a href="{{ path('cumplimiento_new') }}" class="btn btn-primary btn-mini"><i class="icon-plus icon-white"></i>Certificaci&oacute;n de Cumplimiento</a>
+        {% else %}
+                <a href="{{ path('cumplimiento_showByPago', {'id': entity.id }) }}" class="btn btn-primary btn-mini"><i class="icon-plus icon-white"></i>Certificaci&oacute;n de Cumplimiento</a>
 
 {% endif %}
 {% endif %}
