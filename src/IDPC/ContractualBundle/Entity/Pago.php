@@ -75,9 +75,12 @@ use Gedmo\Mapping\Annotation as Gedmo;
     protected $fechaInicio;
 
     /**
-     *
      * @ORM\Column(type="integer")
-     * 
+     * @Assert\Range(
+     *      min = 1,
+     *      max = 30,
+     *      minMessage = "Inserte un valor mayor a 0",
+     *      maxMessage = "Inserte un valor menor o igual a 30")
      */
     
     protected $diasPagados;

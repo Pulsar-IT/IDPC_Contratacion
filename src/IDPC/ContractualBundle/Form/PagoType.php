@@ -17,11 +17,12 @@ class PagoType extends AbstractType
         $builder
             ->add('valor')
             ->add('numeroPago')
+            ->add('diasPagados')    
             ->add('estado')
-            ->add('contrato', 'entity', array(
-                'class' => 'IDPCContractualBundle:Contrato',
-                'property' => 'numero'
-            ))
+           
+            ->add('fechaInicio', 'date', array(
+            'input'  => 'datetime',
+            'widget' => 'choice'))
         ;
     }
     

@@ -156,6 +156,7 @@ class PagoController extends Controller {
      */
     private function createEditForm(Pago $entity) {
         $form = $this->createForm(new PagoType(), $entity, array(
+            'error_bubbling' => false,
             'action' => $this->generateUrl('pago_update', array('id' => $entity->getId())),
             'method' => 'PUT',
         ));
@@ -176,7 +177,8 @@ class PagoController extends Controller {
         $em = $this->getDoctrine()->getManager();
 
         $entity = $em->getRepository('IDPCContractualBundle:Pago')->find($id);
-
+        $contrato = $entity->getContrato();
+        
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find Pago entity.');
         }
@@ -186,9 +188,10 @@ class PagoController extends Controller {
         $editForm->handleRequest($request);
 
         if ($editForm->isValid()) {
+            $entity->setValor(($contrato->getValorPagoMensual()/30)*$editForm["diasPagados"]->getData());
             $em->flush();
 
-            return $this->redirect($this->generateUrl('pago_edit', array('id' => $id)));
+        return $this->redirect($this->generateUrl('pago_edit', array('id' => $id)));
         }
 
         return array(
