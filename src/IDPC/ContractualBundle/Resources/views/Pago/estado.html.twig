@@ -1,0 +1,23 @@
+{% extends '::base.html.twig' %}
+{% block body -%}
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Mes</th>
+                <th>Valor</th>
+                <th>Numeropago</th>
+                <th>Estado</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>{{ entity.id }}</td>
+                <td>{% if entity.fechaInicio %}{{ entity.fechaInicio|date('M-Y') }}{% endif %}</td>
+                <td>{{ entity.valor }}</td>
+                <td>{{ entity.numeroPago }}</td>
+                <td>{{ entity.estado }}</td>
+            </tr>
+        </tbody>
+    </table>
+{%endblock%}

@@ -120,6 +120,23 @@ class PagoController extends Controller {
             'delete_form' => $deleteForm->createView(),
         );
     }
+    
+     /**
+     * @Route("/{id}/estado", name="pago_estado")
+     * @Method("GET")
+     * @Template("IDPCContractualBundle:Pago:estado.html.twig")
+     */
+    public function estadoAction($id) {
+        $em = $this->getDoctrine()->getManager();
+        $entity = $em->getRepository('IDPCContractualBundle:Pago')->find($id);
+
+        if (!$entity) {
+            throw $this->createNotFoundException('Unable to find Pago entity.');
+        }
+        return array(
+            'entity' => $entity,
+        );
+    }
 
     /**
      * Displays a form to edit an existing Pago entity.
