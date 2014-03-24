@@ -86,15 +86,11 @@ use Gedmo\Mapping\Annotation as Gedmo;
     protected $diasPagados;
     
     /**
-     * @ORM\OneToOne(targetEntity="SolicitudPago", mappedBy="pago", cascade={"persist", "remove"})
-     * @ORM\JoinColumn(name="SolicitudPago_id", referencedColumnName="id")
+     * @ORM\OneToOne(targetEntity="SolicitudPago", mappedBy="pago")
+     * @Assert\Valid()
      */
     
-    protected $solicituPago;
-
-
-    
-    
+    protected $solicitudPago;
     
     /**
      * @ORM\OneToOne(targetEntity="Cumplimiento", mappedBy="pago", cascade={"persist", "remove"})
@@ -610,25 +606,25 @@ use Gedmo\Mapping\Annotation as Gedmo;
     }
 
     /**
-     * Set solicituPago
+     * Set solicitudPago
      *
-     * @param \IDPC\ContractualBundle\Entity\SolicitudPago $solicituPago
+     * @param \IDPC\ContractualBundle\Entity\SolicitudPago $solicitudPago
      * @return Pago
      */
-    public function setSolicituPago(\IDPC\ContractualBundle\Entity\SolicitudPago $solicituPago = null)
+    public function setSolicitudPago(\IDPC\ContractualBundle\Entity\SolicitudPago $solicitudPago = null)
     {
-        $this->solicituPago = $solicituPago;
+        $this->solicitudPago = $solicitudPago;
 
         return $this;
     }
 
     /**
-     * Get solicituPago
+     * Get solicitudPago
      *
      * @return \IDPC\ContractualBundle\Entity\SolicitudPago 
      */
-    public function getSolicituPago()
+    public function getSolicitudPago()
     {
-        return $this->solicituPago;
+        return $this->solicitudPago;
     }
 }

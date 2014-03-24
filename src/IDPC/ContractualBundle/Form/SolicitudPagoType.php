@@ -15,7 +15,11 @@ class SolicitudPagoType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('file')
+            ->add('file', 'file', array(
+                'data_class' => null,
+                'required' => true,
+                'label'   => ' '
+            ))
         ;
     }
     

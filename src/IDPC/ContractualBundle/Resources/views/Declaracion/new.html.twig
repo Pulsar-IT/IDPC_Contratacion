@@ -12,7 +12,7 @@
         <div class="widget-body">
             <div class="widget-main no-padding">
     <form action="{{ path('declaracion_create') }}" method="post" {{ form_enctype(form) }}>
-        <div class="alert alert-danger">{{ form_errors(form) }}</div>
+        
         {% if form_errors(form) %}
         <div class="alert alert-danger">{{ form_errors(form) }}</div>
         {% endif %}  
@@ -32,7 +32,9 @@
 
                     <div class="form-actions">
                         
-{{ form_widget(form.submit) }} 
+                                <button type="submit" value="Crear" class="btn btn-primary">
+                                    <i class="icon-cloud-upload"></i>Cargar
+                                </button>
                         
                         </div>
                 

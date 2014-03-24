@@ -20,9 +20,8 @@
                             </fieldset>
                {{form_widget(form._token)}}
                             <div class="form-actions">
-                                <button type="submit" value="Crear" class="btn btn-sm btn-success">
-                                    Crear
-                                    <i class="icon-arrow-right icon-on-right bigger-110"></i>
+                                <button type="submit" value="Crear" class="btn btn-primary">
+                                    <i class="icon-cloud-upload"></i>Cargar
                                 </button>
                             </div>
                     </div>
@@ -36,9 +35,7 @@
 {% block breadcumbs %}
     <ul class="record_actions">
         <li>
-            <a href="{{ path('solicitudpago') }}">
-                Regresar
-            </a>
+            <a href="#">Regresar</a>
         </li>
     </ul>
 {% endblock %}

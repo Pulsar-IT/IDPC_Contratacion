@@ -75,7 +75,11 @@
                     {% if entity.estado == 0 %}
                     {% elseif  entity.estado == 100%}
                         <a href="{{ path('pago_show', { 'id': entity.id }) }}">
-                            <span class="label label-purple arrowed-in arrowed-in-right"> {{ entity.fechaContratista|date('Y-m-d H:i:s') }}</span>
+                            <span class="label label-purple arrowed-in arrowed-in-right">Contratista: {{ entity.fechaContratista|date('Y-m-d H:i:s') }}</span>
+                        </a>
+                    {% elseif  entity.estado == 200%}
+                        <a href="{{ path('pago_show', { 'id': entity.id }) }}">
+                            <span class="label label-pink arrowed-in arrowed-in-right">Supervisor: {{ entity.fechaSupervisor|date('Y-m-d H:i:s') }}</span>
                         </a>
                     {% endif %}
 
@@ -117,10 +121,13 @@
 
 
                             <a href="{{ path('pago_show', { 'id': entity.id }) }}">
-                            {% if entity.estado == 100 %}
-                                    <span class="label label-purple arrowed-in arrowed-in-right" data-rel="tooltip" title="" data-original-title="{{ entity.fechaContratista|date('d-m-Y H:i') }}">confirmado</span>
-                            {% else %}
+                            {% if entity.estado == 0 %}
                                     <span class="label label-yellow arrowed">sin confirmar</span>
+                            {% elseif entity.estado == 100 %}
+                                    <span class="label label-purple arrowed-in arrowed-in-right" data-rel="tooltip" title="" data-original-title="{{ entity.fechaContratista|date('d-m-Y H:i') }}">Confirmado: {{ entity.fechaContratista|date('d-m-Y H:i') }}</span>
+                            {% elseif entity.estado == 200 %}
+                                    <span class="label label-pink arrowed-in arrowed-in-right" data-rel="tooltip" title="" data-original-title="{{ entity.fechaSupervisor|date('d-m-Y H:i') }}">Supervisor: {{ entity.fechaSupervisor|date('d-m-Y H:i') }}</span>
+                            
                             {% endif %}
                                 </a>
 

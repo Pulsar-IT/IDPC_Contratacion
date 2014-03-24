@@ -178,7 +178,7 @@ class PagoController extends Controller {
 
         $entity = $em->getRepository('IDPCContractualBundle:Pago')->find($id);
         $contrato = $entity->getContrato();
-        
+
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find Pago entity.');
         }
@@ -188,10 +188,10 @@ class PagoController extends Controller {
         $editForm->handleRequest($request);
 
         if ($editForm->isValid()) {
-            $entity->setValor(($contrato->getValorPagoMensual()/30)*$editForm["diasPagados"]->getData());
+            $entity->setValor(($contrato->getValorPagoMensual() / 30) * $editForm["diasPagados"]->getData());
             $em->flush();
 
-        return $this->redirect($this->generateUrl('pago_edit', array('id' => $id)));
+            return $this->redirect($this->generateUrl('pago_edit', array('id' => $id)));
         }
 
         return array(
@@ -257,13 +257,25 @@ class PagoController extends Controller {
         if (!$pago) {
             throw $this->createNotFoundException('Unable to find Pago entity.');
         }
-        
-        $pago->setFechaContratista(new \DateTime());
-        $pago->setEstado(100);
-        $em->flush();
-        
-            return $this->redirect($this->generateUrl('pago'));
+        switch ($pago->getEstado()) {
+            case 0:
+                $pago->setFechaContratista(new \DateTime());
+                $pago->setEstado(100);
+                break;
+            case 100:
+                $pago->setFechaSupervisor(new \DateTime());
+                $pago->setEstado(200);
+                break;
+                
 
+            default:
+                break;
+        }
+
+
+            $em->flush();
+
+        return $this->redirect($this->generateUrl('pago'));
     }
 
 }

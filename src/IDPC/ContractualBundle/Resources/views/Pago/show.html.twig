@@ -3,164 +3,175 @@
 
 {% block body -%}
 <div class="page-header">
-    	<h1>Pago correspondiente a {{ entity.fechaInicio|date('F-Y') }}</h1>
-        <br>
+    <h1>Pago correspondiente a {{ entity.fechaInicio|date('F-Y') }}</h1>
+    <br>
         {% if (is_expr_granted("hasRole('ROLE_CONTRATISTA')")) -%}
-            {% if entity.estado != 100 %}
-                <a href="{{ path('informe_new') }}" class="btn btn-primary btn-mini"><i class="icon-plus icon-white"></i>Informe Actividades</a>
-                <a href="{{ path('aportes_index', {'id': entity.id }) }}" class="btn btn-info btn-mini"><i class="icon-plus icon-white"></i>Aportes</a>
-                <a href="{{ path('declaracion_new') }}" class="btn btn-mini"><i class="icon-plus icon-white"></i>Declaraci&oacute;n</a>
+            {% if entity.estado == 0 %}
+    <a href="{{ path('informe_new') }}" class="btn btn-primary btn-mini"><i class="icon-plus icon-white"></i>Informe Actividades</a>
+    <a href="{{ path('aportes_index', {'id': entity.id }) }}" class="btn btn-info btn-mini"><i class="icon-plus icon-white"></i>Aportes</a>
+    <a href="{{ path('declaracion_new') }}" class="btn btn-mini"><i class="icon-plus icon-white"></i>Declaraci&oacute;n</a>
                 {% if entity.informe.pago is defined and entity.declaracion.pago is defined and entity.valorAportes != 0 %}
-                    <a href="{{ path('pago_lock', { 'id': entity.id } ) }}" class="btn btn-inverse btn-mini "><i class="icon-lock icon-white"> Confirmar</i></a>
+    <a href="{{ path('pago_lock', { 'id': entity.id } ) }}" class="btn btn-inverse btn-mini "><i class="icon-lock icon-white"> Confirmar</i></a>
                 {%endif%}
             {%endif%}
         {%endif%}
-                    
+
         {% if (is_expr_granted("hasRole('ROLE_SUPERVISOR')")) -%}
+    
 {% if entity.cumplimiento.pago is not defined or entity.cumplimiento.pago is null  %}
-                <a href="{{ path('cumplimiento_new') }}" class="btn btn-primary btn-mini"><i class="icon-plus icon-white"></i>Certificaci&oacute;n de Cumplimiento</a>
-        {% else %}
-                <a href="{{ path('cumplimiento_showByPago', {'id': entity.id }) }}" class="btn btn-primary btn-mini"><i class="icon-plus icon-white"></i>Certificaci&oacute;n de Cumplimiento</a>
+    <a href="{{ path('cumplimiento_new') }}" class="btn btn-primary btn-mini"><i class="icon-plus icon-white"></i>Certificaci&oacute;n de Cumplimiento</a>
+{% else %}
+    <a href="{{ path('cumplimiento_showByPago', {'id': entity.id }) }}" class="btn btn-primary btn-mini"><i class="icon-plus icon-white"></i>Certificaci&oacute;n de Cumplimiento</a>
+{% endif %}
+
+    <a href="{{ path('solicitudpago_certificado', {'id': entity.id }) }}" class="btn btn-info btn-mini"><i class="icon-cloud-download icon-white"></i>Descarga Solicitud de Pago</a>
+
+{% if entity.solicitudpago.pago is not defined or entity.solicitudpago.pago is null  %}
+    <a href="{{ path('solicitudpago_new') }}" class="btn btn-mini"><i class="icon-cloud-upload icon-white"></i>Cargar Solicitud de Pago</a>
+{% else %}
+    <a href="{{ path('solicitudpago_showByPago', {'id': entity.id }) }}" class="btn btn-mini"><i class="icon-cloud-upload icon-white"></i>Editar Solicitud de Pago</a>
+{% endif %}
+
+{% if entity.cumplimiento.pago is defined and entity.solicitudpago.pago is defined %}
+    <a href="{{ path('pago_lock', { 'id': entity.id } ) }}" class="btn btn-inverse btn-mini "><i class="icon-lock icon-white"> Confirmar</i></a>
+{%endif%}
 
 {% endif %}
-                <a href="{{ path('solicitudpago_certificado', {'id': entity.id }) }}" class="btn btn-primary btn-mini"><i class="icon-plus icon-white"></i>Descarga Solicitud de Pago</a>
-
-{% endif %}
-        <div class="page"></div>
+    <div class="page"></div>
 </div>
 {% if (is_expr_granted("hasRole('ROLE_ADMIN')")) -%}
-    <table class="table table-striped">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Mes</th>
-                <th>Valor</th>
-                <th>Numeropago</th>
-                <th>Estado</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td><i class="icon-plus icon-white"></i>{{ entity.id }}</td>
-                <td>{% if entity.fechaInicio %}{{ entity.fechaInicio|date('M-Y') }}{% endif %}</td>
-                <td>{{ entity.valor }}</td>
-                <td>{{ entity.numeroPago }}</td>
-                <td>{{ entity.estado }}</td>
-            </tr>
-        </tbody>
-    </table>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Mes</th>
+            <th>Valor</th>
+            <th>Numeropago</th>
+            <th>Estado</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><i class="icon-plus icon-white"></i>{{ entity.id }}</td>
+            <td>{% if entity.fechaInicio %}{{ entity.fechaInicio|date('M-Y') }}{% endif %}</td>
+            <td>{{ entity.valor }}</td>
+            <td>{{ entity.numeroPago }}</td>
+            <td>{{ entity.estado }}</td>
+        </tr>
+    </tbody>
+</table>
 {% endif %}
 
 {% if (is_expr_granted("hasRole('ROLE_SUPERVISOR')")) -%}
         {% if entity.contrato.supervisor.documento == app.user.username %}
-    <table class="table table-striped">
-        <thead>
-            <tr>
-                <th>Mes</th>
-                <th>Valor</th>
-                <th>Numeropago</th>
-                <th>Estado</th>
-                <th>Informe</th>
-                <th>Aportes</th>
-                <th>Declaraci&oacute;n</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td>{% if entity.fechaInicio %}{{ entity.fechaInicio|date('M-Y') }}{% endif %}</td>
-                <td>{{ entity.valor|number_format(2, '.', ',') }}</td>
-                <td>{{ entity.numeroPago }}</td>
-                <td>{{ entity.estado }}</td>
-                <td>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Mes</th>
+            <th>Valor</th>
+            <th>Numeropago</th>
+            <th>Estado</th>
+            <th>Informe</th>
+            <th>Aportes</th>
+            <th>Declaraci&oacute;n</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>{% if entity.fechaInicio %}{{ entity.fechaInicio|date('M-Y') }}{% endif %}</td>
+            <td>{{ entity.valor|number_format(2, '.', ',') }}</td>
+            <td>{{ entity.numeroPago }}</td>
+            <td>{{ entity.estado }}</td>
+            <td>
                     {% if entity.informe.pago is not defined or entity.informe.pago is null %}
-                        <span class="label label-yellow arrowed">pendiente</span>
+                    <span class="label label-yellow arrowed">pendiente</span>
                     {% else %}
-                        <a href="{{ path('informe_showByPago', {'id': entity.id }) }}">
-                            <span class="label label-purple arrowed-in arrowed-in-right">enviado</span>
-                        </a>
+                    <a href="{{ path('informe_showByPago', {'id': entity.id }) }}">
+                        <span class="label label-purple arrowed-in arrowed-in-right">enviado</span>
+                    </a>
                     {% endif %}
                 </td>
                 <td>
                     {% if entity.valorAportes == 0 %}
                         <span class="label label-yellow arrowed">pendiente</span>
                     {% else %}
-                            <span class="label label-purple arrowed-in arrowed-in-right">enviado</span>
-                    {% endif %}
-                </td>
-                <td>
-                    {% if entity.declaracion.pago is not defined or entity.declaracion.pago is null %}
-                        <span class="label label-yellow arrowed">pendiente</span>
-                    {% else %}
-                        <a href="{{ path('declaracion_showByPago', {'id': entity.id }) }}">
-                            <span class="label label-purple arrowed-in arrowed-in-right">enviado</span>
-                        </a>
+                        <span class="label label-purple arrowed-in arrowed-in-right">enviado</span>
                     {% endif %}
                     </td>
-            </tr>
-        </tbody>
-    </table>
+                    <td>
+                    {% if entity.declaracion.pago is not defined or entity.declaracion.pago is null %}
+                            <span class="label label-yellow arrowed">pendiente</span>
+                    {% else %}
+                            <a href="{{ path('declaracion_showByPago', {'id': entity.id }) }}">
+                                <span class="label label-purple arrowed-in arrowed-in-right">enviado</span>
+                            </a>
+                    {% endif %}
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
 {% endif %}
 {% endif %}
 
 {% if (is_expr_granted("hasRole('ROLE_CONTRATISTA')")) -%}
         {% if entity.contrato.estudio.contratista.documento == app.user.username %}
-    <table class="table table-striped">
-        <thead>
-            <tr>
-                <th>Mes</th>
-                <th>Valor</th>
-                <th>Numeropago</th>
-                <th>Informe</th>
-                <th>Aportes</th>
-                <th>Declaraci&oacute;n</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td>{% if entity.fechaInicio %}{{ entity.fechaInicio|date('M-Y') }}{% endif %}</td>
-                <td>{{ entity.valor|number_format(2, '.', ',') }}</td>
-                <td>{{ entity.numeroPago }}</td>
-                <td>
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Mes</th>
+                        <th>Valor</th>
+                        <th>Numeropago</th>
+                        <th>Informe</th>
+                        <th>Aportes</th>
+                        <th>Declaraci&oacute;n</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>{% if entity.fechaInicio %}{{ entity.fechaInicio|date('M-Y') }}{% endif %}</td>
+                        <td>{{ entity.valor|number_format(2, '.', ',') }}</td>
+                        <td>{{ entity.numeroPago }}</td>
+                        <td>
                     {% if entity.informe.pago is not defined or entity.informe.pago is null %}
-                        <span class="label label-yellow arrowed">pendiente</span>
+                                <span class="label label-yellow arrowed">pendiente</span>
                     {% else %}
-                        <a href="{{ path('informe_showByPago', {'id': entity.id }) }}">
-                            <span class="label label-purple arrowed-in arrowed-in-right">enviado</span>
-                        </a>
+                                <a href="{{ path('informe_showByPago', {'id': entity.id }) }}">
+                                    <span class="label label-purple arrowed-in arrowed-in-right">enviado</span>
+                                </a>
                     {% endif %}
-                </td>
-                <td>
+                            </td>
+                            <td>
                     {% if entity.valorAportes == 0 %}
-                        <span class="label label-yellow arrowed">pendiente</span>
+                                    <span class="label label-yellow arrowed">pendiente</span>
                     {% else %}
-                            <span class="label label-purple arrowed-in arrowed-in-right">enviado</span>
+                                    <span class="label label-purple arrowed-in arrowed-in-right">enviado</span>
                     {% endif %}
-                </td>
-                <td>
+                                </td>
+                                <td>
                     {% if entity.declaracion.pago is not defined or entity.declaracion.pago is null %}
-                        <span class="label label-yellow arrowed">pendiente</span>
+                                        <span class="label label-yellow arrowed">pendiente</span>
                     {% else %}
-                        <a href="{{ path('declaracion_showByPago', {'id': entity.id }) }}">
-                            <span class="label label-purple arrowed-in arrowed-in-right">enviado</span>
-                        </a>
+                                        <a href="{{ path('declaracion_showByPago', {'id': entity.id }) }}">
+                                            <span class="label label-purple arrowed-in arrowed-in-right">enviado</span>
+                                        </a>
                     {% endif %}
-                    </td>
-            </tr>
-        </tbody>
-    </table>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
 {% endif %}
 {% endif %}
 {% endblock %}
 
 {%block breadcumbs%}
 
-<div class="nav-search">
-        <ul class="nostyle">
-    <li class="previous">
-        <a href="{{ path('pago') }}">
-            Regresar
-        </a>
-    </li>
-</ul>
-    </div>
+                        <div class="nav-search">
+                            <ul class="nostyle">
+                                <li class="previous">
+                                    <a href="{{ path('pago') }}">
+                                        Regresar
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
 {%endblock%}

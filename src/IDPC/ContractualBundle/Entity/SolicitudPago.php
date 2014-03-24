@@ -31,13 +31,13 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 
     /**
-     * @ORM\Column(type="date")
+     * @ORM\Column(type="datetime")
      * @Assert\Date()
      */
     protected $fechaUpload;
     
     /**
-     * @ORM\OneToOne(targetEntity="Pago", inversedBy="solicitudPago", cascade={"persist", "remove"})
+     * @ORM\OneToOne(targetEntity="Pago", inversedBy="solicitudPago", cascade={"persist"})
      * @ORM\JoinColumn(name="Pago_id", referencedColumnName="id")
      * @Assert\Type(type="IDPC\ContractualBundle\Entity\Pago")
      */

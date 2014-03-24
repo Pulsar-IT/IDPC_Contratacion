@@ -43,16 +43,22 @@ class SolicitudPagoController extends Controller {
      * @Template("IDPCContractualBundle:SolicitudPago:new.html.twig")
      */
     public function createAction(Request $request) {
+
         $entity = new SolicitudPago();
         $form = $this->createCreateForm($entity);
         $form->handleRequest($request);
 
         if ($form->isValid()) {
+
             $em = $this->getDoctrine()->getManager();
+            $pago = $em->getRepository('IDPCContractualBundle:Pago')->find($request->getSession()->get('pagoId'));
+
+            $entity->setPago($pago);
+            $entity->setFechaUpload(new \DateTime());
             $em->persist($entity);
             $em->flush();
 
-            return $this->redirect($this->generateUrl('solicitudpago_show', array('id' => $entity->getId())));
+            return $this->redirect($this->generateUrl('pago_show', array('id' => $request->getSession()->get('pagoId'))));
         }
 
         return array(
@@ -212,14 +218,14 @@ class SolicitudPagoController extends Controller {
             $entity = $em->getRepository('IDPCContractualBundle:SolicitudPago')->find($id);
 
             if (!$entity) {
-                throw $this->createNotFoundException('Unable to find SolicitudPago entity.');
+                throw $this->createNotFoundException('Unable to find SolicitudPagosss entity.');
             }
 
             $em->remove($entity);
             $em->flush();
         }
 
-        return $this->redirect($this->generateUrl('solicitudpago'));
+        return $this->redirect($this->generateUrl('pago_show', array('id' => $request->getSession()->get('pagoId'))));
     }
 
     /**
@@ -233,7 +239,10 @@ class SolicitudPagoController extends Controller {
         return $this->createFormBuilder()
                         ->setAction($this->generateUrl('solicitudpago_delete', array('id' => $id)))
                         ->setMethod('DELETE')
-                        ->add('submit', 'submit', array('label' => 'Delete'))
+            ->add('submit', 'submit', array(
+                'label' => 'Eliminar',
+                'attr' => array('class' => 'btn btn-danger')
+                ))
                         ->getForm()
         ;
     }
@@ -248,7 +257,7 @@ class SolicitudPagoController extends Controller {
     public function showByPagoAction($id) {
         $em = $this->getDoctrine()->getManager();
 
-        $entity = $em->getRepository('IDPCContractualBundle:Cumplimiento')->findOneBy(Array('pago' => $id));
+        $entity = $em->getRepository('IDPCContractualBundle:SolicitudPago')->findOneBy(Array('pago' => $id));
 
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find Cumplimiento entity.');
@@ -271,7 +280,7 @@ class SolicitudPagoController extends Controller {
      * 
      */
     public function generateCertificadoAction(Request $request) {
-        
+
         $em = $this->getDoctrine()->getManager();
 
         //$entity = $em->getRepository('IDPCContractualBundle:SolicitudPago')->find($id);
@@ -291,7 +300,6 @@ class SolicitudPagoController extends Controller {
             'Content-Disposition' => 'attachment; filename="file.pdf"'
                 )
         );
- 
     }
 
 }
