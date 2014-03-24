@@ -3,6 +3,7 @@
 namespace IDPC\ContractualBundle\Controller;
 
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -15,8 +16,7 @@ use IDPC\ContractualBundle\Form\SolicitudPagoType;
  *
  * @Route("/solicitudpago")
  */
-class SolicitudPagoController extends Controller
-{
+class SolicitudPagoController extends Controller {
 
     /**
      * Lists all SolicitudPago entities.
@@ -25,8 +25,7 @@ class SolicitudPagoController extends Controller
      * @Method("GET")
      * @Template()
      */
-    public function indexAction()
-    {
+    public function indexAction() {
         $em = $this->getDoctrine()->getManager();
 
         $entities = $em->getRepository('IDPCContractualBundle:SolicitudPago')->findAll();
@@ -35,6 +34,7 @@ class SolicitudPagoController extends Controller
             'entities' => $entities,
         );
     }
+
     /**
      * Creates a new SolicitudPago entity.
      *
@@ -42,8 +42,7 @@ class SolicitudPagoController extends Controller
      * @Method("POST")
      * @Template("IDPCContractualBundle:SolicitudPago:new.html.twig")
      */
-    public function createAction(Request $request)
-    {
+    public function createAction(Request $request) {
         $entity = new SolicitudPago();
         $form = $this->createCreateForm($entity);
         $form->handleRequest($request);
@@ -58,19 +57,18 @@ class SolicitudPagoController extends Controller
 
         return array(
             'entity' => $entity,
-            'form'   => $form->createView(),
+            'form' => $form->createView(),
         );
     }
 
     /**
-    * Creates a form to create a SolicitudPago entity.
-    *
-    * @param SolicitudPago $entity The entity
-    *
-    * @return \Symfony\Component\Form\Form The form
-    */
-    private function createCreateForm(SolicitudPago $entity)
-    {
+     * Creates a form to create a SolicitudPago entity.
+     *
+     * @param SolicitudPago $entity The entity
+     *
+     * @return \Symfony\Component\Form\Form The form
+     */
+    private function createCreateForm(SolicitudPago $entity) {
         $form = $this->createForm(new SolicitudPagoType(), $entity, array(
             'action' => $this->generateUrl('solicitudpago_create'),
             'method' => 'POST',
@@ -88,14 +86,13 @@ class SolicitudPagoController extends Controller
      * @Method("GET")
      * @Template()
      */
-    public function newAction()
-    {
+    public function newAction() {
         $entity = new SolicitudPago();
-        $form   = $this->createCreateForm($entity);
+        $form = $this->createCreateForm($entity);
 
         return array(
             'entity' => $entity,
-            'form'   => $form->createView(),
+            'form' => $form->createView(),
         );
     }
 
@@ -106,8 +103,7 @@ class SolicitudPagoController extends Controller
      * @Method("GET")
      * @Template()
      */
-    public function showAction($id)
-    {
+    public function showAction($id) {
         $em = $this->getDoctrine()->getManager();
 
         $entity = $em->getRepository('IDPCContractualBundle:SolicitudPago')->find($id);
@@ -119,7 +115,7 @@ class SolicitudPagoController extends Controller
         $deleteForm = $this->createDeleteForm($id);
 
         return array(
-            'entity'      => $entity,
+            'entity' => $entity,
             'delete_form' => $deleteForm->createView(),
         );
     }
@@ -131,8 +127,7 @@ class SolicitudPagoController extends Controller
      * @Method("GET")
      * @Template()
      */
-    public function editAction($id)
-    {
+    public function editAction($id) {
         $em = $this->getDoctrine()->getManager();
 
         $entity = $em->getRepository('IDPCContractualBundle:SolicitudPago')->find($id);
@@ -145,21 +140,20 @@ class SolicitudPagoController extends Controller
         $deleteForm = $this->createDeleteForm($id);
 
         return array(
-            'entity'      => $entity,
-            'edit_form'   => $editForm->createView(),
+            'entity' => $entity,
+            'edit_form' => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
         );
     }
 
     /**
-    * Creates a form to edit a SolicitudPago entity.
-    *
-    * @param SolicitudPago $entity The entity
-    *
-    * @return \Symfony\Component\Form\Form The form
-    */
-    private function createEditForm(SolicitudPago $entity)
-    {
+     * Creates a form to edit a SolicitudPago entity.
+     *
+     * @param SolicitudPago $entity The entity
+     *
+     * @return \Symfony\Component\Form\Form The form
+     */
+    private function createEditForm(SolicitudPago $entity) {
         $form = $this->createForm(new SolicitudPagoType(), $entity, array(
             'action' => $this->generateUrl('solicitudpago_update', array('id' => $entity->getId())),
             'method' => 'PUT',
@@ -169,6 +163,7 @@ class SolicitudPagoController extends Controller
 
         return $form;
     }
+
     /**
      * Edits an existing SolicitudPago entity.
      *
@@ -176,8 +171,7 @@ class SolicitudPagoController extends Controller
      * @Method("PUT")
      * @Template("IDPCContractualBundle:SolicitudPago:edit.html.twig")
      */
-    public function updateAction(Request $request, $id)
-    {
+    public function updateAction(Request $request, $id) {
         $em = $this->getDoctrine()->getManager();
 
         $entity = $em->getRepository('IDPCContractualBundle:SolicitudPago')->find($id);
@@ -197,19 +191,19 @@ class SolicitudPagoController extends Controller
         }
 
         return array(
-            'entity'      => $entity,
-            'edit_form'   => $editForm->createView(),
+            'entity' => $entity,
+            'edit_form' => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
         );
     }
+
     /**
      * Deletes a SolicitudPago entity.
      *
      * @Route("/{id}", name="solicitudpago_delete")
      * @Method("DELETE")
      */
-    public function deleteAction(Request $request, $id)
-    {
+    public function deleteAction(Request $request, $id) {
         $form = $this->createDeleteForm($id);
         $form->handleRequest($request);
 
@@ -235,13 +229,69 @@ class SolicitudPagoController extends Controller
      *
      * @return \Symfony\Component\Form\Form The form
      */
-    private function createDeleteForm($id)
-    {
+    private function createDeleteForm($id) {
         return $this->createFormBuilder()
-            ->setAction($this->generateUrl('solicitudpago_delete', array('id' => $id)))
-            ->setMethod('DELETE')
-            ->add('submit', 'submit', array('label' => 'Delete'))
-            ->getForm()
+                        ->setAction($this->generateUrl('solicitudpago_delete', array('id' => $id)))
+                        ->setMethod('DELETE')
+                        ->add('submit', 'submit', array('label' => 'Delete'))
+                        ->getForm()
         ;
     }
+
+    /**
+     * Finds and displays a Informe entity.
+     *
+     * @Route("/{id}/showbypago", name="solicitudpago_showByPago")
+     * @Method("GET")
+     * @Template()
+     */
+    public function showByPagoAction($id) {
+        $em = $this->getDoctrine()->getManager();
+
+        $entity = $em->getRepository('IDPCContractualBundle:Cumplimiento')->findOneBy(Array('pago' => $id));
+
+        if (!$entity) {
+            throw $this->createNotFoundException('Unable to find Cumplimiento entity.');
+        }
+
+        $deleteForm = $this->createDeleteForm($entity->getId());
+
+        return array(
+            'entity' => $entity,
+            'delete_form' => $deleteForm->createView(),
+        );
+    }
+
+    /**
+     * Generate PDF 
+     * 
+     * @Route("/{id}/certificado", name="solicitudpago_certificado")
+     * @Method("GET")
+     * @Template("IDPCContractualBundle:SolicitudPago:certificado.html.twig")
+     * 
+     */
+    public function generateCertificadoAction(Request $request) {
+        
+        $em = $this->getDoctrine()->getManager();
+
+        //$entity = $em->getRepository('IDPCContractualBundle:SolicitudPago')->find($id);
+        $entity = $em->getRepository('IDPCContractualBundle:Pago')->find($request->getSession()->get('pagoId'));
+
+        $html = $this->renderView('IDPCContractualBundle:SolicitudPago:certificado.html.twig', array(
+            'entity' => $entity
+        ));
+
+        //return array('entity'      => $entity);
+        //return $this->redirect($this->generateUrl('cumplimiento'));
+
+
+        return new Response(
+                $this->get('knp_snappy.pdf')->getOutputFromHtml($html), 200, array(
+            'Content-Type' => 'application/pdf',
+            'Content-Disposition' => 'attachment; filename="file.pdf"'
+                )
+        );
+ 
+    }
+
 }

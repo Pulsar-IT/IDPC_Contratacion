@@ -1,0 +1,88 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>Untitled Document</title>
+<link rel="stylesheet" href="{{asset('css/htmltopdf.css')}}" />
+</head>
+
+<body>
+<table class="tablatitulo" width="100%">
+  <tr>
+    <td rowspan="3"><div align="center"><img src="img/logoreportheader.png" width="125" height="108" /></div></td>
+    <td rowspan="3"><b><p align="center">SOLICITUD DE PAGO</p></b></td>
+    <td><p>Código: GF-F04</p></td>
+  </tr>
+  <tr>
+    <td><p>Versión: 3</p></td>
+  </tr>
+  <tr>
+    <td><p>Pág. 1 de 1 </p></td>
+  </tr>
+</table>
+<br>
+<table class="tabla" width="100%" style="border-style:solid; border-width:thin">
+      <tr>
+        <td>
+               <p>Bogotá D.C., {{ "now"|date('d-m-Y') }}</p></td>
+      </tr>
+      <tr>
+        <td><b>PARA:</b> PATRICIA ROJAS OTÁLVARO<br/>
+Subdirector (a) de Gestión Corporativa </td>
+      </tr>
+      <tr>
+        <td><b>DE:</b> CONSTANZA CAÑÓN CHARRY <br/>
+        Supervisor(a) y/o Interventor(a)
+        </td>
+      </tr>
+      <tr>
+        <td><b>ASUNTO:</b> Atentamente, solicito ordenar a quien corresponda realizar el siguiente pago, de acuerdo con la información que a continuación se relaciona</td>
+      </tr>
+      <tr>
+        <td><b>Nombre del beneficiario:</b> {{ entity.contrato.estudio.contratista.primerapellido }} {{ entity.contrato.estudio.contratista.segundoapellido }} {{ entity.contrato.estudio.contratista.primernombre }} {{ entity.contrato.estudio.contratista.segundonombre }}</td>
+      </tr>
+      <tr>
+        <td><b>Contrato N°:</b> {{ entity.contrato.numero }} </td>
+      </tr>
+      <tr>
+        <td><b>Valor a pagar:</b> $ {{ entity.valor|number_format(0, ',', '.') }}</td>
+      </tr>
+        {% if entity.contrato.estudio.cdp.proyecto.esfuncionamiento == 1%}
+      <tr>
+        <td>Funcionamiento: <dd>Vigencia () Reserva () Rubro Presupuestal:<dd></td>
+      </tr>
+        {% else %}
+      <tr>
+        <td>Inversión: <dd>Vigencia ( X ) Reserva () Rubro Presupuestal: {{ entity.contrato.estudio.cdp.proyecto.codigo }} <dd></td>
+      </tr>
+        {% endif %}
+      <tr>
+        <td>Fuente – Recurso (solo para inversión y debe coincidir con el CDP): {{ entity.contrato.estudio.cdp.fuente }}</td>
+      </tr>
+      <tr>
+        <td>Concepto Gastos (solo para inversión y debe coincidir con el CDP): {{ entity.contrato.estudio.cdp.concepto }}</td>
+      </tr>
+       <tr>
+        <td>PMR: {{ entity.contrato.estudio.cdp.producto }}</td>
+      </tr>
+      <tr>
+         <td><b>Para tal efecto anexo los siguientes documentos:</b><br/>
+         1. Certificación de Cumplimiento (Formato GF-F11)<br/>
+         2. Solicitud disminución base de retención en la fuente (opcional)<br/>
+         Demás documentos que el contrato lo estipule respecto al pago.
+         </td>
+  </tr>
+      <tr>
+        <td>
+        __________________________
+        <br>Supervisor y/o interventor
+        </td>
+      </tr>
+      <tr>
+        <td>Proyectó:
+        <br>Revisó:
+        </td>
+      </tr>
+    </table>
+</body>
+</html>

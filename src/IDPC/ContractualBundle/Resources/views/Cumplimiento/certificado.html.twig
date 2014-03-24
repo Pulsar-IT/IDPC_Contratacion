@@ -30,7 +30,7 @@
         <td colspan="2">
                 <b><p align="center">DATOS DEL CONTRATO</p></b>
                 <p>Nombre del Contratista: {{ entity.pago.contrato.estudio.contratista.primerapellido }} {{ entity.pago.contrato.estudio.contratista.segundoapellido }} {{ entity.pago.contrato.estudio.contratista.primernombre }} {{ entity.pago.contrato.estudio.contratista.segundonombre }}</p>
-                <p>Tipo de Contrato: No: {{ entity.pago.contrato.estudio.tipocontrato.tipocontrato }}</p>
+                <p>Tipo de Contrato: {{ entity.pago.contrato.estudio.tipocontrato.tipocontrato }} No. {{ entity.pago.contrato.numero }} </p>
                 <p>Fecha de Contrato: {{ entity.pago.contrato.fechainicio|date('Y-m-d') }}</p>
                 <b><p>Objeto del Contrato: </p></b>
                 <p>Texto Objeto contrato:</p>

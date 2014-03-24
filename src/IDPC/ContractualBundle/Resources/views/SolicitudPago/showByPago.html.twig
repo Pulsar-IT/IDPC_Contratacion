@@ -1,0 +1,69 @@
+{% extends '::base.html.twig' %}
+
+{% block body -%}
+<div class="row">
+    <div class="col-sm-7">
+        <div class="widget-box">
+            <div class="widget-header">
+                <h4>Certificado de Cumplimiento</h4>
+                <span class="widget-toolbar"> 
+                </span>
+            </div>
+            <div class="widget-body">
+                <div class="widget-main">
+                    <div class="profile-user-info profile-user-info-striped">
+                        <div class="profile-info-row">
+                            <div class="profile-info-name">Fecha y hora de env&iacute;o</div>
+                            <div class="profile-info-value">{{ entity.createdat|date('d-m-Y H:i:s') }}</div>
+
+                        </div>
+                        <div class="profile-info-row">
+                            <div class="profile-info-name">N&uacute;mero de Planilla</div>
+                            <div class="profile-info-value">{{ entity.planilla }}</div>
+
+                        </div>
+                        <div class="profile-info-row">
+                            <div class="profile-info-name">Ver Certificado</div>
+                            <div class="profile-info-value"><a href="{{ asset('uploads/documents/') }}{{ entity.path }}" target="_blank" >Ver documento</a></div>
+
+                        </div>
+                        
+                    </div>
+                </div>
+                <div class="widget-toolbox padding-8 clearfix">
+            {% if entity.pago.estado == 100 %}
+                {# {{ form(delete_form) }} #}
+                        <a href="{{ path('cumplimiento_certificado', { 'id' : entity.id }) }}">
+                            <span class="btn btn-primary">
+                                <i class="icon-cloud-download"></i>
+                                Descargar
+                            </span>
+                        </a>
+                        
+                        <a href="{{ path('cumplimiento_edit', { 'id' : entity.id }) }}">
+                            <span class="btn btn-info">
+                                <i class="icon-cloud-upload"></i>
+                                Cargar
+                            </span>
+                        </a>
+            {% endif %}   
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+{% endblock %}
+
+{% block breadcumbs %}
+    <ul class="pagination-sm">
+        <li>
+
+
+            <a href="{{ path('pago_show', { 'id': entity.pago.id }) }}">Regresar</a>
+
+        </li>
+    </ul>
+{% endblock %}

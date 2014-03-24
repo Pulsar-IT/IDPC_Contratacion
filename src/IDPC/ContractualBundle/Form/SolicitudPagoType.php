@@ -15,12 +15,7 @@ class SolicitudPagoType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('fechaUpload')
-            ->add('path')
             ->add('file')
-            ->add('created_at')
-            ->add('update_at')
-            ->add('pago')
         ;
     }
     
