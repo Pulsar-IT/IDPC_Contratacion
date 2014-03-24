@@ -10,6 +10,7 @@
                 <th>Numero</th>
                 <th>Objeto</th>
                 <th>Valor</th>
+                <th> CDP</th>
                 <th>Fecha CDP</th>
                 <th>Actions</th>
             </tr>
@@ -21,6 +22,7 @@
                 <td>{{ entity.numero }}</td>
                 <td>{{ entity.objeto }}</td>
                 <td>{{ entity.valor |number_format(0, ',', '.') }}</td>
+                <td>{{ entity.proyecto.codigo }}</td>
                 <td>{% if entity.fecha %}{{ entity.fecha|date('Y-m-d') }}{% endif %}</td>
  
                 <td>

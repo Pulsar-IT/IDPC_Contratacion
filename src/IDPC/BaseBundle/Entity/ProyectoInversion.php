@@ -43,6 +43,15 @@ use Gedmo\Mapping\Annotation as Gedmo;
     protected $descripcion;
     
     /**
+     * @ORM\Column(type="boolean", nullable=true)
+     */
+    
+    protected $esFuncionamiento;
+
+
+    
+    
+    /**
      * @ORM\Column(type="string", nullable=true)
      * @Assert\Length( max = "100" )
      */
@@ -263,5 +272,30 @@ use Gedmo\Mapping\Annotation as Gedmo;
     public function getNoplanta()
     {
         return $this->noplanta;
+    }
+    
+    
+
+    /**
+     * Set esFuncionamiento
+     *
+     * @param boolean $esFuncionamiento
+     * @return ProyectoInversion
+     */
+    public function setEsFuncionamiento($esFuncionamiento)
+    {
+        $this->esFuncionamiento = $esFuncionamiento;
+
+        return $this;
+    }
+
+    /**
+     * Get esFuncionamiento
+     *
+     * @return boolean 
+     */
+    public function getEsFuncionamiento()
+    {
+        return $this->esFuncionamiento;
     }
 }

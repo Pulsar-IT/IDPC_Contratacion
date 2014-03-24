@@ -14,19 +14,11 @@
                 <div class="widget-main no-padding">
 
 
-                    <form action="{{ path('cumplimiento_update', { 'id': entity.id }) }}" method="post" {{ form_enctype(edit_form) }}>
+                    <form action="{{ path('cumplimiento_upload', { 'id': entity.id }) }}" method="post" {{ form_enctype(edit_form) }}>
                         <input type="hidden" name="_method" value="PUT" />
         {% if form_errors(edit_form) %}
                         <div class="alert alert-danger">{{ form_errors(edit_form) }}</div>
         {% endif %}
-                        
-                        <fieldset>
-                    {{ form_label(edit_form.planilla)}}
-                    {{ form_widget(edit_form.planilla)}}
-                                {% if form_errors(edit_form.planilla) %}
-                                <div class="alert alert-danger">{{ form_errors(edit_form.planilla) }}</div>    
-                                {% endif %}
-                            </fieldset>
                         
 
                         <fieldset>

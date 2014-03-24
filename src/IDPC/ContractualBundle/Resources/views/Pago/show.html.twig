@@ -23,6 +23,12 @@
                 <a href="{{ path('cumplimiento_showByPago', {'id': entity.id }) }}" class="btn btn-primary btn-mini"><i class="icon-plus icon-white"></i>Certificaci&oacute;n de Cumplimiento</a>
 
 {% endif %}
+{% if entity.cumplimiento.pago is not defined or entity.cumplimiento.pago is null  %}
+                <a href="{{ path('cumplimiento_new') }}" class="btn btn-primary btn-mini"><i class="icon-plus icon-white"></i>Certificaci&oacute;n de Cumplimiento</a>
+        {% else %}
+                <a href="{{ path('cumplimiento_showByPago', {'id': entity.id }) }}" class="btn btn-primary btn-mini"><i class="icon-plus icon-white"></i>Certificaci&oacute;n de Cumplimiento</a>
+
+{% endif %}
 {% endif %}
         <div class="page"></div>
 </div>

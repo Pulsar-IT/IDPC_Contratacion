@@ -15,10 +15,13 @@ class CumplimientoType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('planilla')
+            ->add('planilla','text', array(
+                'label' => 'Número de planilla'
+            ))
             ->add('file', 'file', array(
+                'data_class' => null,
                 'required' => true,
-                'label'   => 'Archivo'
+                'label'   => ' '
             ))
                 
         ;

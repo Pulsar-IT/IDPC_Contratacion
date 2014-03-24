@@ -177,6 +177,39 @@ class CumplimientoController extends Controller
 
         return $form;
     }
+    
+    /**
+     * Sube el certificado firmado
+     * 
+     * @Route("/{id}/upload", name="cumplimiento_upload")
+     * @Template()
+     */
+    public function uploadCertificadoAction(Request $request, $id)
+    {
+        $em = $this->getDoctrine()->getEntityManager();
+        
+        $entity = $em->getRepository('IDPCContractualBundle:Cumplimiento')->find($id);
+        
+        if (!$entity) {
+            throw $this->createNotFoundException('No existe la entidad Cumplimiento.');
+        }
+        
+        $editForm = $this->createEditForm($entity);
+        $editForm->handleRequest($request);
+        
+        if ($editForm->isValid()) {
+            $em->flush();
+            return $this->redirect($this->generateUrl('cumplimiento_showByPago', array('id' => $pago->getId())));
+            
+            
+        }   
+        return array(
+            'entity'      => $entity,
+            'edit_form'   => $editForm->createView(),
+        );
+    }
+
+
     /**
      * Edits an existing Cumplimiento entity.
      *
@@ -189,6 +222,7 @@ class CumplimientoController extends Controller
         $em = $this->getDoctrine()->getManager();
 
         $entity = $em->getRepository('IDPCContractualBundle:Cumplimiento')->find($id);
+        $pago = $em->getRepository('IDPCContractualBundle:Pago')->find($request->getSession()->get('pagoId'));
 
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find Cumplimiento entity.');
@@ -201,7 +235,7 @@ class CumplimientoController extends Controller
         if ($editForm->isValid()) {
             $em->flush();
 
-            return $this->redirect($this->generateUrl('cumplimiento_edit', array('id' => $id)));
+            return $this->redirect($this->generateUrl('cumplimiento_showByPago', array('id' => $pago->getId())));
         }
 
         return array(

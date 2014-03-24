@@ -7,15 +7,17 @@ use Symfony\Component\Validator\Constraints as Assert;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 
+
 /**
- * IDPC\ContractualBundle\Entity\Cumplimiento
+ * IDPC\ContractualBundle\Entity\SolicitudPago
  *
- * @ORM\Table(name="tb_con_cumplimiento")
- * @ORM\Entity(repositoryClass="IDPC\ContractualBundle\Entity\CumplimientoRepository")
+ * @ORM\Table(name="tb_con_solicitudPago")
+ * @ORM\Entity(repositoryClass="IDPC\ContractualBundle\Entity\SolicitudPagoRepository")
  * @ORM\HasLifecycleCallbacks
+ * 
  */
 
- class Cumplimiento {
+ class SolicitudPago {
      
      /**
      * @var integer $id
@@ -29,30 +31,25 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 
     /**
-     * @ORM\Column(type="string")
-     * @Assert\NotBlank()
-     * @Assert\Length( max = "100" )
+     * @ORM\Column(type="date")
+     * @Assert\Date()
      */
-    
-    protected $planilla;
+    protected $fechaUpload;
     
     /**
-     * @ORM\OneToOne(targetEntity="Pago", inversedBy="cumplimiento", cascade={"persist", "remove"})
+     * @ORM\OneToOne(targetEntity="Pago", inversedBy="solicitudPago", cascade={"persist", "remove"})
      * @ORM\JoinColumn(name="Pago_id", referencedColumnName="id")
      * @Assert\Type(type="IDPC\ContractualBundle\Entity\Pago")
      */
-    
     
     protected $pago;
 
 
     
     
-    
-    
     /**
-     * 
-     * @ORM\Column(type="text", nullable=true)
+     * @ORM\Column(type="string", nullable=true)
+     * @Assert\NotBlank()
      * @Assert\Length( max = "255" )
      */
     
@@ -70,11 +67,6 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
     
     private $file;
     
-
-    
-
-    
-
     /**
      * @var datetime $created
      * 
@@ -97,7 +89,7 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
     private $update_at;
 
 
-    
+	
 
 
     
@@ -115,74 +107,28 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
     }
 
     /**
-     * Set planilla
+     * Set fechaUpload
      *
-     * @param string $planilla
-     * @return Cumplimiento
+     * @param \DateTime $fechaUpload
+     * @return SolicitudPago
      */
-    public function setPlanilla($planilla)
+    public function setFechaUpload($fechaUpload)
     {
-        $this->planilla = $planilla;
+        $this->fechaUpload = $fechaUpload;
 
         return $this;
     }
 
     /**
-     * Get planilla
-     *
-     * @return string 
-     */
-    public function getPlanilla()
-    {
-        return $this->planilla;
-    }
-
-    /**
-     * Set created_at
-     *
-     * @param \DateTime $createdAt
-     * @return Cumplimiento
-     */
-    public function setCreatedAt($createdAt)
-    {
-        $this->created_at = $createdAt;
-
-        return $this;
-    }
-
-    /**
-     * Get created_at
+     * Get fechaUpload
      *
      * @return \DateTime 
      */
-    public function getCreatedAt()
+    public function getFechaUpload()
     {
-        return $this->created_at;
+        return $this->fechaUpload;
     }
 
-    /**
-     * Set update_at
-     *
-     * @param \DateTime $updateAt
-     * @return Cumplimiento
-     */
-    public function setUpdateAt($updateAt)
-    {
-        $this->update_at = $updateAt;
-
-        return $this;
-    }
-
-    /**
-     * Get update_at
-     *
-     * @return \DateTime 
-     */
-    public function getUpdateAt()
-    {
-        return $this->update_at;
-    }
-    
     public function getAbsolutePath() {
         return null === $this->path 
                 ? null 
@@ -278,17 +224,12 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
     }
 
 
-
-
-	
-
- 
-
+    
     /**
      * Set path
      *
      * @param string $path
-     * @return Cumplimiento
+     * @return SolicitudPago
      */
     public function setPath($path)
     {
@@ -307,12 +248,57 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
         return $this->path;
     }
 
+    /**
+     * Set created_at
+     *
+     * @param \DateTime $createdAt
+     * @return SolicitudPago
+     */
+    public function setCreatedAt($createdAt)
+    {
+        $this->created_at = $createdAt;
+
+        return $this;
+    }
+
+    /**
+     * Get created_at
+     *
+     * @return \DateTime 
+     */
+    public function getCreatedAt()
+    {
+        return $this->created_at;
+    }
+
+    /**
+     * Set update_at
+     *
+     * @param \DateTime $updateAt
+     * @return SolicitudPago
+     */
+    public function setUpdateAt($updateAt)
+    {
+        $this->update_at = $updateAt;
+
+        return $this;
+    }
+
+    /**
+     * Get update_at
+     *
+     * @return \DateTime 
+     */
+    public function getUpdateAt()
+    {
+        return $this->update_at;
+    }
 
     /**
      * Set pago
      *
      * @param \IDPC\ContractualBundle\Entity\Pago $pago
-     * @return Cumplimiento
+     * @return SolicitudPago
      */
     public function setPago(\IDPC\ContractualBundle\Entity\Pago $pago = null)
     {
